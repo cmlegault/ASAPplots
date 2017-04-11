@@ -17,7 +17,7 @@
 #' @param make.one.pdf diagnostics/results/ref pts/MCMC/data are all saved as one pdf (defaults to TRUE)
 #' @param plotf format for individual plots (defaults to 'png')
 #' @export
-#' @examples plotASAP("C:\\main.dir\\my.asap.results.dir","simple") 
+#' @examples PlotASAP("C:\\main.dir\\my.asap.results.dir","simple") 
 
 PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0.9, 
                      scale.catch.bubble.resid=2, scale.index.bubble.resid=2, 
@@ -124,7 +124,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   
   #--- MCMC results (assume user only does 1 chain)
   
-  if (asap$options$do.mcmc>0) PlotMCMC(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
+  if (asap$options$do.mcmc>0) PlotMCMC(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   #--- Input Data
   PlotCatchByFleet(asap,fleet.names,save.plots,od,plotf,liz.palette)
@@ -191,7 +191,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
     PlotExpSpawn(asap,nyrs.ave,save.plots,od,plotf)
     PlotAnnualSPRtargets(asap,save.plots,od,plotf)
     PlotAnnualMSY(asap,save.plots,od,plotf)
-    if (asap$options$do.mcmc>0) PlotMCMC(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
+    if (asap$options$do.mcmc>0) PlotMCMC(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
     PlotCatchByFleet(asap,fleet.names,save.plots,od,plotf,liz.palette)
     PlotCatchAgeCompBubbles(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.data)
     PlotCatchAgeCompBubbles(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.data,
@@ -274,7 +274,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   if (asap$options$do.mcmc>0) {
     windows()
     pdf(file=paste(od,pdf.name,".MCMC.PLOTS.pdf",sep=""), onefile=T)
-    PlotMCMC(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf) 
+    PlotMCMC(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf) 
     dev.off()      
     graphics.off()
   }

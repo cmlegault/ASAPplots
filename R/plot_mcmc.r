@@ -1,6 +1,7 @@
 #' Plot MCMC
 #' 
 #' Makes a number of diagnostic plots to evaluate convergence in the Monte Carlo Markov Chain results.
+#' @param wd directory where ASAP run is located
 #' @param asap.name Base name of original dat file (without the .dat extension)
 #' @param asap name of the variable that read in the asap.rdat file
 #' @param mcmc.burn number of realizations to remove from start of MCMC (defaults to 0)
@@ -10,28 +11,28 @@
 #' @param plotf type of plot to save
 #' @export
 
-PlotMCMC  <- function(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf){
+PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf){
   
-  kk5 <- library(plotMCMC, logical.return=T)
-  if (kk5==F) install.packages("plotMCMC" )
-  library(plotMCMC)
+  # kk5 <- library(plotMCMC, logical.return=T)
+  # if (kk5==F) install.packages("plotMCMC" )
+  # library(plotMCMC)
   
   f.chain <- paste0(asap.name, ".MCM" )
   #f.chain <- "asap3MCMC.dat"
-  chain1c <- read.table(paste(wd,f.chain, sep=""), header=T)
+  chain1c <- read.table(paste0(wd,"\\",f.chain), header=T)
   ## new stuff
   niter = dim(chain1c)[1]
   chain1b = chain1c[(mcmc.burn+1):niter,]
   niter = dim(chain1b)[1]
   chain1a = chain1b[seq(1,niter,by=mcmc.thin),]
   
-  bsn1c <- read.table(paste(wd,asap.name, ".BSN", sep=""), header=T)
+  bsn1c <- read.table(paste0(wd,"\\",asap.name, ".BSN"), header=T)
   niter = dim(bsn1c)[1]
   bsn1b = bsn1c[(mcmc.burn):niter,]
   niter = dim(bsn1b)[1]
   bsn1a = bsn1b[seq(1,niter,by=mcmc.thin),]
-  write.table(bsn1a, file=paste(od, "New_BSN_file.BSN", sep=""), row.names=T)
-  write.table(bsn1a, file=paste(wd, "New_", asap.name,".BSN", sep=""), row.names=F, col.names=F)
+  write.table(bsn1a, file=paste0(od, "New_BSN_file.BSN"), row.names=T)
+  write.table(bsn1a, file=paste0(wd, "\\New_", asap.name,".BSN"), row.names=F, col.names=F)
   
   niter = dim(chain1a)[1]
   nyears <- asap$parms$nyears
@@ -66,7 +67,7 @@ PlotMCMC  <- function(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf){
   ##NEW
   # examine cumuplot in first and last year to determine if chain long enough (quartiles stabilized)
   mcmc.outs <- cbind( f.chain[,c(1,nyears)],  ssb.chain[,c(1,nyears)])
-  plotCumu(mcmc.outs,probs=c(0.05,0.95), div=1, xlab="Iterations",
+  plotMCMC::plotCumu(mcmc.outs,probs=c(0.05,0.95), div=1, xlab="Iterations",
            ylab="Median with 90% PI", lty.median=1, lwd.median=2, col.median="black", lty.outer=2, lwd.outer=1,
            col.outer="black"  )
   

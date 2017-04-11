@@ -4,9 +4,11 @@
 \alias{PlotMCMC}
 \title{Plot MCMC}
 \usage{
-PlotMCMC(asap.name, asap, mcmc.burn, mcmc.thin, save.plots, od, plotf)
+PlotMCMC(wd, asap.name, asap, mcmc.burn, mcmc.thin, save.plots, od, plotf)
 }
 \arguments{
+\item{wd}{directory where ASAP run is located}
+
 \item{asap.name}{Base name of original dat file (without the .dat extension)}
 
 \item{asap}{name of the variable that read in the asap.rdat file}

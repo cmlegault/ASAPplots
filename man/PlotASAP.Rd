@@ -46,5 +46,5 @@ PlotASAP(wd, asap.name, cc.age = -999, nyrs.ave = 5,
 This function calls all the other functions to create the desired outputs.
 }
 \examples{
-plotASAP("C:\\\\main.dir\\\\my.asap.results.dir","simple") 
+PlotASAP("C:\\\\main.dir\\\\my.asap.results.dir","simple") 
 }
