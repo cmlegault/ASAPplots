@@ -11,6 +11,8 @@
 #' @param scale.catch.bubble.data larger values increase size of catch age comp bubbles (defaults to 6)
 #' @param scale.index.bubble.data larger values increase size of catch age comp bubbles (defaults to 6)
 #' @param first.age youngest age to use in catch curves, -999 finds peak age (defaults to -999)
+#' @param mcmc.burn number of realizations to remove from start of MCMC (defaults to 0)
+#' @param mcmc.thin thinning parameter for MCMC (defaults to 1)
 #' @param save.plots saves indivdual plots (defaults to TRUE)
 #' @param make.one.pdf diagnostics/results/ref pts/MCMC/data are all saved as one pdf (defaults to TRUE)
 #' @param plotf format for individual plots (defaults to 'png')
@@ -19,7 +21,8 @@
 
 PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0.9, 
                      scale.catch.bubble.resid=2, scale.index.bubble.resid=2, 
-                     scale.catch.bubble.data=6, scale.index.bubble.data=6, 
+                     scale.catch.bubble.data=6, scale.index.bubble.data=6,
+                     mcmc.burn=0, mcmc.thin=1,
                      first.age=-999, save.plots=TRUE, make.one.pdf=TRUE, plotf='png'){
 
   setwd(wd)
@@ -121,7 +124,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   
   #--- MCMC results (assume user only does 1 chain)
   
-  if (asap$options$do.mcmc>0) PlotMCMC(asap.name,asap,save.plots,od,plotf)
+  if (asap$options$do.mcmc>0) PlotMCMC(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   #--- Input Data
   PlotCatchByFleet(asap,fleet.names,save.plots,od,plotf,liz.palette)
@@ -188,7 +191,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
     PlotExpSpawn(asap,nyrs.ave,save.plots,od,plotf)
     PlotAnnualSPRtargets(asap,save.plots,od,plotf)
     PlotAnnualMSY(asap,save.plots,od,plotf)
-    if (asap$options$do.mcmc>0) PlotMCMC(asap.name,asap,save.plots,od,plotf)
+    if (asap$options$do.mcmc>0) PlotMCMC(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
     PlotCatchByFleet(asap,fleet.names,save.plots,od,plotf,liz.palette)
     PlotCatchAgeCompBubbles(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.data)
     PlotCatchAgeCompBubbles(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.data,
@@ -271,7 +274,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   if (asap$options$do.mcmc>0) {
     windows()
     pdf(file=paste(od,pdf.name,".MCMC.PLOTS.pdf",sep=""), onefile=T)
-    PlotMCMC(asap.name,asap,save.plots,od,plotf) 
+    PlotMCMC(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf) 
     dev.off()      
     graphics.off()
   }

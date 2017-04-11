@@ -4,12 +4,16 @@
 \alias{PlotMCMC}
 \title{Plot MCMC}
 \usage{
-PlotMCMC(asap.name, asap, save.plots, od, plotf)
+PlotMCMC(asap.name, asap, mcmc.burn, mcmc.thin, save.plots, od, plotf)
 }
 \arguments{
 \item{asap.name}{Base name of original dat file (without the .dat extension)}
 
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{mcmc.burn}{number of realizations to remove from start of MCMC (defaults to 0)}
+
+\item{mcmc.thin}{thinning parameter for MCMC (defaults to 1)}
 
 \item{save.plots}{save individual plots}
 

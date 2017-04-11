@@ -3,12 +3,14 @@
 #' Makes a number of diagnostic plots to evaluate convergence in the Monte Carlo Markov Chain results.
 #' @param asap.name Base name of original dat file (without the .dat extension)
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param mcmc.burn number of realizations to remove from start of MCMC (defaults to 0)
+#' @param mcmc.thin thinning parameter for MCMC (defaults to 1)
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @export
 
-PlotMCMC  <- function(asap.name,asap,save.plots,od,plotf){
+PlotMCMC  <- function(asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf){
   
   kk5 <- library(plotMCMC, logical.return=T)
   if (kk5==F) install.packages("plotMCMC" )
@@ -19,15 +21,15 @@ PlotMCMC  <- function(asap.name,asap,save.plots,od,plotf){
   chain1c <- read.table(paste(wd,f.chain, sep=""), header=T)
   ## new stuff
   niter = dim(chain1c)[1]
-  chain1b = chain1c[(burn+1):niter,]
+  chain1b = chain1c[(mcmc.burn+1):niter,]
   niter = dim(chain1b)[1]
-  chain1a = chain1b[seq(1,niter,by=thin),]
+  chain1a = chain1b[seq(1,niter,by=mcmc.thin),]
   
   bsn1c <- read.table(paste(wd,asap.name, ".BSN", sep=""), header=T)
   niter = dim(bsn1c)[1]
-  bsn1b = bsn1c[(burn):niter,]
+  bsn1b = bsn1c[(mcmc.burn):niter,]
   niter = dim(bsn1b)[1]
-  bsn1a = bsn1b[seq(1,niter,by=thin),]
+  bsn1a = bsn1b[seq(1,niter,by=mcmc.thin),]
   write.table(bsn1a, file=paste(od, "New_BSN_file.BSN", sep=""), row.names=T)
   write.table(bsn1a, file=paste(wd, "New_", asap.name,".BSN", sep=""), row.names=F, col.names=F)
   

@@ -5,8 +5,6 @@
 #' @param asap name of the variable that read in the asap.rdat file
 #' @return list of fleet names and index names
 #' @export
-#' @examples
-#' grab.names(simple,asap)
 
 GrabNames <- function(asap.name,asap){
   my.names <- list()

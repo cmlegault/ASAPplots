@@ -7,8 +7,9 @@
 PlotASAP(wd, asap.name, cc.age = -999, nyrs.ave = 5,
   correlation.limit = 0.9, scale.catch.bubble.resid = 2,
   scale.index.bubble.resid = 2, scale.catch.bubble.data = 6,
-  scale.index.bubble.data = 6, first.age = -999, save.plots = TRUE,
-  make.one.pdf = TRUE, plotf = "png")
+  scale.index.bubble.data = 6, mcmc.burn = 0, mcmc.thin = 1,
+  first.age = -999, save.plots = TRUE, make.one.pdf = TRUE,
+  plotf = "png")
 }
 \arguments{
 \item{wd}{directory where ASAP run is located}
@@ -28,6 +29,10 @@ PlotASAP(wd, asap.name, cc.age = -999, nyrs.ave = 5,
 \item{scale.catch.bubble.data}{larger values increase size of catch age comp bubbles (defaults to 6)}
 
 \item{scale.index.bubble.data}{larger values increase size of catch age comp bubbles (defaults to 6)}
+
+\item{mcmc.burn}{number of realizations to remove from start of MCMC (defaults to 0)}
+
+\item{mcmc.thin}{thinning parameter for MCMC (defaults to 1)}
 
 \item{first.age}{youngest age to use in catch curves, -999 finds peak age (defaults to -999)}
 
