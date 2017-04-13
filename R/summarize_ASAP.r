@@ -1,6 +1,6 @@
 #' Summarize ASAP
 #' 
-#' Point estimates and Hessian-based 95% CI for SSB, R, and Freport.
+#' Point estimates and Hessian-based 95 percent CI for SSB, R, and Freport.
 #' @param asap name of the variable that read in the asap.rdat file
 #' @param a1 list file produced by grab.aux.files function
 #' @param od output directory for plots and csv files 

@@ -18,5 +18,5 @@ PlotYieldCurves(asap, nyrs.ave, save.plots, od, plotf)
 \item{plotf}{type of plot to save}
 }
 \description{
-Plot yield curves
+Plot yield and SSB per recruit as a function of F and create associated csv file.
 }

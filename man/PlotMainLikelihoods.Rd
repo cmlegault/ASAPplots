@@ -4,13 +4,14 @@
 \alias{PlotMainLikelihoods}
 \title{Plot main likelihoods by component}
 \usage{
-PlotMainLikelihoods(asap.name, asap, save.plots, od, plotf, liz.palette,
-  max.grad, npar)
+PlotMainLikelihoods(asap.name, asap, a1, save.plots, od, plotf, liz.palette)
 }
 \arguments{
 \item{asap.name}{Base name of original dat file (without the .dat extension)}
 
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{a1}{list file produced by grab.aux.files function}
 
 \item{save.plots}{save individual plots}
 
@@ -19,10 +20,6 @@ PlotMainLikelihoods(asap.name, asap, save.plots, od, plotf, liz.palette,
 \item{plotf}{type of plot to save}
 
 \item{liz.palette}{color definitions}
-
-\item{max.grad}{maximum gradient at solution}
-
-\item{npar}{number of parameters}
 }
 \description{
 Not a very useful plot, need to replace this with something more informative and less misleading.

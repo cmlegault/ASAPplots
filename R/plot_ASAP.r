@@ -3,7 +3,6 @@
 #' This function calls all the other functions to create the desired outputs.
 #' @param wd directory where ASAP run is located
 #' @param asap.name Base name of original dat file (without the .dat extension)
-#' @param cc.age first age to use when plotting catch curves (defaults to -999 which finds peak age)
 #' @param nyrs.ave number of years to average for calculating Reference Points (defaults to 5)
 #' @param correlation.limit will return parameter combos where |correlation| > value (defaults to 0.9)
 #' @param scale.catch.bubble.resid larger values increase size of catch age comp bubbles (defaults to 2)
@@ -19,11 +18,11 @@
 #' @export
 #' @examples PlotASAP("C:\\main.dir\\my.asap.results.dir","simple") 
 
-PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0.9, 
+PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9, 
                      scale.catch.bubble.resid=2, scale.index.bubble.resid=2, 
                      scale.catch.bubble.data=6, scale.index.bubble.data=6,
                      mcmc.burn=0, mcmc.thin=1,
-                     first.age=-999, save.plots=TRUE, make.one.pdf=TRUE, plotf='png'){
+                     first.age=-999, save.plots=TRUE, plotf='png', make.one.pdf=TRUE){
 
   setwd(wd)
   od <- paste0(wd,"\\plots\\")
@@ -74,7 +73,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   PlotHighCVs(a1,save.plots,od,plotf)
   SummarizeASAP(asap,a1,od)
   
-  PlotMainLikelihoods(asap.name,asap,save.plots,od,plotf,liz.palette,max.grad,npar)
+  PlotMainLikelihoods(asap.name,asap,a1,save.plots,od,plotf,liz.palette)
   PlotRMSEtable(asap,save.plots,od,plotf)
   PlotRMSE95CI(asap,index.names,save.plots,od,plotf,liz.palette)
   PlotCatch4Panel(asap,fleet.names,save.plots,od,plotf,liz.palette)
@@ -149,7 +148,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
     windows()
     pdf(file=paste(od,pdf.name,".ALL.PLOTS.pdf",sep=""), onefile=T)
     PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
-    PlotMainLikelihoods(asap.name,asap,save.plots,od,plotf,liz.palette,max.grad,npar)
+    PlotMainLikelihoods(asap.name,asap,a1,save.plots,od,plotf,liz.palette)
     PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
     PlotHighCVs(a1,save.plots,od,plotf)
     PlotRMSEtable(asap,save.plots,od,plotf)
@@ -214,7 +213,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   windows()
   pdf(file=paste(od,pdf.name,".DIAGNOSTIC.PLOTS.pdf",sep=""), onefile=T)
   PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
-  PlotMainLikelihoods(asap.name,asap,save.plots,od,plotf,liz.palette,max.grad,npar)
+  PlotMainLikelihoods(asap.name,asap,a1,save.plots,od,plotf,liz.palette)
   PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
   PlotHighCVs(a1,save.plots,od,plotf)
   PlotRMSEtable(asap,save.plots,od,plotf)

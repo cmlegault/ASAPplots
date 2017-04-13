@@ -1,6 +1,6 @@
 #' Grab Names 
 #' 
-#' This function gets fleet and index names from the original ASAP.DAT file
+#' This function gets fleet and index names from the original ASAP.DAT file.
 #' @param asap.name Base name of original dat file (without the .dat extension)
 #' @param asap name of the variable that read in the asap.rdat file
 #' @return list of fleet names and index names

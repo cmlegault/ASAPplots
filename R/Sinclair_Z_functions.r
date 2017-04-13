@@ -127,7 +127,7 @@ drop_partially_selected_ages <- function(mat,sel,sel.start.age,sel.end.age,sel.c
 #-------------------------------------------------------------------------------
 #' Get Sinclair Z
 #' 
-#' Set of functions to prepare index matrices and compute and plot Sinclair Z. Estimate Z from catch curves using 4 year moving window with cohort-specific coefficients. Based on Sinclair 2001 ICES J Mar Sci 58: 1-10. Note hard wired to use only ages that are at least 90% selected.
+#' Set of functions to prepare index matrices and compute and plot Sinclair Z. Estimate Z from catch curves using 4 year moving window with cohort-specific coefficients. Based on Sinclair 2001 ICES J Mar Sci 58: 1-10. Note hard wired to use only ages that are at least 90 percent selected.
 #' @param asap name of the variable that read in the asap.rdat file
 #' @param index.names names of indices
 #' @param save.plots save individual plots

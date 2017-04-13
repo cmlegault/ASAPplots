@@ -14,5 +14,5 @@ SummarizeASAP(asap, a1, od)
 \item{od}{output directory for plots and csv files}
 }
 \description{
-Point estimates and Hessian-based 95% CI for SSB, R, and Freport.
+Point estimates and Hessian-based 95 percent CI for SSB, R, and Freport.
 }

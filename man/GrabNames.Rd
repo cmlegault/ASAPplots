@@ -15,5 +15,5 @@ GrabNames(asap.name, asap)
 list of fleet names and index names
 }
 \description{
-This function gets fleet and index names from the original ASAP.DAT file
+This function gets fleet and index names from the original ASAP.DAT file.
 }

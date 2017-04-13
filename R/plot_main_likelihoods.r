@@ -3,17 +3,18 @@
 #' Not a very useful plot, need to replace this with something more informative and less misleading.
 #' @param asap.name Base name of original dat file (without the .dat extension)
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param a1 list file produced by grab.aux.files function
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @param liz.palette color definitions
-#' @param max.grad maximum gradient at solution
-#' @param npar number of parameters
 #' @export
 
-PlotMainLikelihoods <- function(asap.name,asap,save.plots,od,plotf,liz.palette,max.grad,npar){
+PlotMainLikelihoods <- function(asap.name,asap,a1,save.plots,od,plotf,liz.palette){
   par(mfrow=c(1,1) )
 
+  npar <- a1$npar
+  max.grad <- a1$max.grad
   like2 <- unlist(asap$like[2:length(asap$like)])
   like2.names <- names(asap$like[2:length(asap$like)])
   n.like <- length(like2)

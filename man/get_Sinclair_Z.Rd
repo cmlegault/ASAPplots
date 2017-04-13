@@ -18,5 +18,5 @@ get_Sinclair_Z(asap, index.names, save.plots, od, plotf)
 \item{plotf}{type of plot to save}
 }
 \description{
-Set of functions to prepare index matrices and compute and plot Sinclair Z. Estimate Z from catch curves using 4 year moving window with cohort-specific coefficients. Based on Sinclair 2001 ICES J Mar Sci 58: 1-10. Note hard wired to use only ages that are at least 90% selected.
+Set of functions to prepare index matrices and compute and plot Sinclair Z. Estimate Z from catch curves using 4 year moving window with cohort-specific coefficients. Based on Sinclair 2001 ICES J Mar Sci 58: 1-10. Note hard wired to use only ages that are at least 90 percent selected.
 }

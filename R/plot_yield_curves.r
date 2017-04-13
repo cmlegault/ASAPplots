@@ -1,5 +1,6 @@
 #' Plot yield curves
 #' 
+#' Plot yield and SSB per recruit as a function of F and create associated csv file.
 #' @param asap name of the variable that read in the asap.rdat file
 #' @param nyrs.ave number of years to average for calculating Reference Points 
 #' @param save.plots save individual plots

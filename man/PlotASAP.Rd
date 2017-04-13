@@ -4,19 +4,16 @@
 \alias{PlotASAP}
 \title{Plot ASAP}
 \usage{
-PlotASAP(wd, asap.name, cc.age = -999, nyrs.ave = 5,
-  correlation.limit = 0.9, scale.catch.bubble.resid = 2,
-  scale.index.bubble.resid = 2, scale.catch.bubble.data = 6,
-  scale.index.bubble.data = 6, mcmc.burn = 0, mcmc.thin = 1,
-  first.age = -999, save.plots = TRUE, make.one.pdf = TRUE,
-  plotf = "png")
+PlotASAP(wd, asap.name, nyrs.ave = 5, correlation.limit = 0.9,
+  scale.catch.bubble.resid = 2, scale.index.bubble.resid = 2,
+  scale.catch.bubble.data = 6, scale.index.bubble.data = 6, mcmc.burn = 0,
+  mcmc.thin = 1, first.age = -999, save.plots = TRUE, plotf = "png",
+  make.one.pdf = TRUE)
 }
 \arguments{
 \item{wd}{directory where ASAP run is located}
 
 \item{asap.name}{Base name of original dat file (without the .dat extension)}
-
-\item{cc.age}{first age to use when plotting catch curves (defaults to -999 which finds peak age)}
 
 \item{nyrs.ave}{number of years to average for calculating Reference Points (defaults to 5)}
 
@@ -38,9 +35,9 @@ PlotASAP(wd, asap.name, cc.age = -999, nyrs.ave = 5,
 
 \item{save.plots}{saves indivdual plots (defaults to TRUE)}
 
-\item{make.one.pdf}{diagnostics/results/ref pts/MCMC/data are all saved as one pdf (defaults to TRUE)}
-
 \item{plotf}{format for individual plots (defaults to 'png')}
+
+\item{make.one.pdf}{diagnostics/results/ref pts/MCMC/data are all saved as one pdf (defaults to TRUE)}
 }
 \description{
 This function calls all the other functions to create the desired outputs.
