@@ -69,6 +69,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   a1 <- GrabAuxFiles(asap.name,asap,fleet.names,index.names)  #TODO make sure a1 exists
   npar<-a1$npar     
   max.grad<-a1$max.grad
+  PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
   PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
   PlotHighCVs(a1,save.plots,od,plotf)
   SummarizeASAP(asap,a1,od)
@@ -147,6 +148,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   if (make.one.pdf==T) {
     windows()
     pdf(file=paste(od,pdf.name,".ALL.PLOTS.pdf",sep=""), onefile=T)
+    PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
     PlotMainLikelihoods(asap.name,asap,save.plots,od,plotf,liz.palette,max.grad,npar)
     PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
     PlotHighCVs(a1,save.plots,od,plotf)
@@ -211,6 +213,7 @@ PlotASAP <- function(wd, asap.name, cc.age=-999, nyrs.ave=5, correlation.limit=0
   
   windows()
   pdf(file=paste(od,pdf.name,".DIAGNOSTIC.PLOTS.pdf",sep=""), onefile=T)
+  PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
   PlotMainLikelihoods(asap.name,asap,save.plots,od,plotf,liz.palette,max.grad,npar)
   PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
   PlotHighCVs(a1,save.plots,od,plotf)
