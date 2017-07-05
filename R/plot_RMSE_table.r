@@ -1,13 +1,14 @@
 #' Plot of RMSE table
 #' 
 #' Summarizes root mean square error by likelihood component.
+#' @param asap.name Base name of original dat file (without the .dat extension)
 #' @param asap name of the variable that read in the asap.rdat file
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @export
  
-PlotRMSEtable <- function(asap,save.plots,od,plotf){
+PlotRMSEtable <- function(asap.name,asap,save.plots,od,plotf){
   par(mfrow=c(1,1) )
   max.txt<-16
   n.rmse<-length(asap$RMSE)
