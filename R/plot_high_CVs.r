@@ -10,6 +10,7 @@
 
 PlotHighCVs <- function(a1,save.plots,od,plotf) {
 
+  asap.name <- a1$asap.name
   npar <- a1$npar
   if (npar != -999){
     # drop last 5 params (or only if steepness is fixed at 1?)

@@ -8,6 +8,7 @@
 
 SummarizeASAP <- function(asap,a1,od){
   
+  asap.name <- a1$asap.name
   years <- seq(asap$parms$styr, asap$parms$endyr)
   ssb.std <- a1$asap.std[which(a1$asap.std$name=="SSB") ,4]
   recr.std <- a1$asap.std[which(a1$asap.std$name=="recruits") ,4]

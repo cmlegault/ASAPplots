@@ -12,7 +12,7 @@ GrabAuxFiles <- function(asap.name,asap,fleet.names,index.names) {
 
   aux.list <-  list("npar"=-999, "asap.cor.names"=NA, "asap.cor.mat"=NA,
                     "asap.std"=NA, "max.grad"=-999, "F.rep"=NA, "Tot.B"=NA , "SSB"=NA, 
-                    "Expl.B"=NA, "recr"=NA )
+                    "Expl.B"=NA, "recr"=NA, "asap.name"=asap.name )
   
   if (file.exists(paste0(asap.name,".std"))){
     asap.std <- read.table(paste0(asap.name, ".std"), header = F, skip=1,sep = "") # Read in std file from admb
@@ -61,9 +61,8 @@ GrabAuxFiles <- function(asap.name,asap,fleet.names,index.names) {
     max.grad <- par.split[length(par.split)]
     npar <- as.numeric(par.split[ 6])
     aux.list <-  list("npar"=npar, "asap.cor.names"=asap.cor.names, "asap.cor.mat"=asap.cor.mat,
-                      "asap.std"=asap.std, "max.grad"=max.grad, "F.rep"=F.rep[1] , "Tot.B"=Tot.B[1] , "SSB"=SSB[1] , 
-                      "Expl.B"=Expl.B[1] , "recr"=recr[1] )
-    
+                      "asap.std"=asap.std, "max.grad"=max.grad, "F.rep"=F.rep[1], "Tot.B"=Tot.B[1], 
+                      "SSB"=SSB[1], "Expl.B"=Expl.B[1] , "recr"=recr[1], "asap.name"=asap.name )
   }
 
   return(aux.list)
