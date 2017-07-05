@@ -4,9 +4,11 @@
 \alias{PlotRMSEtable}
 \title{Plot of RMSE table}
 \usage{
-PlotRMSEtable(asap, save.plots, od, plotf)
+PlotRMSEtable(asap.name, asap, save.plots, od, plotf)
 }
 \arguments{
+\item{asap.name}{Base name of original dat file (without the .dat extension)}
+
 \item{asap}{name of the variable that read in the asap.rdat file}
 
 \item{save.plots}{save individual plots}
