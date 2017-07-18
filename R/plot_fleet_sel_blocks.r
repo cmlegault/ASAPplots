@@ -19,7 +19,7 @@ PlotFleetSelBlocks <- function(asap,fleet.names,save.plots,od,plotf,liz.palette)
     blocks <- unique(asap$fleet.sel.blocks[i,])
     n.blocks <- length(blocks)
     sel.mat <- as.data.frame(asap$fleet.sel.mats[i])
-    sel <- matrix(0, nrow=n.blocks, ncol=asap$parms$nages)
+    sel <- matrix(0, nrow=n.blocks, ncol=(a2 - a1 + 1))
     yr <- rep(NA, n.blocks)
     my.col <- rep(NA, n.blocks)
     for (j in 1:n.blocks){
