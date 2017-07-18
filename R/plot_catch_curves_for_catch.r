@@ -19,9 +19,19 @@ PlotCatchCurvesForCatch <- function(asap,save.plots,od,plotf,first.age=-999){
     if (asap$parms$nfleets == 1) title1 = "Catch"
     if (asap$parms$nfleets >= 2) title1 = paste("Catch for Fleet ",ifleet, sep="")
     
+    # set up full age range matrices
+    catch.comp.mat.ob <- matrix(0, nrow=asap$parms$nyears, ncol=asap$nparms$nages)
+    catch.comp.mat.pr <- matrix(0, nrow=asap$parms$nyears, ncol=asap$nparms$nages)
+    
+    # determine age range for fleet and fill in appropriate ages
+    a1 <- asap$fleet.sel.start.age[ifleet]
+    a2 <- asap$fleet.sel.end.age[ifleet]
+    catch.comp.mat.ob[,a1:a2] <- asap$catch.comp.mats[[(ifleet*4-3)]]
+    catch.comp.mat.pr[,a1:a2] <- asap$catch.comp.mats[[(ifleet*4-2)]]
+    
     # get catch at age
-    catchob <- wtprop2caa(asap$catch.obs[ifleet,],  asap$WAA.mats[[(ifleet*2-1)]], asap$catch.comp.mats[[(ifleet*4-3)]])
-    catchpr <- wtprop2caa(asap$catch.pred[ifleet,], asap$WAA.mats[[(ifleet*2-1)]], asap$catch.comp.mats[[(ifleet*4-2)]])
+    catchob <- wtprop2caa(asap$catch.obs[ifleet,],  asap$WAA.mats[[(ifleet*2-1)]], catch.comp.mat.ob)
+    catchpr <- wtprop2caa(asap$catch.pred[ifleet,], asap$WAA.mats[[(ifleet*2-1)]], catch.comp.mat.pr)
     
     # replace zeros with NA and take logs
     cob <- rep0log(catchob)
