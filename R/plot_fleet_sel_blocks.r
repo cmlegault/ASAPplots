@@ -28,12 +28,12 @@ PlotFleetSelBlocks <- function(asap,fleet.names,save.plots,od,plotf,liz.palette)
       yr[j] <- min(years[asap$fleet.sel.blocks[i,]==blocks[j]])
       sel[j,] <- as.numeric(sel.mat[yr[j],a1:a2])
       if (j==1){
-        plot(1:asap$parms$nages, sel[j,], type='l', col=my.col[j], 
+        plot(a1:a2, sel[j,], type='l', col=my.col[j], 
              xlim=c(0,asap$parms$nages+3), ylim=c(0,1.1), 
              xlab="Age", ylab="Selectivity at Age", lwd=2) 
       }
       if (j>1){
-        lines(1:asap$parms$nages, sel[j,], type='l', col=my.col[j], lwd=2)
+        lines(a1:a2, sel[j,], type='l', col=my.col[j], lwd=2)
       }
     }
     title(paste("Fleet ",i," (",fleet.names[i],")", sep=""))
