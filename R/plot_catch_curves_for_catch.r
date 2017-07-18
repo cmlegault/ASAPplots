@@ -70,23 +70,23 @@ PlotCatchCurvesForCatch <- function(asap,save.plots,od,plotf,first.age=-999){
     
     # make the plots
     par(mfrow=c(2,1))
-    plot(cohort,cohort,type='n',ylim=range(c(cob.coh,cpr.coh),na.rm=T),xlab="",ylab="Log(Catch)",main=paste(title1," Observed", sep=""))
+    plot(cohort,cohort,type='n',ylim=range(c(cob.coh,cpr.coh,0),na.rm=T),xlab="",ylab="Log(Catch)",main=paste(title1," Observed", sep=""))
     for (i in 1:length(cob.coh[,1])){
       lines(seq(cohort[i],cohort[i]+asap$parms$nages-1),cob.coh[i,],type='p',lty=1,pch=seq(1,asap$parms$nages),col="gray50")
       lines(seq(cohort[i],cohort[i]+asap$parms$nages-1),cob.coh[i,],type='l',lty=1,col=my.col[i])
     }
     
-    Hmisc::errbar(cohort,z.ob[,1],z.ob[,3],z.ob[,2],xlab="Year Class",ylab="Z",ylim=range(c(z.ob,z.pr),na.rm=T))
+    Hmisc::errbar(cohort,z.ob[,1],z.ob[,3],z.ob[,2],xlab="Year Class",ylab="Z",ylim=range(c(z.ob,z.pr,0),na.rm=T))
     
     if (save.plots) savePlot(paste(od,"catch_curve_",title1,"_Observed_first_age_",first.age.label,".",plotf, sep=""), type=plotf)
     
-    plot(cohort,cohort,type='n',ylim=range(c(cob.coh,cpr.coh),na.rm=T),xlab="",ylab="Log(Catch)",main=paste(title1," Predicted", sep=""))
+    plot(cohort,cohort,type='n',ylim=range(c(cob.coh,cpr.coh,0),na.rm=T),xlab="",ylab="Log(Catch)",main=paste(title1," Predicted", sep=""))
     for (i in 1:length(cob.coh[,1])){
       lines(seq(cohort[i],cohort[i]+asap$parms$nages-1),cpr.coh[i,],type='p',lty=1,pch=seq(1,asap$parms$nages),col="gray50")
       lines(seq(cohort[i],cohort[i]+asap$parms$nages-1),cpr.coh[i,],type='l',lty=1,col=my.col[i])
     }
     
-    Hmisc::errbar(cohort,z.pr[,1],z.pr[,3],z.pr[,2],xlab="Year Class",ylab="Z",ylim=range(c(z.ob,z.pr),na.rm=T))
+    Hmisc::errbar(cohort,z.pr[,1],z.pr[,3],z.pr[,2],xlab="Year Class",ylab="Z",ylim=range(c(z.ob,z.pr,0),na.rm=T))
     
     if (save.plots) savePlot(paste(od,"catch_curve_",title1,"_Predicted_first_age_",first.age.label,".",plotf, sep=""), type=plotf)
     
