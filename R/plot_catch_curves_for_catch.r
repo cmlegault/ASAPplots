@@ -20,8 +20,8 @@ PlotCatchCurvesForCatch <- function(asap,save.plots,od,plotf,first.age=-999){
     if (asap$parms$nfleets >= 2) title1 = paste("Catch for Fleet ",ifleet, sep="")
     
     # set up full age range matrices
-    catch.comp.mat.ob <- matrix(0, nrow=asap$parms$nyears, ncol=asap$nparms$nages)
-    catch.comp.mat.pr <- matrix(0, nrow=asap$parms$nyears, ncol=asap$nparms$nages)
+    catch.comp.mat.ob <- matrix(0, nrow=asap$parms$nyears, ncol=asap$parms$nages)
+    catch.comp.mat.pr <- matrix(0, nrow=asap$parms$nyears, ncol=asap$parms$nages)
     
     # determine age range for fleet and fill in appropriate ages
     a1 <- asap$fleet.sel.start.age[ifleet]
