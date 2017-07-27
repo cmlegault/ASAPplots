@@ -1,7 +1,7 @@
 Package: ASAPplots
 Type: Package
 Title: Creates Standard Plots and PDFs for ASAP3
-Version: 0.1.7
+Version: 0.1.8
 Author: Liz Brooks and Chris Legault
 Maintainer: Chris Legault <chris.legault@noaa.gov>
 Description: Assumes NOAA Fisheries Toolbox ASAP3 has been run and creates large

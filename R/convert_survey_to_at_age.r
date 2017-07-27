@@ -8,6 +8,8 @@
 ConvertSurveyToAtAge <- function(asap){
   # takes West Coast style surveys and converts them to catch at age matrices
   index.mats <- list()
+  index.mats$ob <- list()
+  index.mats$pr <- list()
   weight.mat.counter <- 0
   years <- asap$parms$styr:asap$parms$endyr
   for (ind in 1:asap$parms$nindices){
