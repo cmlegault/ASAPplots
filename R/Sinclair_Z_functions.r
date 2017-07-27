@@ -138,21 +138,24 @@ drop_partially_selected_ages <- function(mat,sel,sel.start.age,sel.end.age,sel.c
 get_Sinclair_Z <- function(asap,index.names,save.plots,od,plotf){
   index.mats <- ConvertSurveyToAtAge(asap)
   nages <- asap$parms$nages
+  Sinclair.Z <- NA
   for (j in 1:length(index.mats$ob)){
-    mat <- index.mats$ob[[j]]
-    sel.start.age <- asap$control.parms$index.sel.start.age[j]
-    sel.end.age <- asap$control.parms$index.sel.end.age[j]
-    mat <- drop_partially_selected_ages(mat,asap$index.sel[j,],sel.start.age,sel.end.age,0.90)
-    if (sel.end.age == nages) mat[,length(mat[1,])] <- NA # drop oldest age because plus group in ASAP
-    Sinclair.Z <- calc_Sinclair_Z(mat)
-    if (Sinclair.Z$error == FALSE){
-      est.Z.name <- paste0("Sinclair_Z_estimates_index_",j)
-      regress.name <- paste0("Sinclair_Z_regress_index_",j)
-      resid.name <- paste0("Sinclair_Z_resids_index_",j)
-      resids <- plot_Sinclair_Z(Sinclair.Z,est.Z.name,regress.name,resid.name,index.names[j],
-                                save.plots,od,plotf)
-      Sinclair.Z.table <- cbind(Sinclair.Z$plot.year,Sinclair.Z$est.Sinclair.Z)
-      write.csv(Sinclair.Z.table, file=paste0(od,"Sinclair_Z_index_",j,".csv"), row.names=F)
+    if (asap$control.parms$index.age.comp.flag[j] == 1){  # used age composition for the index
+      mat <- index.mats$ob[[j]]
+      sel.start.age <- asap$control.parms$index.sel.start.age[j]
+      sel.end.age <- asap$control.parms$index.sel.end.age[j]
+      mat <- drop_partially_selected_ages(mat,asap$index.sel[j,],sel.start.age,sel.end.age,0.90)
+      if (sel.end.age == nages) mat[,length(mat[1,])] <- NA # drop oldest age because plus group in ASAP
+      Sinclair.Z <- calc_Sinclair_Z(mat)
+      if (Sinclair.Z$error == FALSE){
+        est.Z.name <- paste0("Sinclair_Z_estimates_index_",j)
+        regress.name <- paste0("Sinclair_Z_regress_index_",j)
+        resid.name <- paste0("Sinclair_Z_resids_index_",j)
+        resids <- plot_Sinclair_Z(Sinclair.Z,est.Z.name,regress.name,resid.name,index.names[j],
+                                  save.plots,od,plotf)
+        Sinclair.Z.table <- cbind(Sinclair.Z$plot.year,Sinclair.Z$est.Sinclair.Z)
+        write.csv(Sinclair.Z.table, file=paste0(od,"Sinclair_Z_index_",j,".csv"), row.names=F)
+      }
     }
   }
   return(Sinclair.Z)
