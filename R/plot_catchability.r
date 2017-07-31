@@ -37,7 +37,7 @@ PlotCatchability <- function(asap,index.names,a1,save.plots,od,plotf,liz.palette
     barplot( q.info,  beside=T, axisnames=F, cex.names=0.70 , 
              width=1.0, space=rep(0,num.q), xpd=F,
              xlab = '', ylab ='Catchability (q +/- 2 SE)', 
-             ylim = c(0,1.05*max(se.lines[,2])), 
+             ylim = c(0,1.05*max(se.lines[,2], na.rm=TRUE)), 
              xlim=c(0,num.q), col="lightblue3")
     box()
     axis(side=1, las=2, at=seq(0.5, (num.q-0.5) ),  
