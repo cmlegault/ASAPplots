@@ -40,8 +40,8 @@ PlotIndexAtAgeConsistency <- function(asap,save.plots,od,plotf){
       age.max <- asap$control.parms$index.sel.end.age[ind]
       
       # make the plots
-      iob.cor <- PlotCoh(iob.coh,save.plots,od,plotf,mytitle=paste(title1," Observed", sep=""))
-      ipr.cor <- PlotCoh(ipr.coh,save.plots,od,plotf,mytitle=paste(title1," Predicted", sep=""))
+      iob.cor <- PlotCoh(iob.coh,save.plots,od,plotf,mytitle=paste(title1," Observed", sep=""),mylabels=paste0("age-",seq(age.min,age.max)))
+      ipr.cor <- PlotCoh(ipr.coh,save.plots,od,plotf,mytitle=paste(title1," Predicted", sep=""),mylabels=paste0("age-",seq(age.min,age.max)))
       index.corr[[ind]] <- list(iob.cor,ipr.cor)
     }
   }
