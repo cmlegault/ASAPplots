@@ -16,5 +16,5 @@ PlotRecrSSByr(asap, save.plots, od, plotf)
 \item{plotf}{type of plot to save}
 }
 \description{
-Standard stock-recruitment plot with years labeled.
+Standard stock-recruitment plot with years labeled. Also creates R/SSB time series plot.
 }
