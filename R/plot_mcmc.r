@@ -56,12 +56,12 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   par(mfcol=c(2,1),mar=c(4,4,2,2), oma=c(1,1,1,1))
   plot(seq(1,niter), ssb.chain[,1], type='l', xlab="Iteration", ylab=paste("SSB",years[1], sep="") )
   plot(seq(1,niter), ssb.chain[,nyears], type='l', xlab="Iteration", ylab=paste("SSB",years[nyears], sep="") )
-  if (save.plots==T)  savePlot(paste(od,'Trace.SSB.first.last.yr.png', sep=""),type=plotf)
+  if (save.plots==T)  savePlot(paste(od,'Trace.SSB.first.last.yr.',plotf, sep=""),type=plotf)
   
   par(mfcol=c(2,1),mar=c(4,4,2,2), oma=c(1,1,1,1))
   plot(seq(1,niter), f.chain[,1], type='l', xlab="Iteration", ylab=paste("Freport",years[1], sep="") )
   plot(seq(1,niter), f.chain[,nyears], type='l', xlab="Iteration", ylab=paste("Freport",years[nyears], sep="") )
-  if (save.plots==T)  savePlot(paste(od,'Trace.Freport.first.last.yr.png', sep=""),type=plotf)
+  if (save.plots==T)  savePlot(paste(od,'Trace.Freport.first.last.yr.',plotf, sep=""),type=plotf)
   
   
   ##NEW
@@ -71,7 +71,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
            ylab="Median with 90% PI", lty.median=1, lwd.median=2, col.median="black", lty.outer=2, lwd.outer=1,
            col.outer="black"  )
   
-  if (save.plots==T)  savePlot(paste(od,'Cumu.F_and_SSB.first.last.yr.png', sep=""),type=plotf)
+  if (save.plots==T)  savePlot(paste(od,'Cumu.F_and_SSB.first.last.yr.',plotf, sep=""),type=plotf)
   
   
   
@@ -91,7 +91,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   abline(h=2/sqrt(niter), col='red', lty=2)
   abline(h=-2/sqrt(niter), col='red', lty=2)
   
-  if (save.plots==T)  savePlot(file=paste(od, "lag.autocorrelation.SSB.png",sep=""), type=plotf)
+  if (save.plots==T)  savePlot(file=paste(od, "lag.autocorrelation.SSB.",plotf,sep=""), type=plotf)
   
   par(mfcol=c(2,1),mar=c(4,4,2,2))
   ac.f1<-acf(f.chain[,1], lag.max=10, plot=F)
@@ -107,7 +107,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   abline(h=2/sqrt(niter), col='red', lty=2)
   abline(h=-2/sqrt(niter), col='red', lty=2)
   
-  if (save.plots==T)  savePlot(file=paste(od, "lag.autocorrelation.Freport.png",sep=""), type=plotf)
+  if (save.plots==T)  savePlot(file=paste(od, "lag.autocorrelation.Freport.",plotf,sep=""), type=plotf)
   
   
   # examine Distribution in first and last year
@@ -130,7 +130,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste("SSB", years[nyears],sep=""), ylab="Freq", 
        ylim=c(0, max( 1.02*y2)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=asap$SSB[nyears], col='red', lty=4)
-  if (save.plots==T)  savePlot(paste(od, 'Distribution.SSB.first.last.yr.png', sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste(od, 'Distribution.SSB.first.last.yr.',plotf, sep=""), type=plotf)
   
   
   
@@ -155,7 +155,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
        ylim=c(0, max( 1.02*y2)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=asap$F.report[nyears], col='red', lty=4)
   
-  if (save.plots==T)  savePlot(paste(od, 'Distribution.Freport.first.last.yr.png', sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste(od, 'Distribution.Freport.first.last.yr.',plotf, sep=""), type=plotf)
   
   
   
@@ -181,7 +181,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
        ylim=c(0, max( 1.02*y2)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=full.f[nyears], col='red', lty=4)
   
-  if (save.plots==T)  savePlot(paste(od, 'Distribution.Fmult.first.last.yr.png', sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste(od, 'Distribution.Fmult.first.last.yr.',plotf, sep=""), type=plotf)
   
   
   b1.hist<-hist(totB.chain[,1],breaks = "Sturges", include.lowest = TRUE, right = TRUE, plot=F)
@@ -206,7 +206,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
        ylim=c(0, max( 1.02*y2)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=tot.B[nyears], col='red', lty=4)
   
-  if (save.plots==T)  savePlot(paste(od, 'Distribution.Jan1.B.first.last.yr.png', sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste(od, 'Distribution.Jan1.B.first.last.yr.',plotf, sep=""), type=plotf)
   
   
   ####   Probability Interval Plots

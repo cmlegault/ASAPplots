@@ -84,7 +84,7 @@ PlotFrancisFleet<-function(asap,fleet.names,save.plots,od,plotf,is.catch.flag=T)
       rmse <- sqrt(mean(sdres^2, na.rm=T))
       plotrix::barp(sdres,names.arg=years,col="grey50",ylab="Std Resids",xlab="Year")
       legend('topleft',legend=c(paste("SDNR=",round(sdnr,2), sep=""),paste("RMSE=",round(rmse,2), sep="")),cex=0.7,h=T)
-      if (save.plots) savePlot(paste(od,my.save,"ESS_Mean_Age_Fleet_",i,".png", sep=""), type='png')
+      if (save.plots) savePlot(paste(od,my.save,"ESS_Mean_Age_Fleet_",i,plotf, sep=""), type=plotf)
       
       
       #-- Second plot
@@ -99,7 +99,7 @@ PlotFrancisFleet<-function(asap,fleet.names,save.plots,od,plotf,is.catch.flag=T)
       if(len.uniques==1)  title(main=paste(my.title,"Fleet ",i, " (", fleet.names[i], ")"," ESS = ",ESS[1], sep=""), outer=F)
       if(len.uniques>1)    title(main=paste(my.title,"Fleet ",i, " (", fleet.names[i], ")", sep=""), outer=F)
       
-      if (save.plots) savePlot(paste(od,my.save,"ESS_QQplot_Fleet_",i,".png", sep=""), type='png')
+      if (save.plots) savePlot(paste(od,my.save,"ESS_QQplot_Fleet_",i,plotf, sep=""), type=plotf)
       
     } #end test for catch.yrs
   }   # end loop on number of fleets

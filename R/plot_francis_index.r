@@ -93,8 +93,7 @@ PlotFrancisIndex <- function(asap,index.names,save.plots,od,plotf){
         plotrix::barp(sdres,names.arg=years[acyrs2],col="grey50",ylab="Std Resids",xlab="Year")
         legend('topleft',legend=c(paste("SDNR=",round(sdnr,2), sep=""),paste("RMSE=",round(rmse,2), sep="")),cex=0.7,h=T)
         
-        #if (save.plots) savePlot(paste(od,"Francis_Mean_Age_Orig_Ind_",ind.use[i],".png", sep=""), type='png')
-        if (save.plots) savePlot(paste(od,"Francis_Mean_Age_Orig_Ind_",i,".png", sep=""), type='png')
+        if (save.plots) savePlot(paste(od,"Francis_Mean_Age_Orig_Ind_",i,plotf, sep=""), type=plotf)
         
         
         #-- Second plot
@@ -108,8 +107,7 @@ PlotFrancisIndex <- function(asap,index.names,save.plots,od,plotf){
         
         if(len.uniques==1)    title(main=paste("Index ",i, " (",index.names[i],")", " ESS = ",ESS[i], sep=""), outer=F)
         if(len.uniques>1)    title(main=paste("Index ",i, " (",index.names[i],")",  sep=""), outer=F)
-        if (save.plots) savePlot(paste(od,"Francis_QQ_Orig_Ind_",ind.use[i],".png", sep=""), type='png')
-        if (save.plots) savePlot(paste(od,"Francis_QQ_Orig_Ind_",i,".png", sep=""), type='png')
+        if (save.plots) savePlot(paste(od,"Francis_QQ_Orig_Ind_",i,plotf, sep=""), type=plotf)
         
         
       }  #end test for presence/absence of age-comp  
