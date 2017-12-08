@@ -6,7 +6,7 @@ Author: Liz Brooks and Chris Legault
 Maintainer: Chris Legault <chris.legault@noaa.gov>
 Description: Assumes NOAA Fisheries Toolbox ASAP3 has been run and creates large
     number of plots, csv files, and PDFs.
-License: What license is it under?
+License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
