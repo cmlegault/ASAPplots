@@ -4,10 +4,12 @@
 \alias{PlotCatchCurvesForIndices}
 \title{Plot catch curves for indices}
 \usage{
-PlotCatchCurvesForIndices(asap, save.plots, od, plotf, first.age = -999)
+PlotCatchCurvesForIndices(asap, a1, save.plots, od, plotf, first.age = -999)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{a1}{list file produced by grab.aux.files function}
 
 \item{save.plots}{save individual plots}
 

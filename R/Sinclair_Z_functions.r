@@ -129,13 +129,15 @@ drop_partially_selected_ages <- function(mat,sel,sel.start.age,sel.end.age,sel.c
 #' 
 #' Set of functions to prepare index matrices and compute and plot Sinclair Z. Estimate Z from catch curves using 4 year moving window with cohort-specific coefficients. Based on Sinclair 2001 ICES J Mar Sci 58: 1-10. Note hard wired to use only ages that are at least 90 percent selected.
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param a1 list file produced by grab.aux.files function
 #' @param index.names names of indices
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @export
 
-get_Sinclair_Z <- function(asap,index.names,save.plots,od,plotf){
+get_Sinclair_Z <- function(asap,a1,index.names,save.plots,od,plotf){
+  asap.name <- a1$asap.name
   index.mats <- ConvertSurveyToAtAge(asap)
   nages <- asap$parms$nages
   Sinclair.Z <- NA
@@ -154,7 +156,7 @@ get_Sinclair_Z <- function(asap,index.names,save.plots,od,plotf){
         resids <- plot_Sinclair_Z(Sinclair.Z,est.Z.name,regress.name,resid.name,index.names[j],
                                   save.plots,od,plotf)
         Sinclair.Z.table <- cbind(Sinclair.Z$plot.year,Sinclair.Z$est.Sinclair.Z)
-        write.csv(Sinclair.Z.table, file=paste0(od,"Sinclair_Z_index_",j,".csv"), row.names=F)
+        write.csv(Sinclair.Z.table, file=paste0(od,"Sinclair_Z_index_",j,"_",asap.name,".csv"), row.names=F)
       }
     }
   }

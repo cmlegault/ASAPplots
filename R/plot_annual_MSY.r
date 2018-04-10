@@ -2,12 +2,13 @@
 #' 
 #' Plot values associated with MSY using year-specific inputs.
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param a1 list file produced by grab.aux.files function
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @export
 
-PlotAnnualMSY <- function(asap,save.plots,od,plotf){
+PlotAnnualMSY <- function(asap,a1,save.plots,od,plotf){
   
   h.vals <- asap$SR.annual.parms$steepness.vec
   recr.par <- h.vals
@@ -175,7 +176,8 @@ PlotAnnualMSY <- function(asap,save.plots,od,plotf){
       c("Fmsy", "MSY", "SPRmsy", "SSBmsy", "Rmsy", "YPRmsy",
         "Rel.SSBmsy", "Rel.Rmsy", "Conv.Code",paste("Freport_",frep1,"-",frep2,sep=""))
     
-    write.csv( t(MSY.soln), file=paste(od, "MSY.soln.values.csv", sep=""), row.names=T )
+    asap.name <- a1$asap.name
+    write.csv( t(MSY.soln), file=paste(od, "MSY.soln.values_", asap.name, ".csv", sep=""), row.names=T )
 
   } # end test for steepness phase>0
   

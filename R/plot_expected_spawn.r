@@ -2,13 +2,14 @@
 #' 
 #' Plot expected number of spawnings as a function of fishing mortality rate.
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param a1 list file produced by grab.aux.files function
 #' @param nyrs.ave number of years to average for calculating Reference Points 
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @export
 
-PlotExpSpawn <- function(asap,nyrs.ave,save.plots,od,plotf){
+PlotExpSpawn <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
   
   nages<- asap$parms$nages
   nyears <- asap$parms$nyears
@@ -112,10 +113,11 @@ PlotExpSpawn <- function(asap,nyrs.ave,save.plots,od,plotf){
   if (frep1==frep2) freport <-F.range*sel.age[frep1:frep2]
   if (frep2>frep1) freport <-F.range*mean(sel.age[frep1:frep2])
   
+  asap.name <- a1$asap.name
   
   exp.spawn.table<- as.data.frame(cbind(F.range, exp.spawn.vec, spr.vec, freport))
   colnames(exp.spawn.table) <- c("Full.F", "Exp.Spawn", "SPR", paste("Freport_",frep1,"-",frep2,sep=""))
-  write.csv( exp.spawn.table, file=paste(od,"Exp.Spawn.Table.csv", sep=""), row.names=F )
+  write.csv( exp.spawn.table, file=paste(od,"Exp.Spawn.Table_",asap.name,".csv", sep=""), row.names=F )
   
   return()
 } # end function

@@ -2,6 +2,7 @@
 #' 
 #' Compares input ESS with Francis (2011) estimates. Based on Francis 2011 CJFAS 68: 1124-1138.
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param a1 list file produced by grab.aux.files function
 #' @param fleet.names names of fleets 
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
@@ -9,7 +10,7 @@
 #' @param is.catch.flag true means only catch plotted, false also plots discards (defaults to TRUE)
 #' @export
 
-PlotFrancisFleet<-function(asap,fleet.names,save.plots,od,plotf,is.catch.flag=T) { 
+PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag=T) { 
   par(mfrow=c(2,1), mar=c(4,4,2,4) )
   
   years <- seq(asap$parms$styr, asap$parms$endyr) 
@@ -105,8 +106,10 @@ PlotFrancisFleet<-function(asap,fleet.names,save.plots,od,plotf,is.catch.flag=T)
   }   # end loop on number of fleets
   
   # write csv file of Francis multipliers
+  asap.name <- a1$asap.name
+  
   francis.mult <- unlist(asap$Neff.stage2.mult)
-  write.csv(francis.mult, file=paste(od, "NEFF.Mult.Stage2.csv", sep=""),   row.names=T)
+  write.csv(francis.mult, file=paste(od, "NEFF.Mult.Stage2_",asap.name,".csv", sep=""),   row.names=T)
   
   return()
 } #end function   

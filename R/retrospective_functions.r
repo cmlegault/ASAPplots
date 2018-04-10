@@ -125,7 +125,7 @@ PlotRetroWrapper <- function(asap.name,asap,save.plots,od,plotf){
   Retro.rho <-cbind(f.rho, ssb.rho, recr.rho, jan1b.rho, explb.rho, stockn.rho, age.rho)
   rownames(Retro.rho) <- c(paste("peel", seq(1,(length(f.rho)-1)), sep="."),"Mohn.rho"  )
   
-  write.csv(Retro.rho, file=paste(od, "Retro.rho.values.csv",sep=""),   row.names=T)
+  write.csv(Retro.rho, file=paste(od, "Retro.rho.values_",asap.name,".csv",sep=""),   row.names=T)
   return()
 }
 

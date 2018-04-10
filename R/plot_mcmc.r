@@ -246,7 +246,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   
   ssb.pi <- cbind(years, "5th"=ssb.sort[p5,], "Median"=apply(ssb.sort,2,median), "95th"=ssb.sort[p95,])
-  write.csv(ssb.pi, file=paste(od, "ssb.90pi.csv",sep=""), 
+  write.csv(ssb.pi, file=paste(od, "ssb.90pi_",asap.name,".csv",sep=""), 
             row.names=F )
   
   
@@ -281,7 +281,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   
   Freport.pi <- cbind(years, "5th"=f.sort[p5,], "Median"=apply(f.sort,2,median), "95th"=f.sort[p95,])
-  write.csv(Freport.pi, file=paste(od, "Freport.90pi.csv",sep=""),   row.names=F)
+  write.csv(Freport.pi, file=paste(od, "Freport.90pi_",asap.name,".csv",sep=""),   row.names=F)
   
   
   
@@ -316,7 +316,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   
   Full.F.pi <- cbind(years, "5th"=fm.sort[p5,], "Median"=apply(fm.sort,2,median), "95th"=fm.sort[p95,])
-  write.csv(Full.F.pi, file=paste(od, "Full.F.90pi.csv",sep=""), 
+  write.csv(Full.F.pi, file=paste(od, "Full.F.90pi_",asap.name,".csv",sep=""), 
             row.names=F)
   
   
@@ -352,7 +352,7 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   
   Tot.B.pi <- cbind(years, "5th"=tb.sort[p5,], "Median"=apply(tb.sort,2,median), "95th"=tb.sort[p95,])
-  write.csv(Tot.B.pi, file=paste(od, "Jan1.B.90pi.csv",sep=""), 
+  write.csv(Tot.B.pi, file=paste(od, "Jan1.B.90pi_",asap.name,".csv",sep=""), 
             row.names=F)
   
   return()

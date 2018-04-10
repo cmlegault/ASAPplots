@@ -4,10 +4,12 @@
 \alias{get_Sinclair_Z}
 \title{Get Sinclair Z}
 \usage{
-get_Sinclair_Z(asap, index.names, save.plots, od, plotf)
+get_Sinclair_Z(asap, a1, index.names, save.plots, od, plotf)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{a1}{list file produced by grab.aux.files function}
 
 \item{index.names}{names of indices}
 

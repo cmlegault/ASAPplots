@@ -2,13 +2,14 @@
 #' 
 #' Creates catch curves to estimate Z from catch data. Useful???
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param a1 list file produced by grab.aux.files function
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @param first.age youngest age to use in catch curve, -999 finds peak age (defaults to -999)
 #' @export
 
-PlotCatchCurvesForCatch <- function(asap,save.plots,od,plotf,first.age=-999){
+PlotCatchCurvesForCatch <- function(asap,a1,save.plots,od,plotf,first.age=-999){
   # create catch curve plots for catch by fleet
   usr <- par("usr"); on.exit(par(usr))
   par(oma=c(1,1,1,1),mar=c(4,4,1,0.5))
@@ -92,12 +93,14 @@ PlotCatchCurvesForCatch <- function(asap,save.plots,od,plotf,first.age=-999){
     
     
     # write out .csv files for Z, one file for each fleet
+    asap.name <- a1$asap.name
+    
     colnames(z.ob) <-c("Z.obs","low.80%", "high.80%")
-    write.csv(z.ob, file=paste(od,"Z.Ob.Fleet.",ifleet,".csv", sep=""),
+    write.csv(z.ob, file=paste(od,"Z.Ob.Fleet",ifleet,"_",asap.name,".csv", sep=""),
               row.names=cohort)
     
     colnames(z.pr) <-c("Z.pred","low.80%", "high.80%")
-    write.csv(z.pr, file=paste(od,"Z.Pr.Fleet.",ifleet,".csv", sep=""),
+    write.csv(z.pr, file=paste(od,"Z.Pr.Fleet.",ifleet,"_",asap.name,".csv", sep=""),
               row.names=cohort)
     
   }

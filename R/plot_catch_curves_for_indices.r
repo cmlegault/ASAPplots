@@ -2,13 +2,14 @@
 #' 
 #' Creates catch curves to estimate Z from index catch data (converted from West Coast style indices).
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param a1 list file produced by grab.aux.files function
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @param first.age youngest age to use in catch curve, -999 finds peak age (defaults to -999)
 #' @export
 
-PlotCatchCurvesForIndices <- function(asap,save.plots,od,plotf,first.age=-999){
+PlotCatchCurvesForIndices <- function(asap,a1,save.plots,od,plotf,first.age=-999){
   # first check to see if any West Coast style indices
   if(sum(asap$control.parms$index.age.comp.flag) == 0){
     return(list())
@@ -95,12 +96,14 @@ PlotCatchCurvesForIndices <- function(asap,save.plots,od,plotf,first.age=-999){
       if (save.plots) savePlot(paste(od,"catch_curve_",title1,"_Predicted_first_age_",first.age.label,".",plotf, sep=""), type=plotf)
       
       # write out .csv files for Z, one file for each fleet
+      asap.name <- a1$asap.name
+      
       colnames(z.ob) <-c("Z.obs","low.80%", "high.80%")
-      write.csv(z.ob, file=paste(od,"Z.Ob.Index.",ind,".csv", sep=""),
+      write.csv(z.ob, file=paste(od,"Z.Ob.Index.",ind,"_",asap.name,".csv", sep=""),
                 row.names=cohort)
       
       colnames(z.pr) <-c("Z.pred","low.80%", "high.80%")
-      write.csv(z.pr, file=paste(od,"Z.Pr.Index.",ind,".csv", sep=""),
+      write.csv(z.pr, file=paste(od,"Z.Pr.Index.",ind,"_",asap.name,".csv", sep=""),
                 row.names=cohort)
       
     }

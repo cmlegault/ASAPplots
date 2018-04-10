@@ -4,10 +4,13 @@
 \alias{PlotFrancisFleet}
 \title{Francis effective sample size plots by fleet}
 \usage{
-PlotFrancisFleet(asap, fleet.names, save.plots, od, plotf, is.catch.flag = T)
+PlotFrancisFleet(asap, a1, fleet.names, save.plots, od, plotf,
+  is.catch.flag = T)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{a1}{list file produced by grab.aux.files function}
 
 \item{fleet.names}{names of fleets}
 

@@ -84,9 +84,9 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,
                          is.catch.flag=FALSE)  # discard bubble plots
   PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette)
-  PlotFrancisFleet(asap,fleet.names,save.plots,od,plotf)
+  PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf)
   PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
-  PlotFrancisFleet(asap,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
+  PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
   PlotIndices4Panel(asap,index.names,save.plots,od,plotf,liz.palette)
   PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid)
   PlotIndexNeff(asap,index.names,save.plots,od,plotf,liz.palette)
@@ -97,9 +97,9 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotFleetSelBlocks(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotFleetFmult(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotIndexSelectivities(asap,index.names,save.plots,od,plotf,liz.palette)
-  PlotCatchCurvesForCatch(asap,save.plots,od,plotf,first.age)
-  PlotCatchCurvesForIndices(asap,save.plots,od,plotf,first.age)
-  get_Sinclair_Z(asap,index.names,save.plots,od,plotf)    
+  PlotCatchCurvesForCatch(asap,a1,save.plots,od,plotf,first.age)
+  PlotCatchCurvesForIndices(asap,a1,save.plots,od,plotf,first.age)
+  get_Sinclair_Z(asap,a1,index.names,save.plots,od,plotf)    
   PlotCatchAtAgeConsistency(asap,save.plots,od,plotf)
   PlotIndexAtAgeConsistency(asap,save.plots,od,plotf)
   PlotCatchability(asap,index.names,a1,save.plots,od,plotf,liz.palette)
@@ -116,11 +116,11 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   
   #--- Reference Points
   
-  PlotYieldCurves(asap,nyrs.ave,save.plots,od,plotf)
-  PlotSPRtable(asap, nyrs.ave,save.plots,od,plotf)
-  PlotExpSpawn(asap,nyrs.ave,save.plots,od,plotf)
+  PlotYieldCurves(asap,a1,nyrs.ave,save.plots,od,plotf)
+  PlotSPRtable(asap,a1,nyrs.ave,save.plots,od,plotf)
+  PlotExpSpawn(asap,a1,nyrs.ave,save.plots,od,plotf)
   PlotAnnualSPRtargets(asap,save.plots,od,plotf)
-  PlotAnnualMSY(asap,save.plots,od,plotf)
+  PlotAnnualMSY(asap,a1,save.plots,od,plotf)
   
   #--- MCMC results (assume user only does 1 chain)
   
@@ -161,9 +161,9 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
     PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,
                            is.catch.flag=FALSE)  # discard bubble plots
     PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette)
-    PlotFrancisFleet(asap,fleet.names,save.plots,od,plotf)
+    PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf)
     PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
-    PlotFrancisFleet(asap,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
+    PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
     PlotIndices4Panel(asap,index.names,save.plots,od,plotf,liz.palette)
     PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid)
     PlotIndexNeff(asap,index.names,save.plots,od,plotf,liz.palette)
@@ -171,9 +171,9 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
     PlotFleetSelBlocks(asap,fleet.names,save.plots,od,plotf,liz.palette)
     PlotFleetFmult(asap,fleet.names,save.plots,od,plotf,liz.palette)
     PlotIndexSelectivities(asap,index.names,save.plots,od,plotf,liz.palette)
-    PlotCatchCurvesForCatch(asap,save.plots,od,plotf,first.age)
-    PlotCatchCurvesForIndices(asap,save.plots,od,plotf,first.age)
-    get_Sinclair_Z(asap,index.names,save.plots,od,plotf)    
+    PlotCatchCurvesForCatch(asap,a1,save.plots,od,plotf,first.age)
+    PlotCatchCurvesForIndices(asap,a1,save.plots,od,plotf,first.age)
+    get_Sinclair_Z(asap,a1,index.names,save.plots,od,plotf)    
     PlotCatchAtAgeConsistency(asap,save.plots,od,plotf)
     PlotIndexAtAgeConsistency(asap,save.plots,od,plotf)
     PlotCatchability(asap,index.names,a1,save.plots,od,plotf,liz.palette)
@@ -187,11 +187,11 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
     PlotSARCrecSSB(asap,save.plots,od,plotf)
     PlotCV(asap,a1,save.plots,od,plotf)
     if (retro.flag == TRUE) PlotRetroWrapper(asap.name,asap,save.plots,od,plotf)
-    PlotYieldCurves(asap,nyrs.ave,save.plots,od,plotf)
-    PlotSPRtable(asap, nyrs.ave,save.plots,od,plotf)
-    PlotExpSpawn(asap,nyrs.ave,save.plots,od,plotf)
+    PlotYieldCurves(asap,a1,nyrs.ave,save.plots,od,plotf)
+    PlotSPRtable(asap,a1,nyrs.ave,save.plots,od,plotf)
+    PlotExpSpawn(asap,a1,nyrs.ave,save.plots,od,plotf)
     PlotAnnualSPRtargets(asap,save.plots,od,plotf)
-    PlotAnnualMSY(asap,save.plots,od,plotf)
+    PlotAnnualMSY(asap,a1,save.plots,od,plotf)
     if (asap$options$do.mcmc>0) PlotMCMC(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
     PlotCatchByFleet(asap,fleet.names,save.plots,od,plotf,liz.palette)
     PlotCatchAgeCompBubbles(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.data)
@@ -226,9 +226,9 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,
                          is.catch.flag=FALSE)  # discard bubble plots
   PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette)
-  PlotFrancisFleet(asap,fleet.names,save.plots,od,plotf)
+  PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf)
   PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
-  PlotFrancisFleet(asap,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
+  PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
   PlotIndices4Panel(asap,index.names,save.plots,od,plotf,liz.palette)
   PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid)
   PlotIndexNeff(asap,index.names,save.plots,od,plotf,liz.palette)
@@ -243,9 +243,9 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotFleetSelBlocks(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotFleetFmult(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotIndexSelectivities(asap,index.names,save.plots,od,plotf,liz.palette)
-  PlotCatchCurvesForCatch(asap,save.plots,od,plotf,first.age)
-  PlotCatchCurvesForIndices(asap,save.plots,od,plotf,first.age)
-  get_Sinclair_Z(asap,index.names,save.plots,od,plotf)    
+  PlotCatchCurvesForCatch(asap,a1,save.plots,od,plotf,first.age)
+  PlotCatchCurvesForIndices(asap,a1,save.plots,od,plotf,first.age)
+  get_Sinclair_Z(asap,a1,index.names,save.plots,od,plotf)    
   PlotCatchAtAgeConsistency(asap,save.plots,od,plotf)
   PlotIndexAtAgeConsistency(asap,save.plots,od,plotf)
   PlotCatchability(asap,index.names,a1,save.plots,od,plotf,liz.palette)
@@ -285,11 +285,11 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   
   windows()
   pdf(file=paste(od,pdf.name,".REF.POINTS.PLOTS.pdf",sep=""), onefile=T )
-  PlotYieldCurves(asap,nyrs.ave,save.plots,od,plotf)
-  PlotSPRtable(asap, nyrs.ave,save.plots,od,plotf)
-  PlotExpSpawn(asap,nyrs.ave,save.plots,od,plotf)
+  PlotYieldCurves(asap,a1,nyrs.ave,save.plots,od,plotf)
+  PlotSPRtable(asap,a1,nyrs.ave,save.plots,od,plotf)
+  PlotExpSpawn(asap,a1,nyrs.ave,save.plots,od,plotf)
   PlotAnnualSPRtargets(asap,save.plots,od,plotf)
-  PlotAnnualMSY(asap,save.plots,od,plotf)
+  PlotAnnualMSY(asap,a1,save.plots,od,plotf)
   dev.off()      
   graphics.off()
   

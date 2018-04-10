@@ -4,10 +4,12 @@
 \alias{PlotYieldCurves}
 \title{Plot yield curves}
 \usage{
-PlotYieldCurves(asap, nyrs.ave, save.plots, od, plotf)
+PlotYieldCurves(asap, a1, nyrs.ave, save.plots, od, plotf)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{a1}{list file produced by grab.aux.files function}
 
 \item{nyrs.ave}{number of years to average for calculating Reference Points}
 

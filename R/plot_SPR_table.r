@@ -2,14 +2,16 @@
 #' 
 #' Plot table of values associated with spawners per recruit and compute a number of per recruit reference points.
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param a1 list file produced by grab.aux.files function
 #' @param nyrs.ave number of years to average for calculating Reference Points 
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @export
 
-PlotSPRtable <- function(asap, nyrs.ave,save.plots,od,plotf){
+PlotSPRtable <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
   
+  asap.name <- a1$asap.name
   spr.targ.values <- seq(0.2, 0.8, by=0.05)
   n.spr <- length(spr.targ.values)
   nages<- asap$parms$nages
@@ -64,7 +66,7 @@ PlotSPRtable <- function(asap, nyrs.ave,save.plots,od,plotf){
   ave.pars.mat[10,] <- c(f.spr.vals[5], rep(NA, (nages-1))   )    #F40%
   ave.pars.mat[11,] <- c(f.spr.vals[6], rep(NA, (nages-1))   )    #F45%
   ave.pars.mat[12,] <- c(f.spr.vals[7], rep(NA, (nages-1))   )    #F50%
-  write.csv(ave.pars.mat, file=paste0(od, "AGEPRO_ave_params.csv"), row.names=T)
+  write.csv(ave.pars.mat, file=paste0(od, "AGEPRO_ave_params_",asap.name,".csv"), row.names=T)
   
   
   par(mfrow=c(1,1), mar=c(4,4,2,4) )
@@ -110,6 +112,6 @@ PlotSPRtable <- function(asap, nyrs.ave,save.plots,od,plotf){
   spr.target.table<- as.data.frame(cbind(spr.targ.values, f.spr.vals, ypr.spr.vals, ssb.spr.vals, freport))
   colnames(spr.target.table) <- c("%SPR", "F(%SPR)", "YPR", "SSB.PR", paste("Freport_",frep1,"-",frep2,sep=""))
   
-  write.csv( spr.target.table, file=paste(od,"SPR.Target.Table.csv", sep=""),  row.names=F )
+  write.csv( spr.target.table, file=paste(od,"SPR.Target.Table_",asap.name,".csv", sep=""),  row.names=F )
   return()
 } # end function
