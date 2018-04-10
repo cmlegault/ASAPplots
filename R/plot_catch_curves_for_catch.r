@@ -25,10 +25,10 @@ PlotCatchCurvesForCatch <- function(asap,a1,save.plots,od,plotf,first.age=-999){
     catch.comp.mat.pr <- matrix(0, nrow=asap$parms$nyears, ncol=asap$parms$nages)
     
     # determine age range for fleet and fill in appropriate ages
-    a1 <- asap$fleet.sel.start.age[ifleet]
-    a2 <- asap$fleet.sel.end.age[ifleet]
-    catch.comp.mat.ob[,a1:a2] <- asap$catch.comp.mats[[(ifleet*4-3)]]
-    catch.comp.mat.pr[,a1:a2] <- asap$catch.comp.mats[[(ifleet*4-2)]]
+    age1 <- asap$fleet.sel.start.age[ifleet]
+    age2 <- asap$fleet.sel.end.age[ifleet]
+    catch.comp.mat.ob[,age1:age2] <- asap$catch.comp.mats[[(ifleet*4-3)]]
+    catch.comp.mat.pr[,age1:age2] <- asap$catch.comp.mats[[(ifleet*4-2)]]
     
     # get catch at age
     catchob <- wtprop2caa(asap$catch.obs[ifleet,],  asap$WAA.mats[[(ifleet*2-1)]], catch.comp.mat.ob)
