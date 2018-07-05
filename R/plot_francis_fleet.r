@@ -46,7 +46,7 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
     num.acomp.yrs <- length(catch.yrs)
     
     if (length(catch.yrs)>0){  
-      for (j in 1:nyrs ) {
+      for (j in catch.yrs) {
         obsf <- CalcFreqMeanSE(ages,ESS,t.obs[j,])
         prdf <- CalcFreqMeanSE(ages,ESS,t.pred[j,])
         t.res <- rbind(t.res,c(obsf[1],obsf[1]-1.96*obsf[2],obsf[1]+1.96*obsf[2],
@@ -62,7 +62,7 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
       #-- First plot
       par(mfrow=c(2,1), mar=c(4,4,2,4) )
       
-      plot(years,t.res[,4],lty=1,lwd=2,col="blue", ylim=c(0,10), ylab="Mean Age", type='l')
+      plot(years[catch.yrs],t.res[,4],lty=1,lwd=2,col="blue", ylim=c(0,10), ylab="Mean Age", type='l')
       if (len.uniques>1) {
         segments(x0=years[catch.yrs], y0=rep(0,num.acomp.yrs), x1=years[catch.yrs], 
                  y1=Neff.bars[catch.yrs], lwd=5, col='#66BB77aa')
@@ -71,7 +71,7 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
         lines(years,t.res[,4],lty=1,lwd=2,col="blue")
       } #end test for >1 unique ESS
       
-      Hmisc::errbar(years,t.res[,1],t.res[,3],t.res[,2],ylim=c(0,10),add=T)
+      Hmisc::errbar(years[catch.yrs],t.res[,1],t.res[,3],t.res[,2],ylim=c(0,10),add=T)
       
       
       if(len.uniques==1)    title(main=paste(my.title,"Fleet ",i, " (", fleet.names[i], ")"," ESS = ",ESS[1], sep=""), outer=F)
@@ -83,7 +83,7 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
       
       sdnr <- sd(sdres, na.rm=T)
       rmse <- sqrt(mean(sdres^2, na.rm=T))
-      plotrix::barp(sdres,names.arg=years,col="grey50",ylab="Std Resids",xlab="Year")
+      plotrix::barp(sdres,names.arg=years[catch.yrs],col="grey50",ylab="Std Resids",xlab="Year")
       legend('topleft',legend=c(paste("SDNR=",round(sdnr,2), sep=""),paste("RMSE=",round(rmse,2), sep="")),cex=0.7,h=T)
       if (save.plots) savePlot(paste(od,my.save,"ESS_Mean_Age_Fleet_",i,".",plotf, sep=""), type=plotf)
       
