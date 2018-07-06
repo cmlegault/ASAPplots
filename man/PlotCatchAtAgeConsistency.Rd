@@ -4,10 +4,12 @@
 \alias{PlotCatchAtAgeConsistency}
 \title{Plot catch at age consistency}
 \usage{
-PlotCatchAtAgeConsistency(asap, save.plots, od, plotf)
+PlotCatchAtAgeConsistency(asap, fleet.names, save.plots, od, plotf)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{fleet.names}{names of fleets}
 
 \item{save.plots}{save individual plots}
 

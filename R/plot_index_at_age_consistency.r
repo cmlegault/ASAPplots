@@ -2,13 +2,14 @@
 #' 
 #' Lattice style plot of index catch at age X vs age Y with each point a cohort for each fleet. Computed for both input and predicted index catch at age.
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param index.names names of indices 
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @return list with correlation matrices for input and predicted catch at age matrices for each fleet
 #' @export
 
-PlotIndexAtAgeConsistency <- function(asap,save.plots,od,plotf){
+PlotIndexAtAgeConsistency <- function(asap,index.names,save.plots,od,plotf){
   # first check to see if any West Coast style indices
   if(sum(asap$control.parms$index.age.comp.flag) == 0){
     return(list())
@@ -25,7 +26,7 @@ PlotIndexAtAgeConsistency <- function(asap,save.plots,od,plotf){
   # loop through all the indices
   for (ind in 1:asap$parms$nindices){
     if (asap$control.parms$index.age.comp.flag[ind] == 1){  # used age composition for the index
-      title1 <- paste("Index ",ind, sep="")
+      title1 <- paste("Index ",ind," (",index.names[ind],")", sep="")
       
       # replace zeros with NA and take logs
       iob <- rep0log(index.mats$ob[[ind]])

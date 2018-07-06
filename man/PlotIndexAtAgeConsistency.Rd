@@ -4,10 +4,12 @@
 \alias{PlotIndexAtAgeConsistency}
 \title{Plot index at age consistency}
 \usage{
-PlotIndexAtAgeConsistency(asap, save.plots, od, plotf)
+PlotIndexAtAgeConsistency(asap, index.names, save.plots, od, plotf)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{index.names}{names of indices}
 
 \item{save.plots}{save individual plots}
 
