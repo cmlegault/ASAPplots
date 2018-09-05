@@ -24,11 +24,15 @@ PlotCatchAgeCompBubbles <- function(asap,fleet.names,save.plots,od,plotf,scale.c
   for (i in 1:asap$parms$nfleets) {
     acomp.obs <- as.data.frame(asap$catch.comp.mats[4*(i-1)+1])
     catch.yrs <- which(asap$fleet.catch.Neff.init[i,]>0)
+    missing.catch.yrs <- which(asap$fleet.catch.Neff.init[i,] <= 0)
+    acomp.obs[missing.catch.yrs,] <- rep(NA, nages)
     my.title <- "Age Comps for Catch by Fleet "
     my.save <- "obs.catch.bubble.plots."
     if (!is.catch.flag){
       acomp.obs <- as.data.frame(asap$catch.comp.mats[4*(i-1)+3])
       catch.yrs <- which(asap$fleet.discard.Neff.init[i,]>0)
+      missing.catch.yrs <- which(asap$fleet.catch.Neff.init[i,] <= 0)
+      acomp.obs[missing.catch.yrs,] <- rep(NA, nages)
       my.title <- "Age Comps for Discards by Fleet "
       my.save <- "obs.discard.bubble.plots."
       
