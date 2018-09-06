@@ -43,25 +43,25 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
     plot(seq(1,20), seq(1,20), type='n', axes=F, xlab="", ylab="")
     if (length(rmse.ind)<=20) {
       text( x= rep(1,length(rmse.ind)), y=seq(1, length(rmse.ind)), 
-            labels=tname,   pos=4, cex=0.9)
+            labels=tname,   pos=4, cex=0.8)
       points(x=rep(0.5, length(tname)), y=seq(1, length(tname)), 
              pch=seq(1,length(tname)), col=liz.palette[seq(1,length(tname))] )
     }
     if (length(rmse.ind)>20 & length(rmse.ind)<=40) {
       text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20],
-            pos=4, cex=0.9)
+            pos=4, cex=0.8)
       text( x= rep(7,(length(tname)-20)), y=seq(1, (length(tname)-20)), 
-            labels=tname[21:length(tname)], pos=4, cex=0.9)
+            labels=tname[21:length(tname)], pos=4, cex=0.8)
       points(x=rep(0.5, 20), y=seq(1, 20), 
              pch=seq(1,20), col=liz.palette[seq(1,20)] )
       points(x=rep(6.5, (length(tname)-20)), y=seq(1,(length(tname)-20)), 
              pch=(seq(21,length(tname)) %% 20), col=liz.palette[seq(21, length(tname))] )
     }
     if (length(rmse.ind)>40 & length(rmse.ind)<=60) {
-      text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20], pos=4, cex=0.9)
-      text( x= rep(7,20), y=seq(1,20), labels=tname[21:40], pos=4, cex=0.9)
+      text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20], pos=4, cex=0.8)
+      text( x= rep(7,20), y=seq(1,20), labels=tname[21:40], pos=4, cex=0.8)
       text( x= rep(13,(length(tname)-40)), y=seq(1,(length(tname)-40)), 
-            labels=tname[41:length(tname)], pos=4, cex=0.9)
+            labels=tname[41:length(tname)], pos=4, cex=0.8)
       points(x=rep(0.5, 20), y=seq(1, 20), 
              pch=seq(1,20), col=liz.palette[seq(1,20)] )
       points(x=rep(6.5,20), y=seq(1,20), 
@@ -100,25 +100,25 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
     plot(seq(1,20), seq(1,20), type='n', axes=F, xlab="", ylab="")
     if (length(rmse.cat)<=20) {
       text( x= rep(1,length(rmse.cat)), y=seq(1, length(rmse.cat)), 
-            labels=tname,   pos=4, cex=0.9)
+            labels=tname,   pos=4, cex=0.8)
       points(x=rep(0.5, length(tname)), y=seq(1, length(tname)), 
              pch=seq(1,length(tname)), col=liz.palette[seq(1,length(tname))] )
     }
     if (length(rmse.cat)>20 & length(rmse.cat)<=40) {
       text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20],
-            pos=4, cex=0.9)
+            pos=4, cex=0.8)
       text( x= rep(7,(length(tname)-20)), y=seq(1, (length(tname)-20)), 
-            labels=tname[21:length(tname)], pos=4, cex=0.9)
+            labels=tname[21:length(tname)], pos=4, cex=0.8)
       points(x=rep(0.5, 20), y=seq(1, 20), 
              pch=seq(1,20), col=liz.palette[seq(1,20)] )
       points(x=rep(6.5, (length(tname)-20)), y=seq(1,(length(tname)-20)), 
              pch=(seq(21,length(tname)) %% 20), col=liz.palette[seq(21,length(tname))] )
     }
     if (length(rmse.cat)>40 & length(rmse.cat)<=60) {
-      text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20], pos=4, cex=0.9)
-      text( x= rep(7,20), y=seq(1,20), labels=tname[21:40], pos=4, cex=0.9)
+      text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20], pos=4, cex=0.8)
+      text( x= rep(7,20), y=seq(1,20), labels=tname[21:40], pos=4, cex=0.8)
       text( x= rep(13,(length(tname)-40)), y=seq(1,(length(tname)-40)), 
-            labels=tname[41:length(tname)], pos=4, cex=0.9)
+            labels=tname[41:length(tname)], pos=4, cex=0.8)
       points(x=rep(0.5, 20), y=seq(1, 20), 
              pch=seq(1,20), col=liz.palette[seq(1,20)] )
       points(x=rep(6.5,20), y=seq(1,20), 
