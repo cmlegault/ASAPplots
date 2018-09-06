@@ -20,9 +20,9 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
   f.chain <- paste0(asap.name, ".MCM" )
   #f.chain <- "asap3MCMC.dat"
   chain1c <- read.table(paste0(wd,"\\",f.chain), header=T)
-  if (niter == 0) return # in case asap$options$do.mcmc>0 but MCMC not actually run
   ## new stuff
   niter <-  dim(chain1c)[1]
+  if (niter == 0) return # in case asap$options$do.mcmc>0 but MCMC not actually run
   chain1b <-  chain1c[(mcmc.burn+1):niter,]
   niter <-  dim(chain1b)[1]
   chain1a <-  chain1b[seq(1,niter,by=mcmc.thin),]
