@@ -36,28 +36,28 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
     lines(ci.vals[,1], ci.vals[,2], lty=2, lwd=2)
     lines(ci.vals[,1], ci.vals[,3], lty=2, lwd=2)
     
-    points(rmse.num[rmse.ind], rmse.val[rmse.ind], pch=seq(1,length(rmse.ind)), 
+    points(rmse.num[rmse.ind], rmse.val[rmse.ind], pch=(seq(1,length(rmse.ind)) %% 20), 
            col=liz.palette[seq(1,length(rmse.ind))], cex=1.5 )
     
     
     plot(seq(1,20), seq(1,20), type='n', axes=F, xlab="", ylab="")
-    if (length(rmse.ind)<20) {
+    if (length(rmse.ind)<=20) {
       text( x= rep(1,length(rmse.ind)), y=seq(1, length(rmse.ind)), 
             labels=tname,   pos=4, cex=0.9)
       points(x=rep(0.5, length(tname)), y=seq(1, length(tname)), 
              pch=seq(1,length(tname)), col=liz.palette[seq(1,length(tname))] )
     }
-    if (length(rmse.ind)>=20 & length(rmse.ind)<40) {
+    if (length(rmse.ind)>20 & length(rmse.ind)<=40) {
       text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20],
             pos=4, cex=0.9)
       text( x= rep(7,(length(tname)-20)), y=seq(1, (length(tname)-20)), 
-            labels=tname[21:(length(tname)-20)], pos=4, cex=0.9)
+            labels=tname[21:length(tname)], pos=4, cex=0.9)
       points(x=rep(0.5, 20), y=seq(1, 20), 
              pch=seq(1,20), col=liz.palette[seq(1,20)] )
       points(x=rep(6.5, (length(tname)-20)), y=seq(1,(length(tname)-20)), 
-             pch=seq(1,(length(tname)-20)), col=liz.palette[seq(21,(length(tname)-20))] )
+             pch=(seq(21,length(tname)) %% 20), col=liz.palette[seq(21, length(tname))] )
     }
-    if (length(rmse.ind)>=40 & length(rmse.ind)<60) {
+    if (length(rmse.ind)>40 & length(rmse.ind)<=60) {
       text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20], pos=4, cex=0.9)
       text( x= rep(7,20), y=seq(1,20), labels=tname[21:40], pos=4, cex=0.9)
       text( x= rep(13,(length(tname)-40)), y=seq(1,(length(tname)-40)), 
@@ -65,9 +65,9 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
       points(x=rep(0.5, 20), y=seq(1, 20), 
              pch=seq(1,20), col=liz.palette[seq(1,20)] )
       points(x=rep(6.5,20), y=seq(1,20), 
-             pch=seq(1,20), col=liz.palette[seq(21,40)] )
+             pch=(seq(21, 40) %% 20), col=liz.palette[seq(21,40)] )
       points(x=rep(12.5, (length(tname)-40)), y=seq(1,(length(tname)-40)), 
-             pch=seq(1,(length(tname)-40)), col=liz.palette[seq(41,(length(tname)-40))] )
+             pch=(seq(41, length(tname)) %% 20), col=liz.palette[seq(41, length(tname))] )
     }
     
     title(main="Root Mean Square Error for Indices", outer=T, cex=0.85, line=-1)
@@ -98,23 +98,23 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
     
     
     plot(seq(1,20), seq(1,20), type='n', axes=F, xlab="", ylab="")
-    if (length(rmse.cat)<20) {
+    if (length(rmse.cat)<=20) {
       text( x= rep(1,length(rmse.cat)), y=seq(1, length(rmse.cat)), 
             labels=tname,   pos=4, cex=0.9)
       points(x=rep(0.5, length(tname)), y=seq(1, length(tname)), 
              pch=seq(1,length(tname)), col=liz.palette[seq(1,length(tname))] )
     }
-    if (length(rmse.cat)>=20 & length(rmse.cat)<40) {
+    if (length(rmse.cat)>20 & length(rmse.cat)<=40) {
       text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20],
             pos=4, cex=0.9)
       text( x= rep(7,(length(tname)-20)), y=seq(1, (length(tname)-20)), 
-            labels=tname[21:(length(tname)-20)], pos=4, cex=0.9)
+            labels=tname[21:length(tname)], pos=4, cex=0.9)
       points(x=rep(0.5, 20), y=seq(1, 20), 
              pch=seq(1,20), col=liz.palette[seq(1,20)] )
       points(x=rep(6.5, (length(tname)-20)), y=seq(1,(length(tname)-20)), 
-             pch=seq(1,(length(tname)-20)), col=liz.palette[seq(21,(length(tname)-20))] )
+             pch=(seq(21,length(tname)) %% 20), col=liz.palette[seq(21,length(tname))] )
     }
-    if (length(rmse.cat)>=40 & length(rmse.cat)<60) {
+    if (length(rmse.cat)>40 & length(rmse.cat)<=60) {
       text( x= rep(1,20), y=seq(1, 20), labels=tname[1:20], pos=4, cex=0.9)
       text( x= rep(7,20), y=seq(1,20), labels=tname[21:40], pos=4, cex=0.9)
       text( x= rep(13,(length(tname)-40)), y=seq(1,(length(tname)-40)), 
@@ -122,9 +122,9 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
       points(x=rep(0.5, 20), y=seq(1, 20), 
              pch=seq(1,20), col=liz.palette[seq(1,20)] )
       points(x=rep(6.5,20), y=seq(1,20), 
-             pch=seq(1,20), col=liz.palette[seq(21,40)] )
+             pch=(seq(21,40) %% 20), col=liz.palette[seq(21,40)] )
       points(x=rep(12.5, (length(tname)-40)), y=seq(1,(length(tname)-40)), 
-             pch=seq(1,(length(tname)-40)), col=liz.palette[seq(41,(length(tname)-40))] )
+             pch=(seq(41, length(tname)) %% 20), col=liz.palette[seq(41, length(tname))] )
     }
     
     title(main="Root Mean Square Error for Catch", outer=T, cex=0.85, line=-1)
@@ -156,7 +156,7 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
           pos=4)
     points(x=rep(0.5, length(rmse.prior)), y=seq(1, length(rmse.prior)), 
            pch=seq(1,length(rmse.prior)), col=liz.palette[seq(1,length(rmse.prior))] )
-    title(main="Root Mean Square Error for Catch", outer=T, cex=0.85)
+    title(main="Root Mean Square Error for Priors", outer=T, cex=0.85)
     if (save.plots) savePlot(paste(od, "RMSE.95CI.Prior.",plotf, sep=""), type=plotf)
   }
   return()
