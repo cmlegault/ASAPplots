@@ -11,7 +11,7 @@
 #' @param plotf type of plot to save
 #' @export
 
-PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf){
+PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,plotf){
   
   # kk5 <- library(plotMCMC, logical.return=T)
   # if (kk5==F) install.packages("plotMCMC" )
@@ -20,21 +20,22 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   f.chain <- paste0(asap.name, ".MCM" )
   #f.chain <- "asap3MCMC.dat"
   chain1c <- read.table(paste0(wd,"\\",f.chain), header=T)
+  if (niter == 0) return # in case asap$options$do.mcmc>0 but MCMC not actually run
   ## new stuff
-  niter = dim(chain1c)[1]
-  chain1b = chain1c[(mcmc.burn+1):niter,]
-  niter = dim(chain1b)[1]
-  chain1a = chain1b[seq(1,niter,by=mcmc.thin),]
+  niter <-  dim(chain1c)[1]
+  chain1b <-  chain1c[(mcmc.burn+1):niter,]
+  niter <-  dim(chain1b)[1]
+  chain1a <-  chain1b[seq(1,niter,by=mcmc.thin),]
   
   bsn1c <- read.table(paste0(wd,"\\",asap.name, ".BSN"), header=T)
-  niter = dim(bsn1c)[1]
-  bsn1b = bsn1c[(mcmc.burn):niter,]
-  niter = dim(bsn1b)[1]
-  bsn1a = bsn1b[seq(1,niter,by=mcmc.thin),]
+  niter <-  dim(bsn1c)[1]
+  bsn1b <-  bsn1c[(mcmc.burn):niter,]
+  niter <-  dim(bsn1b)[1]
+  bsn1a <-  bsn1b[seq(1,niter,by=mcmc.thin),]
   write.table(bsn1a, file=paste0(od, "New_BSN_file.BSN"), row.names=T)
   write.table(bsn1a, file=paste0(wd, "\\New_", asap.name,".BSN"), row.names=F, col.names=F)
   
-  niter = dim(chain1a)[1]
+  niter <-  dim(chain1a)[1]
   nyears <- asap$parms$nyears
   years <- seq(asap$parms$styr, asap$parms$endyr)
   
@@ -115,10 +116,10 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   ssb2.hist<-hist(ssb.chain[,nyears],breaks = "Sturges", include.lowest = TRUE, right = TRUE, plot=F)
   xlims <- c(min(ssb1.hist$mids, ssb2.hist$mids), max(ssb1.hist$mids, ssb2.hist$mids))
   
-  x1=(ssb1.hist$mids)
-  y1=(ssb1.hist$counts) 
-  x2=(ssb2.hist$mids)
-  y2=(ssb2.hist$counts) 
+  x1 <- (ssb1.hist$mids)
+  y1 <- (ssb1.hist$counts) 
+  x2 <- (ssb2.hist$mids)
+  y2 <- (ssb2.hist$counts) 
   
   par(mfrow=c(2,1) )
   plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste("SSB", years[1],sep=""), ylab="Freq", 
@@ -138,10 +139,10 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   f2.hist<-hist(f.chain[,nyears],breaks = "Sturges", include.lowest = TRUE, right = TRUE, plot=F)
   xlims <- c(min(f1.hist$mids, f2.hist$mids), max(f1.hist$mids, f2.hist$mids))
   
-  x1=(f1.hist$mids)
-  y1=(f1.hist$counts) 
-  x2=(f2.hist$mids)
-  y2=(f2.hist$counts) 
+  x1 <- (f1.hist$mids)
+  y1 <- (f1.hist$counts) 
+  x2 <- (f2.hist$mids)
+  y2 <- (f2.hist$counts) 
   
   par(mfrow=c(2,1) )
   plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste("Freport", years[1],sep=""), ylab="Freq", 
@@ -163,11 +164,11 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   fm2.hist<-hist(fmult.chain[,nyears],breaks = "Sturges", include.lowest = TRUE, right = TRUE, plot=F)
   xlims <- c(min(fm1.hist$mids, fm2.hist$mids), max(fm1.hist$mids, fm2.hist$mids))
   
-  x1=(fm1.hist$mids)
-  y1=(fm1.hist$counts) 
-  x2=(fm2.hist$mids)
-  y2=(fm2.hist$counts) 
-  full.f <-apply(asap$F.age,1,max)
+  x1 <- (fm1.hist$mids)
+  y1 <- (fm1.hist$counts) 
+  x2 <- (fm2.hist$mids)
+  y2 <- (fm2.hist$counts) 
+  full.f <- apply(asap$F.age,1,max)
   
   par(mfrow=c(2,1) )
   plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste("Full F", years[1],sep=""), ylab="Freq", 
@@ -188,10 +189,10 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   b2.hist<-hist(totB.chain[,nyears],breaks = "Sturges", include.lowest = TRUE, right = TRUE, plot=F)
   xlims <- c(min(b1.hist$mids, b2.hist$mids), max(b1.hist$mids, b2.hist$mids))
   
-  x1=(b1.hist$mids)
-  y1=(b1.hist$counts) 
-  x2=(b2.hist$mids)
-  y2=(b2.hist$counts) 
+  x1 <- (b1.hist$mids)
+  y1 <- (b1.hist$counts) 
+  x2 <- (b2.hist$mids)
+  y2 <- (b2.hist$counts) 
   tot.B <- asap$tot.jan1.B
   
   par(mfrow=c(2,1) )
@@ -216,12 +217,12 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   par(mfrow=c(1,1), mar=c(4,4,2,3), oma=c(1,1,1,1)  )
   
   ssb.sort<- (apply(ssb.chain,2,sort ))
-  p5 = trunc( dim(ssb.sort)[1] *.05)
-  p95= trunc( dim(ssb.sort)[1] *.95)
+  p5 <- trunc( dim(ssb.sort)[1] *.05)
+  p95 <-  trunc( dim(ssb.sort)[1] *.95)
   
-  p50=median(dim(ssb.sort)[1])
-  p10 = trunc( dim(ssb.sort)[1] *.10)
-  p90 = trunc( dim(ssb.sort)[1] *.90)
+  p50 <- median(dim(ssb.sort)[1])
+  p10 <-  trunc( dim(ssb.sort)[1] *.10)
+  p90 <-  trunc( dim(ssb.sort)[1] *.90)
   
   
   plot(years, ssb.sort[p5,], type='l', col='grey35', lwd=2, xlab='Year',
@@ -251,13 +252,13 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   
   
-  f.sort<- (apply(f.chain,2,sort ))
-  p5 = trunc( dim(f.sort)[1] *.05)
-  p95= trunc( dim(f.sort)[1] *.95)
+  f.sort <- (apply(f.chain,2,sort ))
+  p5 <- trunc( dim(f.sort)[1] *.05)
+  p95 <- trunc( dim(f.sort)[1] *.95)
   
-  p50=median(dim(f.sort)[1])
-  p10 = trunc( dim(f.sort)[1] *.10)
-  p90 = trunc( dim(f.sort)[1] *.90)
+  p50 <- median(dim(f.sort)[1])
+  p10 <- trunc( dim(f.sort)[1] *.10)
+  p90 <- trunc( dim(f.sort)[1] *.90)
   
   par(mfrow=c(1,1), mar=c(4,4,2,3), oma=c(1,1,1,1)  )
   plot(years, f.sort[p5,], type='l', col='grey35', lwd=2, xlab='Year',
@@ -286,13 +287,13 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   
   
-  fm.sort<- (apply(fmult.chain,2,sort ))
-  p5 = trunc( dim(fm.sort)[1] *.05)
-  p95= trunc( dim(fm.sort)[1] *.95)
+  fm.sort <- (apply(fmult.chain,2,sort ))
+  p5 <- trunc( dim(fm.sort)[1] *.05)
+  p95 <- trunc( dim(fm.sort)[1] *.95)
   
-  p50=median(dim(fm.sort)[1])
-  p10 = trunc( dim(fm.sort)[1] *.10)
-  p90 = trunc( dim(fm.sort)[1] *.90)
+  p50 <- median(dim(fm.sort)[1])
+  p10 <- trunc( dim(fm.sort)[1] *.10)
+  p90 <- trunc( dim(fm.sort)[1] *.90)
   
   par(mfrow=c(1,1), mar=c(4,4,2,3), oma=c(1,1,1,1)  )
   plot(years, fm.sort[p5,], type='l', col='grey35', lwd=2, xlab='Year',
@@ -321,13 +322,13 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
   
   
   
-  tb.sort<- (apply(totB.chain,2,sort ))
-  p5 = trunc( dim(tb.sort)[1] *.05)
-  p95= trunc( dim(tb.sort)[1] *.95)
+  tb.sort <- (apply(totB.chain,2,sort ))
+  p5 <- trunc( dim(tb.sort)[1] *.05)
+  p95 <- trunc( dim(tb.sort)[1] *.95)
   
-  p50=median(dim(tb.sort)[1])
-  p10 = trunc( dim(tb.sort)[1] *.10)
-  p90 = trunc( dim(tb.sort)[1] *.90)
+  p50 <- median(dim(tb.sort)[1])
+  p10 <- trunc( dim(tb.sort)[1] *.10)
+  p90 <- trunc( dim(tb.sort)[1] *.90)
   
   par(mfrow=c(1,1), mar=c(4,4,2,3), oma=c(1,1,1,1)  )
   plot(years, tb.sort[p5,], type='l', col='grey35', lwd=2, xlab='Year',
