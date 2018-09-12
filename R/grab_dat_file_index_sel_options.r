@@ -13,8 +13,9 @@ GrabDatFileIndexSelOptions <- function(asap.name,asap){
   if (length(gg2)==0 ){
     datfile <- readLines(con = paste(asap.name,".dat", sep=""))
     nlines <- seq(1, length(datfile))
-    myval <- "# Index Selectivity Options 1=by age, 2=logisitic, 3=double logistic"
-    index.sel.options.line <- nlines[datfile == myval]
+    myval <- c("# Index Selectivity Options 1=by age, 2=logisitic, 3=double logistic",
+               "# Survey Selectivity Type")  # this one written in retro file
+    index.sel.options.line <- nlines[datfile %in% myval]
     if (length(index.sel.options.line) > 0){
       dat.file.all.index.sel.options <- scan(file = paste(asap.name,".dat", sep=""),
                                              n = asap$parms$navailindices, 
