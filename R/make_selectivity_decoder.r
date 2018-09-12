@@ -7,7 +7,7 @@
 #' @param od output directory for plots and csv files 
 #' @export
 
-PlotFleetSelBlocks <- function(asap,a1,index.names,od){
+MakeSelectivityDecoder <- function(asap,a1,index.names,od){
   asap.name <- a1$asap.name
   
   empty.df <- data.frame(Source = character(),

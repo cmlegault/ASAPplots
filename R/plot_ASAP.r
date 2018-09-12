@@ -68,6 +68,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   a1 <- GrabAuxFiles(asap.name,asap,fleet.names,index.names)  #TODO make sure a1 exists
   npar<-a1$npar     
   max.grad<-a1$max.grad
+  MakeSelectivityDecoder(asap,a1,index.names,od)
   PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
   PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
   PlotHighCVs(a1,save.plots,od,plotf)
