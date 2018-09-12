@@ -15,7 +15,7 @@ GrabDatFileIndexSelOptions <- function(asap.name,asap){
     nlines <- seq(1, length(datfile))
     myval <- "# Index Selectivity Options 1=by age, 2=logisitic, 3=double logistic"
     index.sel.options.line <- nlines[datfile == myval]
-    if (index.sel.options.line > 0){
+    if (length(index.sel.options.line) > 0){
       dat.file.all.index.sel.options <- scan(file = paste(asap.name,".dat", sep=""),
                                              n = asap$parms$navailindices, 
                                              skip = index.sel.options.line)
