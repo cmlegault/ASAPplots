@@ -19,12 +19,10 @@ MakeSelectivityDecoder <- function(asap,a1,index.names,od){
                          InitGuess = double(),
                          Phase = integer(),
                          Lambda = double(),
-                         CV = double() )
-                         #Estimate = double(),        # not sure this will be easy to get, but can try
-                         #EstimatedStDev = double(),  
-                         #EstimatedCV = double())  
+                         CV = double())  
   
-  selectivity.decoder.table <- empty.df
+  fleet.selectivity.decoder.table <- empty.df
+  index.selectivity.decoder.table <- empty.df
   
   nages <- asap$parms$nages
   
@@ -72,9 +70,20 @@ MakeSelectivityDecoder <- function(asap,a1,index.names,od){
                          Lambda = asap$sel.input.mats$fleet.sel.ini[start.row:end.row, 3],
                          CV = asap$sel.input.mats$fleet.sel.ini[start.row:end.row, 4])
     
-    selectivity.decoder.table <- rbind(selectivity.decoder.table, thisdf)
+    fleet.selectivity.decoder.table <- rbind(fleet.selectivity.decoder.table, thisdf)
     icount <- icount + nparms
   }
+  
+  # get fleet selectivity estimates
+  fleet.sel.estimates <- a1$asap.std %>%
+    data.frame(.) %>%
+    filter(substr(name, 1, 10) == "sel_params") %>%
+    mutate(ParamNum = parse_number(name)) %>%
+    mutate(Estimate = value, EstimatedStDev = stdev, EstimatedCV = stdev/value) %>%
+    select(ParamNum, Estimate, EstimatedStDev, EstimatedCV)
+    
+  # join the selectivity table and estimates
+  selectivity.decoder.table <- left_join(fleet.selectivity.decoder.table, fleet.sel.estimates)
   
   # index selectivities
   icount <- 1
@@ -133,7 +142,7 @@ MakeSelectivityDecoder <- function(asap,a1,index.names,od){
                              Lambda = asap$sel.input.mats$index.sel.ini[start.row:end.row, 3],
                              CV = asap$sel.input.mats$index.sel.ini[start.row:end.row, 4])
         
-        selectivity.decoder.table <- rbind(selectivity.decoder.table, thisdf)
+        index.selectivity.decoder.table <- rbind(index.selectivity.decoder.table, thisdf)
         icount <- icount + nparms
       }
       
@@ -144,6 +153,19 @@ MakeSelectivityDecoder <- function(asap,a1,index.names,od){
         if (asap$control.parms$index.sel.option[ind] == 3) icount <- icount + 4
       }  
     }
+    
+    # get index selectivity estimates
+    index.sel.estimates <- a1$asap.std %>%
+      data.frame(.) %>%
+      filter(substr(name, 1, 16) == "index_sel_params") %>%
+      mutate(ParamNum = parse_number(name)) %>%
+      mutate(Estimate = value, EstimatedStDev = stdev, EstimatedCV = stdev/value) %>%
+      select(ParamNum, Estimate, EstimatedStDev, EstimatedCV)
+    
+    # join the selectivity table and estimates
+    index.selectivity.decoder.table <- left_join(index.selectivity.decoder.table, index.sel.estimates)
+    selectivity.decoder.table <- rbind(selectivity.decoder.table, index.selectivity.decoder.table)
+    
   }
   
   write.csv(selectivity.decoder.table, 
