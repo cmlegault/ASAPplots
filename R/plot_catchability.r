@@ -11,6 +11,10 @@
 #' @export
   
 PlotCatchability <- function(asap,index.names,a1,save.plots,od,plotf,liz.palette){
+  if (is.na(a1$asap.std)){
+    return() # skip plot if no CI available
+  }
+  
   par(mfrow=c(1,1), mar=c(6,4,2,2) )
   
   years=seq(asap$parms$styr, asap$parms$endyr)
