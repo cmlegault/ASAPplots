@@ -80,7 +80,7 @@ MakeSelectivityDecoder <- function(wd,asap,a1,index.names,od){
     fleet.sel.estimates <- a1$asap.std %>%
       data.frame(.) %>%
       filter(substr(name, 1, 10) == "sel_params") %>%
-      mutate(ParamNum = parse_number(name)) %>%
+      mutate(ParamNum = readr::parse_number(name)) %>%
       mutate(Estimate = value, EstimatedStDev = stdev, EstimatedCV = stdev/value) %>%
       select(ParamNum, Estimate, EstimatedStDev, EstimatedCV)
     
