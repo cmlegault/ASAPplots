@@ -106,59 +106,67 @@ MakeSelectivityDecoder <- function(wd,asap,a1,index.names,od){
   
   if (!is.null(asap$control.parms$index.sel.option)){
     
-    for (ind in 1:asap$parms$nindices){
+    ind <- 0 # counter for indices that are used in estimation
+    
+    for (avail.ind in 1:asap$parms$nindices){
       
-      # first check to make sure index selectivity not linked to a fleet
-      if (asap$control.parms$index.sel.choice[ind] <= 0){
-        # age specific parameters
-        if (asap$control.parms$index.sel.option[ind] == 1){
-          nparms <- nages
-          start.row <- (ind - 1) * (nages + 6) + 1
-          end.row <- start.row + nparms - 1
-          mySelType <- "Age Specific"
-          myParam <- paste("Age", 1:nages)
+      # check to see if index used
+      if (asap$initial.guesses$index.use.flag[avail.ind] == 1){
+        
+        ind <- ind + 1
+        
+        # check to make sure index selectivity not linked to a fleet
+        if (asap$control.parms$index.sel.choice[ind] <= 0){
+          # age specific parameters
+          if (asap$control.parms$index.sel.option[ind] == 1){
+            nparms <- nages
+            start.row <- (avail.ind - 1) * (nages + 6) + 1
+            end.row <- start.row + nparms - 1
+            mySelType <- "Age Specific"
+            myParam <- paste("Age", 1:nages)
+          }
+          
+          # single logistic parameters
+          if (asap$control.parms$index.sel.option[ind] == 2){
+            nparms <- 2
+            start.row <- (avail.ind - 1) * (nages + 6) + nages + 1
+            end.row <- start.row + nparms - 1
+            mySelType <- "Single Logistic"
+            myParam <- c("A50", "Slope")
+          }
+          
+          # double logistic parameters
+          if (asap$control.parms$index.sel.option[ind] == 3){
+            nparms <- 4
+            start.row <- (avail.ind - 1) * (nages + 6) + nages + 2 + 1
+            end.row <- start.row + nparms - 1
+            mySelType <- "Double Logistic"
+            myParam <- c("A50 ascending", "Slope ascending", "A50 descending", "Slope descending")
+          }
+          
+          # add this block to table and increase icount
+          thisdf <- data.frame(Source = "Index",
+                               Name = index.names[ind],
+                               NameNum = ind,
+                               SelType = mySelType,
+                               Param = myParam,
+                               ParamNum = seq(icount, (icount + nparms - 1)),
+                               InitGuess = asap$sel.input.mats$index.sel.ini[start.row:end.row, 1],
+                               Phase = asap$sel.input.mats$index.sel.ini[start.row:end.row, 2],
+                               Lambda = asap$sel.input.mats$index.sel.ini[start.row:end.row, 3],
+                               CV = asap$sel.input.mats$index.sel.ini[start.row:end.row, 4])
+          
+          index.selectivity.decoder.table <- rbind(index.selectivity.decoder.table, thisdf)
+          icount <- icount + nparms
         }
         
-        # single logistic parameters
-        if (asap$control.parms$index.sel.option[ind] == 2){
-          nparms <- 2
-          start.row <- (ind - 1) * (nages + 6) + nages + 1
-          end.row <- start.row + nparms - 1
-          mySelType <- "Single Logistic"
-          myParam <- c("A50", "Slope")
-        }
-        
-        # double logistic parameters
-        if (asap$control.parms$index.sel.option[ind] == 3){
-          nparms <- 4
-          start.row <- (ind - 1) * (nages + 6) + nages + 2 + 1
-          end.row <- start.row + nparms - 1
-          mySelType <- "Double Logistic"
-          myParam <- c("A50 ascending", "Slope ascending", "A50 descending", "Slope descending")
-        }
-        
-        # add this block to table and increase icount
-        thisdf <- data.frame(Source = "Index",
-                             Name = index.names[ind],
-                             NameNum = ind,
-                             SelType = mySelType,
-                             Param = myParam,
-                             ParamNum = seq(icount, (icount + nparms - 1)),
-                             InitGuess = asap$sel.input.mats$index.sel.ini[start.row:end.row, 1],
-                             Phase = asap$sel.input.mats$index.sel.ini[start.row:end.row, 2],
-                             Lambda = asap$sel.input.mats$index.sel.ini[start.row:end.row, 3],
-                             CV = asap$sel.input.mats$index.sel.ini[start.row:end.row, 4])
-        
-        index.selectivity.decoder.table <- rbind(index.selectivity.decoder.table, thisdf)
-        icount <- icount + nparms
+        # if index selectivity is linked to a fleet, just increase parameter counter
+        if (asap$control.parms$index.sel.choice[ind] > 0){
+          if (asap$control.parms$index.sel.option[ind] == 1) icount <- icount + nages
+          if (asap$control.parms$index.sel.option[ind] == 2) icount <- icount + 2
+          if (asap$control.parms$index.sel.option[ind] == 3) icount <- icount + 4
+        }  
       }
-      
-      # if index selectivity is linked to a fleet, just increase parameter counter
-      if (asap$control.parms$index.sel.choice[ind] > 0){
-        if (asap$control.parms$index.sel.option[ind] == 1) icount <- icount + nages
-        if (asap$control.parms$index.sel.option[ind] == 2) icount <- icount + 2
-        if (asap$control.parms$index.sel.option[ind] == 3) icount <- icount + 4
-      }  
     }
     
     # get index selectivity estimates, if available, and join to table
