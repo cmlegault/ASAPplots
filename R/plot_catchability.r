@@ -11,7 +11,7 @@
 #' @export
   
 PlotCatchability <- function(asap,index.names,a1,save.plots,od,plotf,liz.palette){
-  if (is.na(a1$asap.std)){
+  if (all(is.na(a1$asap.std))){
     return() # skip plot if no CI available
   }
   
