@@ -24,24 +24,23 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
                      mcmc.burn=0, mcmc.thin=1,
                      first.age=-999, save.plots=TRUE, plotf='png', make.one.pdf=TRUE){
 
-  setwd(wd)
   od <- paste0(wd,"\\plots\\")
   pdf.name <- asap.name
   
   retro.flag <- FALSE  
-  if (file.exists(paste0(asap.name, ".rts"))){
+  if (file.exists(paste0(wd,"\\",asap.name, ".rts"))){
     retro.flag <- TRUE
     asap.name <- paste0(asap.name,"_000")  # change asap.name to use null retro peel
   }
 
-  ss5<-shell("dir plots", intern=T )
+  ss5<-shell(paste0("dir ",wd,"\\plots"), intern=T )
   ss6 <- which(ss5=="File Not Found")
-  if (length(ss6)>0 )  shell("mkdir plots", intern=T )
+  if (length(ss6)>0 )  shell(paste0("mkdir ",wd,"\\plots"), intern=T )
   # the line below is more elegant, but not supported by older versions of R
   #if (dir.exists(od)==F )  shell(paste("mkdir ",  od, sep=""), intern=T )
   
   rdat <- paste0(asap.name,".rdat")
-  asap <- dget(rdat)
+  asap <- dget(paste0(wd,"\\",rdat))
   
   liz.palette = c( "black"  ,  "purple3" ,  "blue"  ,  "turquoise2"  ,
                    "red2" ,   "orange" ,  "#994411",   "#770000"    ,
@@ -61,14 +60,14 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
 
   #--- Model Diagnostics
   
-  gn <- GrabNames(asap.name,asap)
+  gn <- GrabNames(wd,asap.name,asap)
   fleet.names <- gn$fleet.names
   index.names <- gn$index.names
   
-  a1 <- GrabAuxFiles(asap.name,asap,fleet.names,index.names)  #TODO make sure a1 exists
+  a1 <- GrabAuxFiles(wd,asap.name,asap,fleet.names,index.names)  #TODO make sure a1 exists
   npar<-a1$npar     
   max.grad<-a1$max.grad
-  MakeSelectivityDecoder(asap,a1,index.names,od)
+  MakeSelectivityDecoder(wd,asap,a1,index.names,od)
   PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
   PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
   PlotHighCVs(a1,save.plots,od,plotf)
@@ -113,7 +112,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotSRpredLine(asap,save.plots,od,plotf)
   PlotSARCrecSSB(asap,save.plots,od,plotf)
   PlotCV(asap,a1,save.plots,od,plotf)
-  if (retro.flag == TRUE) PlotRetroWrapper(asap.name,asap,save.plots,od,plotf)
+  if (retro.flag == TRUE) PlotRetroWrapper(wd,asap.name,asap,save.plots,od,plotf)
   
   #--- Reference Points
   
@@ -187,7 +186,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
     PlotSRpredLine(asap,save.plots,od,plotf)
     PlotSARCrecSSB(asap,save.plots,od,plotf)
     PlotCV(asap,a1,save.plots,od,plotf)
-    if (retro.flag == TRUE) PlotRetroWrapper(asap.name,asap,save.plots,od,plotf)
+    if (retro.flag == TRUE) PlotRetroWrapper(wd,asap.name,asap,save.plots,od,plotf)
     PlotYieldCurves(asap,a1,nyrs.ave,save.plots,od,plotf)
     PlotSPRtable(asap,a1,nyrs.ave,save.plots,od,plotf)
     PlotExpSpawn(asap,a1,nyrs.ave,save.plots,od,plotf)
@@ -259,7 +258,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotSRpredLine(asap,save.plots,od,plotf)
   PlotSARCrecSSB(asap,save.plots,od,plotf)
   PlotCV(asap,a1,save.plots,od,plotf)
-  if (retro.flag == TRUE) PlotRetroWrapper(asap.name,asap,save.plots,od,plotf)
+  if (retro.flag == TRUE) PlotRetroWrapper(wd,asap.name,asap,save.plots,od,plotf)
   dev.off()
   graphics.off()
   
@@ -268,7 +267,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   if (retro.flag == TRUE){
     windows()
     pdf(file=paste0(od,pdf.name,".RETRO.PLOTS.pdf"), onefile=TRUE)
-    PlotRetroWrapper(asap.name,asap,save.plots,od,plotf)
+    PlotRetroWrapper(wd,asap.name,asap,save.plots,od,plotf)
     dev.off()
     graphics.off()
   }

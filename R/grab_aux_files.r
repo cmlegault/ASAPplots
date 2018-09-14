@@ -1,6 +1,7 @@
 #' Grab Auxilliary Files
 #' 
 #' This function reads in values from the *.std, *.par, and *.cor files.
+#' @param wd directory where ASAP run is located
 #' @param asap.name Base name of original dat file (without the .dat extension)
 #' @param asap name of the variable that read in the asap.rdat file
 #' @param fleet.names names of fleets 
@@ -8,21 +9,23 @@
 #' @return list of summary statistics about run (e.g. # parameters, correlation matrix, max gradient)
 #' @export
 
-GrabAuxFiles <- function(asap.name,asap,fleet.names,index.names) {
+GrabAuxFiles <- function(wd,asap.name,asap,fleet.names,index.names) {
 
   aux.list <-  list("npar"=-999, "asap.cor.names"=NA, "asap.cor.mat"=NA,
                     "asap.std"=NA, "max.grad"=-999, "F.rep"=NA, "Tot.B"=NA , "SSB"=NA, 
                     "Expl.B"=NA, "recr"=NA, "asap.name"=asap.name )
   
-  if (file.exists(paste0(asap.name,".std"))){
-    asap.std <- read.table(paste0(asap.name, ".std"), header = F, skip=1,sep = "") # Read in std file from admb
+  if (file.exists(paste0(wd,"\\",asap.name,".std"))){
+    # Read in std file from admb
+    asap.std <- read.table(paste0(wd,"\\",asap.name, ".std"), header = F, skip=1,sep = "") 
     names(asap.std) <- c("index", "name", "value", "stdev" )
     
     years <- seq(asap$parms$styr, asap$parms$endyr)
     
+    # Read in cor file from admb
     ncol.cor <- dim(asap.std) [1]
-    asap.cor <- read.table(paste(asap.name, ".cor",sep=""), header = F, skip=2,sep = "", 
-                           col.names=c("index", "name", "value", "stdev", seq(1,ncol.cor)), fill=T) # Read in std file from admb
+    asap.cor <- read.table(paste(wd,"\\",asap.name, ".cor",sep=""), header = F, skip=2,sep = "", 
+                           col.names=c("index", "name", "value", "stdev", seq(1,ncol.cor)), fill=T) 
     asap.cor.mat <- as.matrix(asap.cor[,5:length(asap.cor[1,])])
     asap.cor.names <- as.character(as.vector(asap.cor[,2]) )
     levels.cor.names <- unique(asap.cor.names)
@@ -56,7 +59,7 @@ GrabAuxFiles <- function(asap.name,asap,fleet.names,index.names) {
     
     diag(asap.cor.mat) <- rep(NA, ncol.cor)
     
-    asap.grad <- readLines(paste(asap.name,".par", sep=""),n=1) 
+    asap.grad <- readLines(paste0(wd, "\\", asap.name, ".par"),n=1) 
     par.split<- unlist(strsplit(asap.grad, " "))
     max.grad <- par.split[length(par.split)]
     npar <- as.numeric(par.split[ 6])

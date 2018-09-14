@@ -1,13 +1,14 @@
 #' Make selectivity decoder
 #' 
 #' Create csv file decoding selectivity parameters for fleet blocks and indices.
+#' @param wd directory where ASAP run is located
 #' @param asap name of the variable that read in the asap.rdat file
 #' @param a1 list file produced by grab.aux.files function
 #' @param index.names names of indices 
 #' @param od output directory for plots and csv files 
 #' @export
 
-MakeSelectivityDecoder <- function(asap,a1,index.names,od){
+MakeSelectivityDecoder <- function(wd,asap,a1,index.names,od){
   asap.name <- a1$asap.name
   
   empty.df <- data.frame(Source = character(),
@@ -97,7 +98,7 @@ MakeSelectivityDecoder <- function(asap,a1,index.names,od){
   # cannot get index sel with release version of ASAP3 because index.sel.options not saved in rdat
   # need to make a one-off version that has this added to rdat or else read from the dat file
   if (is.null(asap$control.parms$index.sel.option)){
-    dat.file.index.sel.options <- GrabDatFileIndexSelOptions(asap.name,asap)
+    dat.file.index.sel.options <- GrabDatFileIndexSelOptions(wd,asap.name,asap)
     if (!is.null(dat.file.index.sel.options)){
       asap$control.parms$index.sel.option <- dat.file.index.sel.options
     }

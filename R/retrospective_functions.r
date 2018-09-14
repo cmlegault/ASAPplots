@@ -1,11 +1,11 @@
 #--------------  RETROSPECTIVE FUNCTIONS -----------------------
 # set of functions to compute Mohn's rho and make retrospective plots
 
-get.retro <- function(asap.name,asap){
+get.retro <- function(wd,asap.name,asap){
   # get the number of peels from the rts file
   asap.name.short <- substr(asap.name, 1, (nchar(asap.name)-4) )  # removing "_000"
   asap.rts <- paste0(asap.name.short,".rts")  
-  npeels <- scan(asap.rts,n=1) # includes base run as one of the peels 
+  npeels <- scan(paste0(wd, "\\", asap.rts),n=1) # includes base run as one of the peels 
 
   retro <- list()
   retro$nyears <- asap$parms$nyears
@@ -76,6 +76,7 @@ plot.retro <- function(retro.mat,years,nages,y.lab,y.range1=NA,y.range2=NA){
 #' Plot retrospectives
 #' 
 #' Plots both standard and relative retrospectives and computes Mohn's rho values. Uses functions get.retro and plot.retro.
+#' @param wd directory where ASAP run is located
 #' @param asap.name Base name of original dat file (without the .dat extension)
 #' @param asap name of the variable that read in the asap.rdat file
 #' @param save.plots save individual plots
@@ -83,9 +84,9 @@ plot.retro <- function(retro.mat,years,nages,y.lab,y.range1=NA,y.range2=NA){
 #' @param plotf type of plot to save
 #' @export
 
-PlotRetroWrapper <- function(asap.name,asap,save.plots,od,plotf){
+PlotRetroWrapper <- function(wd,asap.name,asap,save.plots,od,plotf){
   years <- seq(asap$parms$styr,asap$parms$endyr)
-  my <- get.retro(asap.name,asap)
+  my <- get.retro(wd,asap.name,asap)
   par(mfrow=c(3,2),mar=c(4,4,4,2) )
   # F, SSB, R
   f.rho<-plot.retro(my$favg,years,asap$parms$nages,"Average F",y.range1=c(0,max(my$favg, na.rm=T)))

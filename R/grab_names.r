@@ -1,20 +1,21 @@
 #' Grab Names 
 #' 
 #' This function gets fleet and index names from the original ASAP.DAT file.
+#' @param wd directory where ASAP run is located
 #' @param asap.name Base name of original dat file (without the .dat extension)
 #' @param asap name of the variable that read in the asap.rdat file
 #' @return list of fleet names and index names
 #' @export
 
-GrabNames <- function(asap.name,asap){
+GrabNames <- function(wd,asap.name,asap){
   my.names <- list()
   # in case the file was created outside the GUI
   my.names$fleet.names <- paste("FLEET-",1:asap$parms$nfleets, sep="")
   my.names$index.names <- paste("INDEX-",1:asap$parms$nindices, sep="")
-  gg1<-shell(paste("dir ", asap.name,".dat", sep=""), intern=T, mustWork=NA )
+  gg1<-shell(paste("dir ", wd, "\\", asap.name,".dat", sep=""), intern=T, mustWork=NA )
   gg2 <- which(gg1=="File Not Found")
   if (length(gg2)==0 )  {
-    datfile <- readLines(con = paste(asap.name,".dat", sep=""))
+    datfile <- readLines(con = paste0(wd,"\\",asap.name,".dat"))
     nlines <- length(datfile)
     nfinis <- nlines-asap$parms$nfleets-asap$parms$navailindices-3
     if (datfile[nfinis] == "###### FINIS ######"){
