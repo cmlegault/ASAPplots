@@ -4,9 +4,11 @@
 \alias{GrabDatFileIndexSelOptions}
 \title{Grab Dat File Index Selectivity Options}
 \usage{
-GrabDatFileIndexSelOptions(asap.name, asap)
+GrabDatFileIndexSelOptions(wd, asap.name, asap)
 }
 \arguments{
+\item{wd}{directory where ASAP run is located}
+
 \item{asap.name}{Base name of original dat file (without the .dat extension)}
 
 \item{asap}{name of the variable that read in the asap.rdat file}

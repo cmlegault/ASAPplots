@@ -8,7 +8,7 @@
 
 SummarizeASAP <- function(asap,a1,od){
   
-  if(!is.na(a1$asap.std)){
+  if(any(!is.na(a1$asap.std))){
     asap.name <- a1$asap.name
     years <- seq(asap$parms$styr, asap$parms$endyr)
     ssb.std <- a1$asap.std[which(a1$asap.std$name=="SSB") ,4]

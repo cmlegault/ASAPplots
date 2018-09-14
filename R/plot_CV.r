@@ -9,7 +9,7 @@
 #' @export
 
 PlotCV <- function(asap,a1,save.plots,od,plotf){
-  if (!is.na(a1$asap.std)){
+  if (any(!is.na(a1$asap.std))){
     par(mfrow=c(1,1), mar=c(4,4,2,2)  )
     
     years = seq(asap$parms$styr, asap$parms$endyr)

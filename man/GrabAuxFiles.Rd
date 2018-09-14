@@ -4,9 +4,11 @@
 \alias{GrabAuxFiles}
 \title{Grab Auxilliary Files}
 \usage{
-GrabAuxFiles(asap.name, asap, fleet.names, index.names)
+GrabAuxFiles(wd, asap.name, asap, fleet.names, index.names)
 }
 \arguments{
+\item{wd}{directory where ASAP run is located}
+
 \item{asap.name}{Base name of original dat file (without the .dat extension)}
 
 \item{asap}{name of the variable that read in the asap.rdat file}

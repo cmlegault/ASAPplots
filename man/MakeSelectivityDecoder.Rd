@@ -4,9 +4,11 @@
 \alias{MakeSelectivityDecoder}
 \title{Make selectivity decoder}
 \usage{
-MakeSelectivityDecoder(asap, a1, index.names, od)
+MakeSelectivityDecoder(wd, asap, a1, index.names, od)
 }
 \arguments{
+\item{wd}{directory where ASAP run is located}
+
 \item{asap}{name of the variable that read in the asap.rdat file}
 
 \item{a1}{list file produced by grab.aux.files function}

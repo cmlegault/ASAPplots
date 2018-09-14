@@ -12,7 +12,7 @@ PlotHighCVs <- function(a1,save.plots,od,plotf) {
 
   asap.name <- a1$asap.name
   npar <- a1$npar
-  if ((npar != -999) & !is.na(a1$asap.std)){
+  if ((npar != -999) & any(!is.na(a1$asap.std))){
     # drop last 5 params (or only if steepness is fixed at 1?)
     asap.std <- a1$asap.std 
     nCV1 <- length(asap.std[,1])

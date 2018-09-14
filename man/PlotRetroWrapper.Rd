@@ -4,9 +4,11 @@
 \alias{PlotRetroWrapper}
 \title{Plot retrospectives}
 \usage{
-PlotRetroWrapper(asap.name, asap, save.plots, od, plotf)
+PlotRetroWrapper(wd, asap.name, asap, save.plots, od, plotf)
 }
 \arguments{
+\item{wd}{directory where ASAP run is located}
+
 \item{asap.name}{Base name of original dat file (without the .dat extension)}
 
 \item{asap}{name of the variable that read in the asap.rdat file}

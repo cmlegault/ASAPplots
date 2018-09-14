@@ -76,7 +76,7 @@ MakeSelectivityDecoder <- function(wd,asap,a1,index.names,od){
   }
   
   # get fleet selectivity estimates, if available, and join to table
-  if (!is.na(a1$asap.std)){
+  if (any(!is.na(a1$asap.std))){
     fleet.sel.estimates <- a1$asap.std %>%
       data.frame(.) %>%
       filter(substr(name, 1, 10) == "sel_params") %>%
@@ -162,7 +162,7 @@ MakeSelectivityDecoder <- function(wd,asap,a1,index.names,od){
     }
     
     # get index selectivity estimates, if available, and join to table
-    if (!is.na(a1$asap.std)){
+    if (any(!is.na(a1$asap.std))){
       index.sel.estimates <- a1$asap.std %>%
         data.frame(.) %>%
         filter(substr(name, 1, 16) == "index_sel_params") %>%
