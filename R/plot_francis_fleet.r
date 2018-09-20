@@ -62,7 +62,7 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
       #-- First plot
       par(mfrow=c(2,1), mar=c(4,4,2,4) )
       
-      plot(years[catch.yrs],t.res[,4],lty=1,lwd=2,col="blue", ylim=c(0,10), ylab="Mean Age", type='l')
+      plot(years[catch.yrs],t.res[,4],lty=1,lwd=2,col="blue", ylim=c(0,10), xlab="Year",ylab="Mean Age", type='l')
       if (len.uniques>1) {
         segments(x0=years[catch.yrs], y0=rep(0,num.acomp.yrs), x1=years[catch.yrs], 
                  y1=Neff.bars[catch.yrs], lwd=5, col='#66BB77aa')
