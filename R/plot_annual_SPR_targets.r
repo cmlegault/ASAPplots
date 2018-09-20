@@ -45,7 +45,7 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   
   par(mfrow=c(1,1), mar=c(4,4,2,4) )
   lty.seq=c(1,2,4,6)
-  plot(years, f.spr.vals[,1], type='n', xlab="Years", ylab="Full F (%SPR)", lwd=2,
+  plot(years, f.spr.vals[,1], type='n', xlab="Year", ylab="Full F (%SPR)", lwd=2,
        col="blue3", ylim=c(0,1.2*max(f.spr.vals)) )
   for (i in 1:n.spr) {
     lines(years, f.spr.vals[,i], lwd=2, col=i, lty=lty.seq[i] )     
@@ -58,7 +58,7 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   if (save.plots) savePlot(paste(od, "Annual.FSPR.", plotf, sep=''), type=plotf)
   
   
-  plot(years, ypr.spr.vals[,1], type='n', xlab="Years", ylab="YPR (%SPR)", lwd=2,
+  plot(years, ypr.spr.vals[,1], type='n', xlab="Year", ylab="YPR (%SPR)", lwd=2,
        col="blue3", ylim=c(0,1.2*max(ypr.spr.vals)) )
   for (i in 1:n.spr) {
     lines(years, ypr.spr.vals[,i], lwd=2, col=i, lty=lty.seq[i] )     

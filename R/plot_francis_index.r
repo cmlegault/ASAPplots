@@ -70,7 +70,7 @@ PlotFrancisIndex <- function(asap,index.names,save.plots,od,plotf){
         #-- First plot
         par(mfrow=c(2,1), mar=c(4,4,2,4) )    
         plot(years[acyrs2],t.res[,4],lty=1,lwd=2,col="blue", ylim=c(0,10), ylab="Mean Age", 
-             type='l', xlab="Years")
+             type='l', xlab="Year")
         if (len.uniques>1) {
           segments(x0=years[acyrs2], y0=rep(0,num.acyrs2), x1=years[acyrs2], y1=Neff.bars, lwd=5, col='#66BB77aa')
           axis(side=4, at=seq(0,10,2), lab=scale.Neff*seq(0,10,2), las=2 )
@@ -79,7 +79,7 @@ PlotFrancisIndex <- function(asap,index.names,save.plots,od,plotf){
         } #end test for >1 unique ESS
         
         Hmisc::errbar(years[acyrs2], t.res[,1],t.res[,3],t.res[,2],ylim=c(0,10),ylab="Mean Age", 
-               xlab="Years", add=T)
+               xlab="Year", add=T)
         
         if(len.uniques==1)    title(main=paste("Index ",i, " (",index.names[i],")", " ESS = ",ESS[i], sep=""), outer=F)
         if(len.uniques>1)    title(main=paste("Index ",i, " (",index.names[i],")",  sep=""), outer=F)
