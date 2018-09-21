@@ -95,7 +95,7 @@ docxASAP <- function(wd,asap.name,od=NULL,docx.name="docxASAP.docx",control.file
       # check for multiple files that start with myfile - be careful of extra files with diff extensions
       gg1 <- list.files(od, pattern = con.file$ASAPplot[iplot])
       ngg1 <- length(gg1)
-      if (ngg1 > 1){
+      if (ngg1 >= 1){
         for (igg in 1:ngg1){
           myfile <- paste0(od, gg1[igg])
           if (igg > 1) mycaption <- paste0("Figure ", figure.prefix, thisfig, ". continued")
