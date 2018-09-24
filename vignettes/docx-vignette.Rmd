@@ -1,0 +1,146 @@
+---
+title: "Using docxASAP"
+author: "Chris Legault"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+If you've ever grown weary doing multiple copy/paste of ASAPplots figures into a Word Document, the function docxASAP may interest you. It uses a csv file to determine which figures are added, how the figure numbering is determined, and the figure caption for each figure. A function provides a default csv file that can then be modified to meet your needs. Here's to the end of sore wrists from too much copy/paste!
+
+## Just starting with ASAPplots?
+
+If you've never used ASAPplots before, there are a few steps you'll need to do to begin. You'll need to install some R packages, get the most recent version of ASAPplots, and set up some R code to use it. These steps are quite easy and can be done as follows. Start with installing the package devtools from CRAN
+
+```{r, eval=FALSE}
+install.packages("devtools")
+```
+
+Next, you need to get the latest version of ASAPplots from the github site https://github.com/cmlegault/ASAPplots using the command
+
+```{r, eval=FALSE}
+devtools::install_github("cmlegault/ASAPplots")
+```
+
+It is a good idea to run keep up to date with ASAPplots by running this line of code if you haven't been used ASAPplots in a while.
+
+The ASAPplots package uses a number of other R packages that need to be installed as well. These packages are 
+- dplyr
+- Hmisc
+- officer
+- plotMCMC
+- plotrix
+- readr
+- reshape2
+
+You can either install these packages one at a time using the command install.packages as shown above for devtools, or you can use the following code to see if any of them need to be installed.
+
+```{r, eval=FALSE}
+packages = c("dplyr",       # data handling
+             "Hmisc",       # error bar plotting
+             "officer",     # writing Word docx
+             "plotMCMC",    # Monte Carlo Markov Chain plotting 
+             "plotrix",     # nice barplots
+             "readr",       # pull number out of character string
+             "reshape2")    # data handling
+
+package.check <- lapply(packages, FUN = function(x) {
+  if (!require(x, character.only = TRUE)) {
+    install.packages(x, dependencies = TRUE)
+    library(x, character.only = TRUE)
+  }
+})
+```
+
+Almost all of these packages are called by name within ASAPplots, so you do not need to use the library(package) command when running ASAPplots. The exception is the package dplyr. So when you are ready to run ASAPplots, you should use the following two library commands in your R code
+
+```{r}
+library(ASAPplots)
+library(dplyr)
+```
+
+You are now ready to run ASAPplots to create a bunch of figures, csv files, and pdfs summarizing the results of an ASAP run. As an example, if you've run the simple.dat example file in the directory testingASAPplots located on the desktop of my computer, the following code would run ASAPplots
+
+```{r, eval=FALSE}
+asap.name <- "simple"
+wd <- "C:\\Users\\chris.legault\\Desktop\\testingASAPplots"
+PlotASAP(wd, asap.name)
+```
+
+## Options in ASAPplots
+
+There are a number of options when running ASAPplots that have default values. These default values were chosen to be appropriate in most cases, but there may be times when other values are desired. The options available can be seen using the following R command
+
+```{r, eval=FALSE}
+?PlotASAP
+```
+
+Any of the options can be changed within the PlotASAP call simply by setting the argument equal to a different value. For example, if the bubble plot for catch data has bubbles that are too big, the following command could be used to make the plot(s) with smaller bubbles
+
+```{r, eval=FALSE}
+PlotASAP(wd, asap.name, scale.catch.bubble.data = 4)
+```
+
+## What about docxASAP?
+
+Once you've run ASAPplots, you may wish to put a number of the produced plots into a Word document. Previsously, this was a tedious task requiring many copy/paste commands. The docxASAP functions simplify this process greatly. To create the default csv control file for docxASAP, use the following R command where wd is the directory where your ASAP dat file was located.
+
+```{r, eval=FALSE}
+createDefaultdocxASAPcontrolfile(wd)
+```
+
+This produces the file docxASAP.csv in the directory wd. This is the controller for the docxASAP function determining which figures to add to the Word document, how the figures are ordered and numbered, and the text in the figure captions. The default control file will not over-write an existing file named docxASAP.csv in order to prevent loss of changes that you've made. If the file docxASAP.csv already exists in directory wd, when you run createDefaultdocxASAPcontrolfile you will get the following message  
+```{r, eval=FALSE}
+# "docxASAP.csv already present in directory"  
+# "rename or delete current docxASAP.csv before creating new default file"  
+```
+
+As for PlotASAP, the options available for the docxASAP function can be seen using
+
+```{r, eval=FALSE}
+?docxASAP
+```
+
+As with PlotASAP, docxASAP can be run with the default settings using the same variables wd (the working directory where the ASAP .dat file is located) and asap.name (the name of the ASAP run without any extension).
+
+```{r, eval=FALSE}
+docxASAP(wd, asap.name)
+```
+
+This call assumes the output directory (od) is wd\\plots\\, the default in PlotASAP, the control file is named docxASAP.csv, and the Word document will be named docxASAP.docx. These options can be changed by calling the function with different arguement values. For example, if you have modified the control file and saved it with the name fluke_docxASAP.csv, then the following call would be used
+
+```{r, eval=FALSE}
+docxASAP(wd, asap.name, control.file = "fluke_docxASAP.csv")
+```
+
+If you want the figure numbering to begin at 52 and would like it to be displayed as B52 because it is in the B series of plots, then set first.figure.number = 52 and figure.prefix = "B". By default, the asap.name is appended to all the figure captions, but this can be turned off by setting append.asap.name.caption = FALSE. 
+
+Which figures appear in the Word document is determined by a combination of four factors. The first factor is whether the Group is selected (the default use.group = NULL means all groups are selected). If you only want the Retro plots included, then set use.group = "Retro". The second factor is whether the Include column in the control file contains one of the following: Yes, YES, yes, Y, y, or TRUE. If anything else is in the Include column for that figure, it will not appear in the Word document. Note that Yes followed by a space is not in the list, so be careful how you make changes to this column. Finally, the ASAPplot column in the control file determines the base name for the plot. If that base name combined with the plotf extension (default = 'png') is not present in the output directory, then nothing is added to the Word document. If there are multiple files, for example due to multiple fleets or indices, then all of them will be added with the figure caption beyond the first one simply stating "continued." Note that if you've run PlotASAP in the same output directory for a case with more fleets or indices than the asap.name case, these plots will be included as well. Be sure to clear your output directory before running PlotASAP if you are going to use docxASAP. The fourth factor is the Number column of the control file. Any value other than NA in this column will replace the value that would have appeared due to first.figure.number and the Order column. It is recommended that all Numbers within the use.group have a value in the Number column if this approach is used to avoid issues with non-sequential or possibly repeating figure numbers.
+
+## Faking out docxASAP
+
+The function docxASAP can be used to create Word documents for figures not created through PlotASAP with just a little faking out. You'll need to explicitly define the output directory (od) where the figure files are located and modify by hand the control file. Note the control file is required to have columns Include, Order, Number, Group, ASAPplot, FigureText. Other columns can be included in the csv file, they will be ignored by the docxASAP function. Currently, only one type of figure can be added at a time using docxASAP, due to the plotf argument determining the extension of the files. You will need to change the ASAPplot column values to reflect the plots that you would like included as well as the FigureText column for the figure captions. For example, say I have a number of jpg files saved in directory C:\\Users\\chris.legault\\Desktop\\yellowtailfigures and I've modified the default control file to list all these figures and changed the captions appropriately in file "yellowtailSAS-docx.csv." I would then use the following command to create the Word document
+
+```{r, eval=FALSE}
+docxASAP(wd = "", 
+         asap.name = "", 
+         od = "C:\\Users\\chris.legault\\Desktop\\yellowtailfigures", 
+         control.file = "yellowtailSAS-docx.csv",
+         append.asap.name.caption = FALSE)
+```
+
+Note that wd and asap.name are required arguments for this function, but are being ignored in this case, so can be set equal to anything. To remind myself that I am faking out docxASAP in this case I set both wd and asap.name equal to "". 
+
+## Have fun!
+
+If you have questions, you can contact me at chris.legault@noaa.gov.

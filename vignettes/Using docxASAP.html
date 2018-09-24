@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Chris Legault" />
+
+<meta name="date" content="2018-09-24" />
+
+<title>Using docxASAP</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Using docxASAP</h1>
+<h4 class="author"><em>Chris Legault</em></h4>
+<h4 class="date"><em>2018-09-24</em></h4>
+
+
+
+<p>If you’ve ever grown weary doing multiple copy/paste of ASAPplots figures into a Word Document, the function docxASAP may interest you. It uses a csv file to determine which figures are added, how the figure numbering is determined, and the figure caption for each figure. A function provides a default csv file that can then be modified to meet your needs. Here’s to the end of sore wrists from too much copy/paste!</p>
+<div id="just-starting-with-asapplots" class="section level2">
+<h2>Just starting with ASAPplots?</h2>
+<p>If you’ve never used ASAPplots before, there are a few steps you’ll need to do to begin. You’ll need to install some R packages, get the most recent version of ASAPplots, and set up some R code to use it. These steps are quite easy and can be done as follows. Start with installing the package devtools from CRAN</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</code></pre></div>
+<p>Next, you need to get the latest version of ASAPplots from the github site <a href="https://github.com/cmlegault/ASAPplots" class="uri">https://github.com/cmlegault/ASAPplots</a> using the command</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;cmlegault/ASAPplots&quot;</span>)</code></pre></div>
+<p>It is a good idea to run keep up to date with ASAPplots by running this line of code if you haven’t been used ASAPplots in a while.</p>
+<p>The ASAPplots package uses a number of other R packages that need to be installed as well. These packages are - dplyr - Hmisc - officer - plotMCMC - plotrix - readr - reshape2</p>
+<p>You can either install these packages one at a time using the command install.packages as shown above for devtools, or you can use the following code to see if any of them need to be installed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">packages =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dplyr&quot;</span>,       <span class="co"># data handling</span>
+             <span class="st">&quot;Hmisc&quot;</span>,       <span class="co"># error bar plotting</span>
+             <span class="st">&quot;officer&quot;</span>,     <span class="co"># writing Word docx</span>
+             <span class="st">&quot;plotMCMC&quot;</span>,    <span class="co"># Monte Carlo Markov Chain plotting </span>
+             <span class="st">&quot;plotrix&quot;</span>,     <span class="co"># nice barplots</span>
+             <span class="st">&quot;readr&quot;</span>,       <span class="co"># pull number out of character string</span>
+             <span class="st">&quot;reshape2&quot;</span>)    <span class="co"># data handling</span>
+
+package.check &lt;-<span class="st"> </span><span class="kw">lapply</span>(packages, <span class="dt">FUN =</span> <span class="cf">function</span>(x) {
+  <span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(x, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)) {
+    <span class="kw">install.packages</span>(x, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)
+    <span class="kw">library</span>(x, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)
+  }
+})</code></pre></div>
+<p>Almost all of these packages are called by name within ASAPplots, so you do not need to use the library(package) command when running ASAPplots. The exception is the package dplyr. So when you are ready to run ASAPplots, you should use the following two library commands in your R code</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ASAPplots)
+<span class="kw">library</span>(dplyr)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span></code></pre></div>
+<p>You are now ready to run ASAPplots to create a bunch of figures, csv files, and pdfs summarizing the results of an ASAP run. As an example, if you’ve run the simple.dat example file in the directory testingASAPplots located on the desktop of my computer, the following code would run ASAPplots</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">asap.name &lt;-<span class="st"> &quot;simple&quot;</span>
+wd &lt;-<span class="st"> &quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">chris.legault</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">testingASAPplots&quot;</span>
+<span class="kw">PlotASAP</span>(wd, asap.name)</code></pre></div>
+</div>
+<div id="options-in-asapplots" class="section level2">
+<h2>Options in ASAPplots</h2>
+<p>There are a number of options when running ASAPplots that have default values. These default values were chosen to be appropriate in most cases, but there may be times when other values are desired. The options available can be seen using the following R command</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?PlotASAP</code></pre></div>
+<p>Any of the options can be changed within the PlotASAP call simply by setting the argument equal to a different value. For example, if the bubble plot for catch data has bubbles that are too big, the following command could be used to make the plot(s) with smaller bubbles</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">PlotASAP</span>(wd, asap.name, <span class="dt">scale.catch.bubble.data =</span> <span class="dv">4</span>)</code></pre></div>
+</div>
+<div id="what-about-docxasap" class="section level2">
+<h2>What about docxASAP?</h2>
+<p>Once you’ve run ASAPplots, you may wish to put a number of the produced plots into a Word document. Previsously, this was a tedious task requiring many copy/paste commands. The docxASAP functions simplify this process greatly. To create the default csv control file for docxASAP, use the following R command where wd is the directory where your ASAP dat file was located.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">createDefaultdocxASAPcontrolfile</span>(wd)</code></pre></div>
+<p>This produces the file docxASAP.csv in the directory wd. This is the controller for the docxASAP function determining which figures to add to the Word document, how the figures are ordered and numbered, and the text in the figure captions. The default control file will not over-write an existing file named docxASAP.csv in order to prevent loss of changes that you’ve made. If the file docxASAP.csv already exists in directory wd, when you run createDefaultdocxASAPcontrolfile you will get the following message</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># &quot;docxASAP.csv already present in directory&quot;  </span>
+<span class="co"># &quot;rename or delete current docxASAP.csv before creating new default file&quot;  </span></code></pre></div>
+<p>As for PlotASAP, the options available for the docxASAP function can be seen using</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?docxASAP</code></pre></div>
+<p>As with PlotASAP, docxASAP can be run with the default settings using the same variables wd (the working directory where the ASAP .dat file is located) and asap.name (the name of the ASAP run without any extension).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">docxASAP</span>(wd, asap.name)</code></pre></div>
+<p>This call assumes the output directory (od) is wd\plots\, the default in PlotASAP, the control file is named docxASAP.csv, and the Word document will be named docxASAP.docx. These options can be changed by calling the function with different arguement values. For example, if you have modified the control file and saved it with the name fluke_docxASAP.csv, then the following call would be used</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">docxASAP</span>(wd, asap.name, <span class="dt">control.file =</span> <span class="st">&quot;fluke_docxASAP.csv&quot;</span>)</code></pre></div>
+<p>If you want the figure numbering to begin at 52 and would like it to be displayed as B52 because it is in the B series of plots, then set first.figure.number = 52 and figure.prefix = “B”. By default, the asap.name is appended to all the figure captions, but this can be turned off by setting append.asap.name.caption = FALSE.</p>
+<p>Which figures appear in the Word document is determined by a combination of four factors. The first factor is whether the Group is selected (the default use.group = NULL means all groups are selected). If you only want the Retro plots included, then set use.group = “Retro”. The second factor is whether the Include column in the control file contains one of the following: Yes, YES, yes, Y, y, or TRUE. If anything else is in the Include column for that figure, it will not appear in the Word document. Note that Yes followed by a space is not in the list, so be careful how you make changes to this column. Finally, the ASAPplot column in the control file determines the base name for the plot. If that base name combined with the plotf extension (default = ‘png’) is not present in the output directory, then nothing is added to the Word document. If there are multiple files, for example due to multiple fleets or indices, then all of them will be added with the figure caption beyond the first one simply stating “continued.” Note that if you’ve run PlotASAP in the same output directory for a case with more fleets or indices than the asap.name case, these plots will be included as well. Be sure to clear your output directory before running PlotASAP if you are going to use docxASAP. The fourth factor is the Number column of the control file. Any value other than NA in this column will replace the value that would have appeared due to first.figure.number and the Order column. It is recommended that all Numbers within the use.group have a value in the Number column if this approach is used to avoid issues with non-sequential or possibly repeating figure numbers.</p>
+</div>
+<div id="faking-out-docxasap" class="section level2">
+<h2>Faking out docxASAP</h2>
+<p>The function docxASAP can be used to create Word documents for figures not created through PlotASAP with just a little faking out. You’ll need to explicitly define the output directory (od) where the figure files are located and modify by hand the control file. Note the control file is required to have columns Include, Order, Number, Group, ASAPplot, FigureText. Other columns can be included in the csv file, they will be ignored by the docxASAP function. Currently, only one type of figure can be added at a time using docxASAP, due to the plotf argument determining the extension of the files. You will need to change the ASAPplot column values to reflect the plots that you would like included as well as the FigureText column for the figure captions. For example, say I have a number of jpg files saved in directory C:\Users\chris.legault\Desktop\yellowtailfigures and I’ve modified the default control file to list all these figures and changed the captions appropriately in file “yellowtailSAS-docx.csv.” I would then use the following command to create the Word document</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">docxASAP</span>(<span class="dt">wd =</span> <span class="st">&quot;&quot;</span>, 
+         <span class="dt">asap.name =</span> <span class="st">&quot;&quot;</span>, 
+         <span class="dt">od =</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">chris.legault</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">yellowtailfigures&quot;</span>, 
+         <span class="dt">control.file =</span> <span class="st">&quot;yellowtailSAS-docx.csv&quot;</span>,
+         <span class="dt">append.asap.name.caption =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Note that wd and asap.name are required arguments for this function, but are being ignored in this case, so can be set equal to anything. To remind myself that I am faking out docxASAP in this case I set both wd and asap.name equal to “”.</p>
+</div>
+<div id="have-fun" class="section level2">
+<h2>Have fun!</h2>
+<p>If you have questions, you can contact me at <a href="mailto:chris.legault@noaa.gov">chris.legault@noaa.gov</a>.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
