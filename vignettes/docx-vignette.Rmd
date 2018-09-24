@@ -34,14 +34,7 @@ devtools::install_github("cmlegault/ASAPplots", build_vignettes = TRUE)
 
 It is a good idea to run keep up to date with ASAPplots by running this line of code if you haven't been used ASAPplots in a while.
 
-The ASAPplots package uses a number of other R packages that need to be installed as well. These packages are 
-- dplyr
-- Hmisc
-- officer
-- plotMCMC
-- plotrix
-- readr
-- reshape2
+The ASAPplots package uses a number of other R packages that need to be installed as well. These packages are dplyr, Hmisc, officer, plotMCMC, plotrix, readr, and reshape2.  
 
 You can either install these packages one at a time using the command install.packages as shown above for devtools, or you can use the following code to see if any of them need to be installed.
 
@@ -64,7 +57,7 @@ package.check <- lapply(packages, FUN = function(x) {
 
 Almost all of these packages are called by name within ASAPplots, so you do not need to use the library(package) command when running ASAPplots. The exception is the package dplyr. So when you are ready to run ASAPplots, you should use the following two library commands in your R code
 
-```{r}
+```{r, eval=FALSE}
 library(ASAPplots)
 library(dplyr)
 ```
@@ -125,7 +118,11 @@ docxASAP(wd, asap.name, control.file = "fluke_docxASAP.csv")
 
 If you want the figure numbering to begin at 52 and would like it to be displayed as B52 because it is in the B series of plots, then set first.figure.number = 52 and figure.prefix = "B". By default, the asap.name is appended to all the figure captions, but this can be turned off by setting append.asap.name.caption = FALSE. 
 
-Which figures appear in the Word document is determined by a combination of four factors. The first factor is whether the Group is selected (the default use.group = NULL means all groups are selected). If you only want the Retro plots included, then set use.group = "Retro". The second factor is whether the Include column in the control file contains one of the following: Yes, YES, yes, Y, y, or TRUE. If anything else is in the Include column for that figure, it will not appear in the Word document. Note that Yes followed by a space is not in the list, so be careful how you make changes to this column. Finally, the ASAPplot column in the control file determines the base name for the plot. If that base name combined with the plotf extension (default = 'png') is not present in the output directory, then nothing is added to the Word document. If there are multiple files, for example due to multiple fleets or indices, then all of them will be added with the figure caption beyond the first one simply stating "continued." Note that if you've run PlotASAP in the same output directory for a case with more fleets or indices than the asap.name case, these plots will be included as well. Be sure to clear your output directory before running PlotASAP if you are going to use docxASAP. The fourth factor is the Number column of the control file. Any value other than NA in this column will replace the value that would have appeared due to first.figure.number and the Order column. It is recommended that all Numbers within the use.group have a value in the Number column if this approach is used to avoid issues with non-sequential or possibly repeating figure numbers.
+Which figures appear in the Word document is determined by a combination of four factors.  
+* The first factor is whether the Group is selected (the default use.group = NULL means all groups are selected). If you only want the Retro plots included, then set use.group = "Retro".  
+* The second factor is whether the Include column in the control file contains one of the following: Yes, YES, yes, Y, y, or TRUE. If anything else is in the Include column for that figure, it will not appear in the Word document. Note that Yes followed by a space is not in the list, so be careful how you make changes to this column.  
+* The third factor is how many files exist with the base name: zero, one, or more than one. The ASAPplot column in the control file determines the base name for the plot. If that base name combined with the plotf extension (default = 'png') is not present in the output directory, then nothing is added to the Word document. If there are multiple files, for example due to multiple fleets or indices, then all of them will be added with the figure caption beyond the first one simply stating "continued." Note that if you've run PlotASAP in the same output directory for a case with more fleets or indices than the asap.name case, these plots will be included as well. Be sure to clear your output directory before running PlotASAP if you are going to use docxASAP.  
+* The fourth factor is the Number column of the control file. Any value other than NA in this column will replace the value that would have appeared due to first.figure.number and the Order column. It is recommended that all Numbers within the use.group have a value in the Number column if this approach is used to avoid issues with non-sequential or possibly repeating figure numbers.  
 
 ## Faking out docxASAP
 
