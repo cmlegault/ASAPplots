@@ -29,7 +29,7 @@ install.packages("devtools")
 Next, you need to get the latest version of ASAPplots from the github site https://github.com/cmlegault/ASAPplots using the command
 
 ```{r, eval=FALSE}
-devtools::install_github("cmlegault/ASAPplots")
+devtools::install_github("cmlegault/ASAPplots", build_vignettes = TRUE)
 ```
 
 It is a good idea to run keep up to date with ASAPplots by running this line of code if you haven't been used ASAPplots in a while.
