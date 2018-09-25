@@ -64,6 +64,9 @@ docxASAP <- function(wd,asap.name,od=NULL,docx.name="docxASAP.docx",control.file
     mutate(thisfig = ifelse(is.na(Number), ifig, Number)) %>%
     arrange(thisfig)
   
+  # use ifig for counting figure numbers
+  ifig <- first.figure.number
+  
   # how many figures to add to Word doc
   nplots <- length(con.file$thisfig)
   
@@ -74,10 +77,11 @@ docxASAP <- function(wd,asap.name,od=NULL,docx.name="docxASAP.docx",control.file
   for (iplot in 1:nplots){
     
     myfile <- paste0(od, con.file$ASAPplot[iplot], ".", plotf)
-    thisfig <- con.file$thisfig[iplot]
+    fignum <- ifig
+    if (!is.na(con.file$Number[iplot])) fignum <- con.file$Number[iplot]
     
     # form figure caption
-    mycaption <- paste0("Figure ", figure.prefix, thisfig, ". ", con.file$FigureText[iplot])
+    mycaption <- paste0("Figure ", figure.prefix, fignum, ". ", con.file$FigureText[iplot])
     if (append.asap.name.caption == TRUE){
       mycaption <- paste0(mycaption, " ", asap.name, ".")  
     }else{
@@ -91,6 +95,7 @@ docxASAP <- function(wd,asap.name,od=NULL,docx.name="docxASAP.docx",control.file
         officer::body_add_par(mycaption, style = "Normal") %>%
         officer::body_add_par("", style = "Normal") %>% # blank line
         officer::body_add_break(pos = "after") # page break
+      ifig <- ifig + 1
     }else{
       # check for multiple files that start with myfile - be careful of extra files with diff extensions
       gg1 <- list.files(od, pattern = con.file$ASAPplot[iplot])
@@ -98,16 +103,16 @@ docxASAP <- function(wd,asap.name,od=NULL,docx.name="docxASAP.docx",control.file
       if (ngg1 >= 1){
         for (igg in 1:ngg1){
           myfile <- paste0(od, gg1[igg])
-          if (igg > 1) mycaption <- paste0("Figure ", figure.prefix, thisfig, ". continued")
+          if (igg > 1) mycaption <- paste0("Figure ", figure.prefix, fignum, ". continued")
           my_doc <- my_doc %>%
             officer::body_add_img(src=myfile, width = 6.5, height = 6.5, style = "centered") %>%
             officer::body_add_par(mycaption, style = "Normal") %>%
             officer::body_add_par("", style = "Normal") %>% # blank line
             officer::body_add_break(pos = "after") # page break
         }
+        ifig <- ifig + 1
       }
     }
-    
   }
   
   # make the docx file
