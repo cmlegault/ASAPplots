@@ -104,7 +104,7 @@ As for PlotASAP, the options available for the docxASAP function can be seen usi
 ?docxASAP
 ```
 
-As with PlotASAP, docxASAP can be run with the default settings using the same variables wd (the working directory where the ASAP .dat file is located) and asap.name (the name of the ASAP run without any extension).
+Note both the docxASAP and createDefaultdocxASAPcontrolfile function calls return NULL when successful. As with PlotASAP, docxASAP can be run with the default settings using the same variables wd (the working directory where the ASAP .dat file is located) and asap.name (the name of the ASAP run without any extension).
 
 ```{r, eval=FALSE}
 docxASAP(wd, asap.name)
