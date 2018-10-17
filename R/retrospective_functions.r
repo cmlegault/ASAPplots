@@ -23,7 +23,7 @@ get.retro <- function(wd,asap.name,asap){
   for (i in 0:(npeels-1)){
     if (i < 10) i3 <- paste("00",i, sep="")
     else if(i < 100) i3 <- paste("0",i, sep="")
-    r1 <- paste(asap.name.short,'_',i3,'.rdat', sep="")
+    r1 <- paste(wd,"\\",asap.name.short,'_',i3,'.rdat', sep="")
     rr <- dget(r1)
     retro$favg[1:rr$parms$nyears,(npeels-i)] <- rr$F.report
     retro$ssb[1:rr$parms$nyears,(npeels-i)] <- rr$SSB
