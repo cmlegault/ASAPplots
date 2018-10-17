@@ -43,7 +43,7 @@ PlotIndexInput <- function(asap,save.plots,od,plotf,liz.palette){
   for (i in 1:asap$parms$nindices){
     lines(years,log.rescaled[,i],col=liz.palette[i])
   }
-  if (save.plots) savePlot(paste(od, "index.input.", plotf, sep=''), type=plotf)  
+  if (save.plots) savePlot(paste0(od, "index.input.", plotf), type=plotf)  
   par(mfrow=c(1,1))
   return()
 }

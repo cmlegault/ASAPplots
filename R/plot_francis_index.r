@@ -81,8 +81,8 @@ PlotFrancisIndex <- function(asap,index.names,save.plots,od,plotf){
         Hmisc::errbar(years[acyrs2], t.res[,1],t.res[,3],t.res[,2],ylim=c(0,10),ylab="Mean Age", 
                xlab="Year", add=T)
         
-        if(len.uniques==1)    title(main=paste("Index ",i, " (",index.names[i],")", " ESS = ",ESS[i], sep=""), outer=F)
-        if(len.uniques>1)    title(main=paste("Index ",i, " (",index.names[i],")",  sep=""), outer=F)
+        if(len.uniques==1) title(main=paste0("Index ",i, " (",index.names[i],")", " ESS = ",ESS[i]), outer=F)
+        if(len.uniques>1) title(main=paste0("Index ",i, " (",index.names[i],")"), outer=F)
         
         
         sdres <- (t.res[,4]-t.res[,1])/((t.res[,1]-t.res[,2])/1.96)
@@ -91,11 +91,10 @@ PlotFrancisIndex <- function(asap,index.names,save.plots,od,plotf){
         sdnr <- sd(sdres, na.rm=T)
         rmse <- sqrt(mean(sdres^2, na.rm=T))
         plotrix::barp(sdres,names.arg=years[acyrs2],col="grey50",ylab="Std Resids",xlab="Year")
-        legend('topleft',legend=c(paste("SDNR=",round(sdnr,2), sep=""),paste("RMSE=",round(rmse,2), sep="")),cex=0.7,h=T)
+        legend('topleft',legend=c(paste0("SDNR=",round(sdnr,2)),paste0("RMSE=",round(rmse,2))),cex=0.7,h=T)
         
-        if (save.plots) savePlot(paste(od,"Francis_Mean_Age_Orig_Ind_",i,".",plotf, sep=""), type=plotf)
-        
-        
+        if (save.plots) savePlot(paste0(od,"Francis_Mean_Age_Orig_Ind_",i,".",plotf), type=plotf)
+
         #-- Second plot
         par(mfrow=c(1,1), mar=rep(4,4) )      
         aa <- sort(sdres)
@@ -105,9 +104,9 @@ PlotFrancisIndex <- function(asap,index.names,save.plots,od,plotf){
         abline(a=0,b=1,col="blue",lty=2)
         legend('topleft',legend=c("y=x","1st-3rd quartiles"),lty=c(2,1),col=c("blue","red"))
         
-        if(len.uniques==1)    title(main=paste("Index ",i, " (",index.names[i],")", " ESS = ",ESS[i], sep=""), outer=F)
-        if(len.uniques>1)    title(main=paste("Index ",i, " (",index.names[i],")",  sep=""), outer=F)
-        if (save.plots) savePlot(paste(od,"Francis_QQ_Orig_Ind_",i,".",plotf, sep=""), type=plotf)
+        if(len.uniques==1) title(main=paste0("Index ",i, " (",index.names[i],")", " ESS = ",ESS[i]), outer=F)
+        if(len.uniques>1) title(main=paste0("Index ",i, " (",index.names[i],")"), outer=F)
+        if (save.plots) savePlot(paste0(od,"Francis_QQ_Orig_Ind_",i,".",plotf), type=plotf)
         
         
       }  #end test for presence/absence of age-comp  

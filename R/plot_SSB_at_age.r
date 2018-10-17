@@ -26,7 +26,7 @@ PlotSSBatAge <- function(asap,save.plots,od,plotf,liz.palette){
   legend('top', horiz=T, legend=seq(1, asap$parms$nages), 
          pch=15, col=liz.palette[1:asap$parms$nages], cex=0.8 )
   
-  if (save.plots==T) savePlot(paste(od, 'SSB.AA.barplot.stacked.', plotf, sep=''), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, 'SSB.AA.barplot.stacked.', plotf), type=plotf)
   
   #----same information, but proportion at age each year
   barplot( t(ssb.aa/apply(ssb.aa,1,sum)), beside=F  ,  cex.names=0.75 ,  
@@ -37,7 +37,7 @@ PlotSSBatAge <- function(asap,save.plots,od,plotf,liz.palette){
   legend('top', horiz=T, legend=seq(1, asap$parms$nages), 
          pch=15, col=liz.palette[1:asap$parms$nages], cex=0.8 )
   
-  if (save.plots==T) savePlot(paste(od, 'SSB.AA.proportion.barplot.stacked.', plotf, sep=''), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, 'SSB.AA.proportion.barplot.stacked.', plotf), type=plotf)
 
   return()
 }  #end funciton

@@ -28,7 +28,7 @@ PlotCV <- function(asap,a1,save.plots,od,plotf){
     legend('top', legend=c("Recr.", "SSB", "Freport"), col=c("black", "blue", "green3"),
            lty=rep(1,3), lwd=rep(2,3), horiz=T)
     
-    if (save.plots==T) savePlot(paste(od, 'CV.estimates.', plotf, sep=''), type=plotf)
+    if (save.plots==T) savePlot(paste0(od, 'CV.estimates.', plotf), type=plotf)
   }
   return()
 }  # end function

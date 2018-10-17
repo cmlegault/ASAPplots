@@ -22,7 +22,7 @@ PlotNAA <- function(asap,save.plots,od,plotf,liz.palette){
   legend('top', horiz=T, legend=seq(1, asap$parms$nages), 
          pch=15, col=liz.palette[1:asap$parms$nages], cex=0.8 )
   
-  if (save.plots==T) savePlot(paste(od, 'NAA.barplot.stacked.', plotf, sep=''), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, 'NAA.barplot.stacked.', plotf), type=plotf)
   
   #----same information, but proportion at age each year
   barplot( t(asap$N.age/apply(asap$N.age,1,sum)), beside=F  ,  cex.names=0.75 ,  
@@ -33,7 +33,7 @@ PlotNAA <- function(asap,save.plots,od,plotf,liz.palette){
   legend('top', horiz=T, legend=seq(1, asap$parms$nages), 
          pch=15, col=liz.palette[1:asap$parms$nages], cex=0.8 )
   
-  if (save.plots==T) savePlot(paste(od, 'NAA.proportion.barplot.stacked.', plotf, sep=''), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, 'NAA.proportion.barplot.stacked.', plotf), type=plotf)
   
   return()
 } # end function

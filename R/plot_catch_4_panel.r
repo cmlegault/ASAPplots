@@ -28,7 +28,7 @@ PlotCatch4Panel <- function(asap,fleet.names,save.plots,od,plotf,liz.palette){
                 1.1*max(log.ob.max,log(asap$catch.pred[i,catch.yrs]))) )    
     lines(x.yrs, log(asap$catch.pred[i,catch.yrs]), col=liz.palette[i], lwd=2)
     arrows(x.yrs, log.ob.min, x.yrs, log.ob.max, length=0)
-    title (paste("Fleet ",i, " Catch  (", fleet.names[i], ")", sep=""), outer=T, line=-1 )
+    title (paste0("Fleet ",i, " Catch  (", fleet.names[i], ")"), outer=T, line=-1 )
     
     c.resid <- rep(NA, length(catch.yrs))
     c.resid <- asap$catch.std.resid[i, catch.yrs]
@@ -37,7 +37,7 @@ PlotCatch4Panel <- function(asap,fleet.names,save.plots,od,plotf,liz.palette){
     abline(h=0)
     
     hist(c.resid, plot=T, xlab="Std. Residual", ylab="Probability Density", freq=F, main=NULL) 
-    if (save.plots) savePlot(paste(od, "Catch.4panel.",i,".",plotf, sep=""), type=plotf) 
+    if (save.plots) savePlot(paste0(od, "Catch.4panel.",i,".",plotf), type=plotf) 
   } #end loop nfleets
   par(mfrow=c(1,1))
 }

@@ -30,14 +30,14 @@ PlotIndices4Panel <- function(asap,index.names,save.plots,od,plotf,liz.palette){
          ylim=c(min(log.ob.min,log(index.obs)), 1.1*max(log.ob.max,log(index.pred))) )    
     lines(index.year, log(index.pred), col=liz.palette[i], lwd=2)
     arrows(index.year, log.ob.min, index.year, log.ob.max, length=0)
-    title (paste("Index ", i, " (", index.names[i], ")", sep=""), outer=T, line=-1 )
+    title (paste0("Index ", i, " (", index.names[i], ")"), outer=T, line=-1 )
     
     plot(index.year, index.std.resid, type='h', lwd=2, col=liz.palette[i], 
          xlab="Year", ylab="Log-scale Std. Residual", xlim=c(asap$parms$styr,asap$parms$endyr)) 
     abline(h=0)
     
     hist(index.std.resid, plot=T, xlab="Std. Residual", ylab="Probability Density", freq=F, main=NULL) 
-    if (save.plots) savePlot(paste(od, "Index.4panel.",i,".",plotf, sep=""), type=plotf) 
+    if (save.plots) savePlot(paste0(od, "Index.4panel.",i,".",plotf), type=plotf) 
   }   # end i-loop over nindices
   
   par(mfrow=c(1,1))

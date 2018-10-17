@@ -38,10 +38,10 @@ PlotSARCrecSSB <- function(asap,save.plots,od,plotf){
   
   
   mtext(side = 1, 'Year', line = 3)
-  mtext(side = 4, paste('SSB (year)',sep=""), line = 3, col='navyblue')
-  mtext(side = 2, paste('Age-1 Recruits (year-class)', sep=""), line = 3)
+  mtext(side = 4, 'SSB (year)', line = 3, col='navyblue')
+  mtext(side = 2, 'Age-1 Recruits (year-class)', line = 3)
   
-  if (save.plots==T) savePlot(paste(od, 'SARC.SSB.vs.R.barplots.', plotf, sep=''), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, 'SARC.SSB.vs.R.barplots.', plotf), type=plotf)
   par(family="")
   return()
 }  # end function

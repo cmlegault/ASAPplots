@@ -31,7 +31,7 @@ PlotRecrSSByr <- function(asap,save.plots,od,plotf){
   points (SR[npts,2], SR[npts,3], pch=19, col="#ffaa22", cex=2.5)
   text(SR[,2], SR[,3], yr.text[1:(nyears-1)], cex=0.9, col="black")  
   
-  if (save.plots==T) savePlot( paste(od, "S_R.Yr.",plotf, sep=""), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, "S_R.Yr.",plotf), type=plotf)
   
   plot(SR[,1],SR[,4], type='o', col='black', pch=16, 
        xlab="Year", ylab="R/SSB")

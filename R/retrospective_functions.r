@@ -21,9 +21,9 @@ get.retro <- function(wd,asap.name,asap){
   }
   
   for (i in 0:(npeels-1)){
-    if (i < 10) i3 <- paste("00",i, sep="")
-    else if(i < 100) i3 <- paste("0",i, sep="")
-    r1 <- paste(wd,"\\",asap.name.short,'_',i3,'.rdat', sep="")
+    if (i < 10) i3 <- paste0("00", i)
+    else if(i < 100) i3 <- paste0("0", i)
+    r1 <- paste0(wd,"\\",asap.name.short,'_',i3,'.rdat')
     rr <- dget(r1)
     retro$favg[1:rr$parms$nyears,(npeels-i)] <- rr$F.report
     retro$ssb[1:rr$parms$nyears,(npeels-i)] <- rr$SSB
@@ -67,7 +67,7 @@ plot.retro <- function(retro.mat,years,nages,y.lab,y.range1=NA,y.range2=NA){
   }
   mohn.rho <- mm/npeels
   rho.vals[(npeels+1)] <- mohn.rho
-  text(x=years[1], y=0.9*y.range2[2], label=expression(paste(rho,"= ",sep="")), pos=4)
+  text(x=years[1], y=0.9*y.range2[2], label=expression(paste0(rho,"= ")), pos=4)
   text(x=(years[1]+3), y=0.9*y.range2[2], label=round(mohn.rho,3), pos=4)
   return(rho.vals)
 }
@@ -93,40 +93,40 @@ PlotRetroWrapper <- function(wd,asap.name,asap,save.plots,od,plotf){
   ssb.rho<-plot.retro(my$ssb,years,asap$parms$nages,"SSB",y.range1=c(0,max(my$ssb, na.rm=T)))
   recr.rho<-plot.retro(my$stock_age[[1]],years,asap$parms$nages,"Recruitment",y.range1=c(0,max(my$stock_age[[1]], na.rm=T)))
   title(main="F, SSB, R", outer=T, line=-1)
-  if(save.plots) savePlot(paste(od,"retro_F_SSB_R.",plotf, sep=""), type=plotf)
+  if(save.plots) savePlot(paste0(od,"retro_F_SSB_R.",plotf), type=plotf)
   
   # Jan-1 B, Exploitable B, Total Stock N
   jan1b.rho<-plot.retro(my$jan1b,years,asap$parms$nages,"Jan-1 B",y.range1=c(0,max(my$jan1b, na.rm=T)))
   explb.rho<-plot.retro(my$explb,years,asap$parms$nages,"Exploitable B",y.range1=c(0,max(my$explb, na.rm=T)))
   stockn.rho<-plot.retro(my$stockn,years,asap$parms$nages,"Total Stock N",y.range1=c(0,max(my$stockn, na.rm=T)))
   title(main="Jan-1 B, Exploitable B, Total Stock N", outer=T, line=-1)
-  if(save.plots) savePlot(paste(od,"retro_Jan1B_ExplB_StockN.",plotf, sep=""), type=plotf)  
+  if(save.plots) savePlot(paste0(od,"retro_Jan1B_ExplB_StockN.",plotf), type=plotf)  
   
   # Population numbers at age
   age.rho <- matrix(NA,1,asap$parms$nages)
   for (j in 1:asap$parms$nages){
-    temp.rho<-plot.retro(my$stock_age[[j]],years,asap$parms$nages,paste("N at Age ",j, sep=""),y.range1=c(0,max(my$stock_age[[j]], na.rm=T)))
+    temp.rho<-plot.retro(my$stock_age[[j]],years,asap$parms$nages,paste0("N at Age ",j),y.range1=c(0,max(my$stock_age[[j]], na.rm=T)))
     if (j==1) age.rho<- (temp.rho )
     if (j>1) age.rho<-rbind(age.rho, t(temp.rho) )    
     title(main="Stock Numbers at Age", outer=T, line=-1)
     if (j%%3==0){
-      if(save.plots) savePlot(paste(od,"retro_ages_",j-2,"_",j,".",plotf, sep=""), type=plotf)
+      if(save.plots) savePlot(paste0(od,"retro_ages_",j-2,"_",j,".",plotf), type=plotf)
     }
   }  # end loop over ages
   age.rho<-as.data.frame(t(age.rho))
   colnames(age.rho) <- c(paste(rep("Age",asap$parms$nages),seq(1,asap$parms$nages), sep="."))
   if (asap$parms$nages%%3==1){
-    if(save.plots) savePlot(paste(od,"retro_ages_",j,".",plotf, sep=""), type=plotf)
+    if(save.plots) savePlot(paste0(od,"retro_ages_",j,".",plotf), type=plotf)
   }
   if (asap$parms$nages%%3==2){
-    if(save.plots) savePlot(paste(od,"retro_ages_",j-1,"_",j,".",plotf, sep=""), type=plotf)
+    if(save.plots) savePlot(paste0(od,"retro_ages_",j-1,"_",j,".",plotf), type=plotf)
   }
   
   par(mfrow=c(1,1))
   Retro.rho <-cbind(f.rho, ssb.rho, recr.rho, jan1b.rho, explb.rho, stockn.rho, age.rho)
   rownames(Retro.rho) <- c(paste("peel", seq(1,(length(f.rho)-1)), sep="."),"Mohn.rho"  )
   
-  write.csv(Retro.rho, file=paste(od, "Retro.rho.values_",asap.name,".csv",sep=""),   row.names=T)
+  write.csv(Retro.rho, file=paste0(od, "Retro.rho.values_",asap.name,".csv"),   row.names=T)
   return()
 }
 

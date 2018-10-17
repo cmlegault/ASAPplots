@@ -21,7 +21,7 @@ PlotCoh <- function(matcoh,save.plots,od,plotf,mytitle="",mylabels=NA){
     for (j in nc:1){
       if (i == j){
         plot(1:10,1:10,type='n',axes=F)
-        if (is.na(mylabels[1])) text(5,5,paste("age-",i,sep=""),cex=1.4)
+        if (is.na(mylabels[1])) text(5,5,paste0("age-",i),cex=1.4)
         if (is.na(mylabels[1])==F) text(5,5,mylabels[i],cex=1.4)
       }
       if (i < j){
@@ -56,6 +56,6 @@ PlotCoh <- function(matcoh,save.plots,od,plotf,mytitle="",mylabels=NA){
     }
   }
   title(mytitle, outer=T)
-  if (save.plots) savePlot(paste(od,"cohort_age_matrix_",mytitle,".",plotf, sep=""), type=plotf)
+  if (save.plots) savePlot(paste0(od,"cohort_age_matrix_",mytitle,".",plotf), type=plotf)
   return(my.cor)
 }

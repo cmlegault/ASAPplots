@@ -27,6 +27,6 @@ PlotSSBFtrend<-function(asap,save.plots,od,plotf){
   legend('topleft', horiz=T, legend=c('F.report', 'F.full'), col=c('black', 'red'),
          lwd=c(2,2), lty=c(1,2), cex=0.85)
   
-  if (save.plots==T) savePlot( paste(od, "SSB.F.Timeseries.Line.",plotf, sep=""), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, "SSB.F.Timeseries.Line.",plotf), type=plotf)
   return()
 }  #end function

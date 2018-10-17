@@ -29,7 +29,7 @@ PlotRecruitmentDevs <- function(asap,save.plots,od,plotf){
         ylim=c(1.1*min(resids) , 1.1*max(resids))  )    
   abline(h=0, lwd=1)
   
-  if (save.plots==T) savePlot( paste(od, "Recruit.Yr.Devs.",plotf, sep=""), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, "Recruit.Yr.Devs.",plotf), type=plotf)
   
   return()
 } # end function

@@ -59,9 +59,8 @@ PlotCatchAgeCompBubbles <- function(asap,fleet.names,save.plots,od,plotf,scale.c
       bubble.legend2 <- bubble.legend1 * scale.catch.bubble.data
       legend("topright", xpd=T, legend=bubble.legend1, pch=rep(21, 3), 
              pt.cex=bubble.legend2, horiz=T , col='black', pt.bg = bubble.color  )
-      title (paste(my.title,i, " (", fleet.names[i], ")", sep=""), 
-             outer=T, line=-1 ) 
-      if (save.plots) savePlot(paste(od, my.save, i, ".", plotf, sep=''), type=plotf)
+      title(paste0(my.title,i, " (", fleet.names[i], ")"), outer=T, line=-1 ) 
+      if (save.plots) savePlot(paste0(od, my.save, i, ".", plotf), type=plotf)
     } # end catch.yrs test  
   }   #end loop nfleets
   return()

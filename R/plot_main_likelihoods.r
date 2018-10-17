@@ -27,12 +27,12 @@ PlotMainLikelihoods <- function(asap.name,asap,a1,save.plots,od,plotf,liz.palett
   axis(side=2, at=seq(0.5,(n.like-0.5)), labels= like2.names, las=2)
   text(x= like2, y=seq(0.5,(n.like-0.5)), labels=round(like2,0), cex=0.8, pos=4)
   text(x= my.range[1], y=(n.like+0.25),  cex=0.95, pos=4, col='#110033',
-       labels=paste('Maximum gradient = ',round(as.numeric(max.grad),6),sep="") )  
+       labels=paste0('Maximum gradient = ',round(as.numeric(max.grad),6)) )  
   box()
-  title(paste("Components of Obj. Function (", round(as.numeric(asap$like[1]),0), "), npar=", npar, sep=""), cex=0.9 )
-  title( sub=paste("Model: ", asap.name, "     ", asap$info$date,sep=""))
+  title(paste0("Components of Obj. Function (", round(as.numeric(asap$like[1]),0), "), npar=", npar), cex=0.9 )
+  title(sub=paste0("Model: ", asap.name, "     ", asap$info$date))
   
-  if (save.plots) savePlot(paste(od, "Likelihood.Comp.",plotf, sep=""), type=plotf)
+  if (save.plots) savePlot(paste0(od, "Likelihood.Comp.",plotf), type=plotf)
   
   ###NEW  
   # write out .csv with likelihood components
@@ -68,8 +68,7 @@ PlotMainLikelihoods <- function(asap.name,asap,a1,save.plots,od,plotf,liz.palett
                                  asap$like[(line.index+1):length(asap$like)]  )   )
   
   colnames(like.table) <- c(asap.name, "Value")
-  write.csv(like.table, file=paste(od, "Likelihood.Table.", asap.name, ".csv", sep=""), 
-            row.names=F)
+  write.csv(like.table, file=paste0(od, "Likelihood.Table.", asap.name, ".csv"), row.names=F)
   
   return() 
 }

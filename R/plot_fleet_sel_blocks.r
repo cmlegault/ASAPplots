@@ -36,9 +36,9 @@ PlotFleetSelBlocks <- function(asap,fleet.names,save.plots,od,plotf,liz.palette)
         lines(a1:a2, sel[j,], type='l', col=my.col[j], lwd=2)
       }
     }
-    title(paste("Fleet ",i," (",fleet.names[i],")", sep=""))
+    title(paste0("Fleet ",i," (",fleet.names[i],")"))
     legend("topright", col=my.col, legend=asap$parms$styr+yr-1, lwd=2)
-    if (save.plots) savePlot(paste(od, "Catch.Sel.Blocks.Fleet.",i,".",plotf, sep=""), type=plotf)
+    if (save.plots) savePlot(paste0(od, "Catch.Sel.Blocks.Fleet.",i,".",plotf), type=plotf)
   }
   return()
 }

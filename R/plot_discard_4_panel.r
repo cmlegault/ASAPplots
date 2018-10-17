@@ -29,7 +29,7 @@ PlotDiscard4Panel <- function(asap,fleet.names,save.plots,od,plotf,liz.palette){
                   1.1*max(log.ob.max,log(asap$discard.pred[i,discard.yrs]) )) )   
       lines( as.numeric(names(discard.yrs)), log(asap$discard.pred[i,discard.yrs]), col=liz.palette[i], lwd=2)
       arrows(x.yrs, log.ob.min, x.yrs, log.ob.max, length=0)
-      title (paste("Fleet ",i, " Discards  (", fleet.names[i], ")", sep=""), outer=T, line=-1 )
+      title (paste0("Fleet ",i, " Discards  (", fleet.names[i], ")"), outer=T, line=-1 )
       
       c.resid <- rep(NA, length(discard.yrs))
       c.resid <- asap$discard.std.resid[i, discard.yrs]
@@ -38,7 +38,7 @@ PlotDiscard4Panel <- function(asap,fleet.names,save.plots,od,plotf,liz.palette){
       abline(h=0)
       
       hist(c.resid, plot=T, xlab="Std. Residual", ylab="Probability Density", freq=F, main=NULL) 
-      if (save.plots) savePlot(paste(od, "Discard.4panel.",i,".",plotf, sep=""), type=plotf) 
+      if (save.plots) savePlot(paste0(od, "Discard.4panel.",i,".",plotf), type=plotf) 
     }
   } #end loop nfleets
   par(mfrow=c(1,1))

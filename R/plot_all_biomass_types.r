@@ -26,6 +26,6 @@ PlotAllBiomassTypes<-function(asap,save.plots,od,plotf){
          lwd=c(2,2,2), col=c("maroon", "blue", "green2") )
   title ( "Comparison of January 1 Biomass", outer=T, line=-1 )
   
-  if (save.plots==T) savePlot( paste(od, "Biomass.Comparisons.",plotf, sep=""), type=plotf)
+  if (save.plots==T) savePlot( paste0(od, "Biomass.Comparisons.",plotf), type=plotf)
   return()
 } #end function

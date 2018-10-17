@@ -42,13 +42,13 @@ PlotHighCVs <- function(a1,save.plots,od,plotf) {
       trouble.pars2 <- trouble.pars
       trouble.pars2$CV[which(trouble.pars$CV>1)]<- 1  #truncate CV at 1 so you can read plot
       
-      write.csv(trouble.pars, file=paste(od, "CV.Check.Params.",asap.name,".csv",sep=""),   row.names=F)
-      write.csv(CVmat, file=paste(od, "CV.All.Params.",asap.name,".csv",sep=""),   row.names=F)
+      write.csv(trouble.pars, file=paste0(od, "CV.Check.Params.",asap.name,".csv"), row.names=F)
+      write.csv(CVmat, file=paste0(od, "CV.All.Params.",asap.name,".csv"), row.names=F)
       
       plot(trouble.pars$index, trouble.pars$CV, type='p', pch=pch.par, col='red', cex=cex.par,
            xlab="Parameter number", ylab="CV (parameter estimate)", ylim=c(0,1.05) )
       
-      if (save.plots) savePlot(paste(od, "CV.Check.Params.",plotf, sep=""), type=plotf) 
+      if (save.plots) savePlot(paste0(od, "CV.Check.Params.",plotf), type=plotf) 
     }  #end check for length(trouble.pars)>0
 
   } else { # if npar == -999

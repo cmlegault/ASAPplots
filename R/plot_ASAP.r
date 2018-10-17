@@ -37,7 +37,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   ss6 <- which(ss5=="File Not Found")
   if (length(ss6)>0 )  shell(paste0("mkdir ",wd,"\\plots"), intern=T )
   # the line below is more elegant, but not supported by older versions of R
-  #if (dir.exists(od)==F )  shell(paste("mkdir ",  od, sep=""), intern=T )
+  #if (dir.exists(od)==F )  shell(paste0("mkdir ",  od), intern=T )
   
   rdat <- paste0(asap.name,".rdat")
   asap <- dget(paste0(wd,"\\",rdat))
@@ -146,7 +146,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   
   if (make.one.pdf==T) {
     windows()
-    pdf(file=paste(od,pdf.name,".ALL.PLOTS.pdf",sep=""), onefile=T)
+    pdf(file=paste0(od,pdf.name,".ALL.PLOTS.pdf"), onefile=T)
     PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
     PlotMainLikelihoods(asap.name,asap,a1,save.plots,od,plotf,liz.palette)
     PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
@@ -211,7 +211,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   #_________DIAGNOSTIC PLOTS___________________
   
   windows()
-  pdf(file=paste(od,pdf.name,".DIAGNOSTIC.PLOTS.pdf",sep=""), onefile=T)
+  pdf(file=paste0(od,pdf.name,".DIAGNOSTIC.PLOTS.pdf"), onefile=T)
   PlotFrontPage(wd,asap.name,asap,a1,save.plots,od,plotf)
   PlotMainLikelihoods(asap.name,asap,a1,save.plots,od,plotf,liz.palette)
   PlotHighCorr(a1,correlation.limit,save.plots,od,plotf)
@@ -239,7 +239,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   #_________RESULTS___________________
   
   windows()
-  pdf(file=paste(od,pdf.name,".RESULTS.PLOTS.pdf",sep=""), onefile=T)
+  pdf(file=paste0(od,pdf.name,".RESULTS.PLOTS.pdf"), onefile=T)
   PlotFleetSelBlocks(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotFleetFmult(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotIndexSelectivities(asap,index.names,save.plots,od,plotf,liz.palette)
@@ -275,7 +275,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   #_________  MCMC   ___________________
   if (asap$options$do.mcmc>0) {
     windows()
-    pdf(file=paste(od,pdf.name,".MCMC.PLOTS.pdf",sep=""), onefile=T)
+    pdf(file=paste0(od,pdf.name,".MCMC.PLOTS.pdf"), onefile=T)
     PlotMCMC(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf) 
     dev.off()      
     graphics.off()
@@ -284,7 +284,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   #_________REFERENCE POINTS___________________
   
   windows()
-  pdf(file=paste(od,pdf.name,".REF.POINTS.PLOTS.pdf",sep=""), onefile=T )
+  pdf(file=paste0(od,pdf.name,".REF.POINTS.PLOTS.pdf"), onefile=T )
   PlotYieldCurves(asap,a1,nyrs.ave,save.plots,od,plotf)
   PlotSPRtable(asap,a1,nyrs.ave,save.plots,od,plotf)
   PlotExpSpawn(asap,a1,nyrs.ave,save.plots,od,plotf)
@@ -296,7 +296,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   #_________INPUTS___________________
   
   windows()
-  pdf(file=paste(od,pdf.name,".DATA.PLOTS.pdf",sep=""), onefile=T)
+  pdf(file=paste0(od,pdf.name,".DATA.PLOTS.pdf"), onefile=T)
   PlotCatchByFleet(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotCatchAgeCompBubbles(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.data)
   PlotCatchAgeCompBubbles(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.data,

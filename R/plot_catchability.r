@@ -51,7 +51,7 @@ PlotCatchability <- function(asap,index.names,a1,save.plots,od,plotf,liz.palette
             as.numeric(q.info),
             yminus=se.lines[,1], add=T, lty=1, pch='.' )
     
-    if (save.plots==T) savePlot( paste(od, "Q.Index.Err.Bars.",plotf, sep=""), type=plotf)      
+    if (save.plots==T) savePlot(paste0(od, "Q.Index.Err.Bars.",plotf), type=plotf)      
   } # end block for no q-devs
   
   
@@ -92,7 +92,7 @@ PlotCatchability <- function(asap,index.names,a1,save.plots,od,plotf,liz.palette
                col=liz.palette[(i-4):i], horiz=T , lwd=rep(2,5), cex=0.8)    
         
         title ( "Index q estimates", outer=T, line=-1 )
-        if (save.plots==T) savePlot( paste(od, "Q.Index.Yr.",cc,".",plotf, sep=""), type=plotf)      
+        if (save.plots==T) savePlot(paste0(od, "Q.Index.Yr.",cc,".",plotf), type=plotf)      
       }  # end modulo test of 5 q's per plot
       
       if(i == n.ind & n.ind%%5>0 )  {
@@ -102,7 +102,7 @@ PlotCatchability <- function(asap,index.names,a1,save.plots,od,plotf,liz.palette
                col=liz.palette[(i-(n.ind%%5)+1):i], horiz=T, lwd=rep(2,5), cex=0.8 )    
         
         title ( "Index q estimates", outer=T, line=-1 )
-        if (save.plots==T) savePlot( paste(od, "Q.Index.Yr.",cc,".",plotf, sep=""), type=plotf)      
+        if (save.plots==T) savePlot(paste0(od, "Q.Index.Yr.",cc,".",plotf), type=plotf)      
       }  # end modulo test of 5 q's per plot
       
     } #end loop over number of q parameters    

@@ -36,8 +36,8 @@ PlotWAAmatrices <- function(asap,save.plots,od,plotf,liz.palette){
       lines(years,rep(mean(WAA.plot[,i]),length(years)),lty=2,col=liz.palette[i])
     }
     legend('top',legend=names(asap$WAA.mats[counter[waa.set==k]]),cex=0.7,horiz=T)
-    title(main=paste("WAA matrix ",k, sep=""), outer=F)
-    if (save.plots) savePlot(paste(od, "waa.matrix.", k, ".", plotf, sep=''), type=plotf)
+    title(main=paste0("WAA matrix ",k), outer=F)
+    if (save.plots) savePlot(paste0(od, "waa.matrix.", k, ".", plotf), type=plotf)
   }  # end k-loop
   return()
 }  # end function

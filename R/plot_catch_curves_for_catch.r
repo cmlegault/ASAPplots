@@ -18,7 +18,7 @@ PlotCatchCurvesForCatch <- function(asap,a1,save.plots,od,plotf,first.age=-999){
   my.col <- rep(c("blue","red","green","orange","gray50"),50)
   for (ifleet in 1:asap$parms$nfleets){
     if (asap$parms$nfleets == 1) title1 = "Catch"
-    if (asap$parms$nfleets >= 2) title1 = paste("Catch for Fleet ",ifleet, sep="")
+    if (asap$parms$nfleets >= 2) title1 = paste0("Catch for Fleet ",ifleet)
     
     # set up full age range matrices
     catch.comp.mat.ob <- matrix(0, nrow=asap$parms$nyears, ncol=asap$parms$nages)
@@ -47,21 +47,21 @@ PlotCatchCurvesForCatch <- function(asap,a1,save.plots,od,plotf,first.age=-999){
     cpr.coh[,asap$parms$nages] <- NA
     
     first.age.label <- 1
-    if (first.age==1) title1 <- paste(title1," First Age = 1", sep="") 
+    if (first.age==1) title1 <- paste0(title1," First Age = 1") 
     
     # determine which ages to use for each cohort (default)
     if (first.age == -999){
       cob.coh <- find_peak_age(cob.coh)
       cpr.coh <- find_peak_age(cpr.coh)
       first.age.label <- "find_peak"
-      title1 <- paste(title1," (Peak Age)", sep="")       
+      title1 <- paste0(title1," (Peak Age)")       
     }
     
     # or drop youngest ages based on user control
     if (first.age > 1) {
       cob.coh[,1:(first.age-1)] <- NA
       cpr.coh[,1:(first.age-1)] <- NA
-      title1 <- paste(title1," First Age = ",first.age, sep="")
+      title1 <- paste0(title1," First Age = ",first.age)
       first.age.label <- first.age
     }
     
@@ -71,7 +71,7 @@ PlotCatchCurvesForCatch <- function(asap,a1,save.plots,od,plotf,first.age=-999){
     
     # make the plots
     par(mfrow=c(2,1))
-    plot(cohort,cohort,type='n',ylim=range(c(cob.coh,cpr.coh,0),na.rm=T),xlab="",ylab="Log(Catch)",main=paste(title1," Observed", sep=""))
+    plot(cohort,cohort,type='n',ylim=range(c(cob.coh,cpr.coh,0),na.rm=T),xlab="",ylab="Log(Catch)",main=paste0(title1," Observed"))
     for (i in 1:length(cob.coh[,1])){
       lines(seq(cohort[i],cohort[i]+asap$parms$nages-1),cob.coh[i,],type='p',lty=1,pch=seq(1,asap$parms$nages),col="gray50")
       lines(seq(cohort[i],cohort[i]+asap$parms$nages-1),cob.coh[i,],type='l',lty=1,col=my.col[i])
@@ -79,9 +79,9 @@ PlotCatchCurvesForCatch <- function(asap,a1,save.plots,od,plotf,first.age=-999){
     
     Hmisc::errbar(cohort,z.ob[,1],z.ob[,3],z.ob[,2],xlab="Year Class",ylab="Z",ylim=range(c(z.ob,z.pr,0),na.rm=T))
     
-    if (save.plots) savePlot(paste(od,"catch_curve_",title1,"_Observed_first_age_",first.age.label,".",plotf, sep=""), type=plotf)
+    if (save.plots) savePlot(paste0(od,"catch_curve_",title1,"_Observed_first_age_",first.age.label,".",plotf), type=plotf)
     
-    plot(cohort,cohort,type='n',ylim=range(c(cob.coh,cpr.coh,0),na.rm=T),xlab="",ylab="Log(Catch)",main=paste(title1," Predicted", sep=""))
+    plot(cohort,cohort,type='n',ylim=range(c(cob.coh,cpr.coh,0),na.rm=T),xlab="",ylab="Log(Catch)",main=paste0(title1," Predicted"))
     for (i in 1:length(cob.coh[,1])){
       lines(seq(cohort[i],cohort[i]+asap$parms$nages-1),cpr.coh[i,],type='p',lty=1,pch=seq(1,asap$parms$nages),col="gray50")
       lines(seq(cohort[i],cohort[i]+asap$parms$nages-1),cpr.coh[i,],type='l',lty=1,col=my.col[i])
@@ -89,19 +89,17 @@ PlotCatchCurvesForCatch <- function(asap,a1,save.plots,od,plotf,first.age=-999){
     
     Hmisc::errbar(cohort,z.pr[,1],z.pr[,3],z.pr[,2],xlab="Year Class",ylab="Z",ylim=range(c(z.ob,z.pr,0),na.rm=T))
     
-    if (save.plots) savePlot(paste(od,"catch_curve_",title1,"_Predicted_first_age_",first.age.label,".",plotf, sep=""), type=plotf)
+    if (save.plots) savePlot(paste0(od,"catch_curve_",title1,"_Predicted_first_age_",first.age.label,".",plotf), type=plotf)
     
     
     # write out .csv files for Z, one file for each fleet
     asap.name <- a1$asap.name
     
     colnames(z.ob) <-c("Z.obs","low.80%", "high.80%")
-    write.csv(z.ob, file=paste(od,"Z.Ob.Fleet",ifleet,"_",asap.name,".csv", sep=""),
-              row.names=cohort)
+    write.csv(z.ob, file=paste0(od,"Z.Ob.Fleet",ifleet,"_",asap.name,".csv"), row.names=cohort)
     
     colnames(z.pr) <-c("Z.pred","low.80%", "high.80%")
-    write.csv(z.pr, file=paste(od,"Z.Pr.Fleet.",ifleet,"_",asap.name,".csv", sep=""),
-              row.names=cohort)
+    write.csv(z.pr, file=paste0(od,"Z.Pr.Fleet.",ifleet,"_",asap.name,".csv"), row.names=cohort)
     
   }
   return()

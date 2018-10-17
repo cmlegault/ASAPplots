@@ -85,14 +85,13 @@ PlotIndexAgeCompResids <- function(asap,index.names,save.plots,od,plotf,scale.in
       legend("topleft", xpd=T, legend=c("Neg.", "Pos."), pch=rep(21, 2), pt.cex=3,
              horiz=T , pt.bg=c(neg.resid.col, pos.resid.col), col="black"  )
       text(x= trunc(nages/2), y=(years[1]-1),   cex=0.8,
-           label=paste("Max(resid)=",round(max(abs(zr), na.rm=T),2), sep="") )
+           label=paste0("Max(resid)=",round(max(abs(zr), na.rm=T),2)) )
       
-      title (paste(my.title,i, " (", index.names[i], ")", sep=""), 
-             outer=T, line=-1 ) 
-      title(sub=paste("Mean resid = ", round(mean(zr, na.rm=T),2), "   SD(resid) = ", 
-                      round(sd(as.vector(zr), na.rm=T),2), sep=""), col.sub='blue', cex.sub=0.8)
+      title (paste0(my.title,i, " (", index.names[i], ")"), outer=T, line=-1 ) 
+      title(sub=paste0("Mean resid = ", round(mean(zr, na.rm=T),2), "   SD(resid) = ", 
+                      round(sd(as.vector(zr), na.rm=T),2)), col.sub='blue', cex.sub=0.8)
       
-      if (save.plots) savePlot(paste(od, "Pearson.", my.save, i, ".", plotf, sep=''), type=plotf)
+      if (save.plots) savePlot(paste0(od, "Pearson.", my.save, i, ".", plotf), type=plotf)
       
       
     } # end index.yrs test  

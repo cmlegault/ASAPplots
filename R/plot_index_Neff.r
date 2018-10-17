@@ -25,8 +25,8 @@ PlotIndexNeff  <- function(asap,index.names,save.plots,od,plotf,liz.palette){
       plot(years,Neff.init[i,], type='p', col=liz.palette[i], pch=1, xlab="Year", ylab="Effective Sample Size", 
            ylim=c(0, 1.1*max(Neff.init[i,],Neff.est[i,])) )    
       lines(years, Neff.est[i,], col=liz.palette[i], lwd=2)
-      title (paste(my.title, i, " (", index.names[i], ")", sep="") )
-      if (save.plots) savePlot(paste(od, my.save, i, ".", plotf, sep=""), type=plotf) 
+      title (paste0(my.title, i, " (", index.names[i], ")") )
+      if (save.plots) savePlot(paste0(od, my.save, i, ".", plotf), type=plotf) 
     } #end test for age-comp
   } #end loop nindices
   return()

@@ -33,6 +33,6 @@ PlotSRpredLine <- function(asap,save.plots,od,plotf){
   
   
   
-  if (save.plots==T) savePlot( paste(od, "S_R.Pred.Line.",plotf, sep=""), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, "S_R.Pred.Line.",plotf), type=plotf)
   return()
 }   # end function

@@ -21,7 +21,7 @@ PlotRMSEtable <- function(asap.name,asap,save.plots,od,plotf){
   text( c(1, max.txt+2, max.txt+2+ 6+2), rep( 2, 3), 
         labels=c("Component","# resids","RMSE"), font=2, pos=4)
   title(main="Root Mean Square Error computed from Standardized Residuals", outer=T, cex=0.85)
-  if (save.plots) savePlot(paste(od, "RMSE.Comp.Table.",plotf, sep=""), type=plotf)
+  if (save.plots) savePlot(paste0(od, "RMSE.Comp.Table.",plotf), type=plotf)
   
   ###NEW  
   rmse.table <- as.data.frame(matrix(NA, nrow=length(asap$RMSE), ncol=3)  )
@@ -30,8 +30,7 @@ PlotRMSEtable <- function(asap.name,asap,save.plots,od,plotf){
   rmse.table[,3] <- as.numeric(asap$RMSE)
   colnames(rmse.table) <- c(asap.name, "N", "RMSE")
   
-  write.csv(rmse.table, file=paste(od, "RMSE.Table.", asap.name, ".csv", sep=""), 
-            row.names=F)
+  write.csv(rmse.table, file=paste0(od, "RMSE.Table.", asap.name, ".csv"), row.names=F)
   
   return()
 }

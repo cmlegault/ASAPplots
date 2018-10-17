@@ -17,14 +17,14 @@ GrabAuxFiles <- function(wd,asap.name,asap,fleet.names,index.names) {
   
   if (file.exists(paste0(wd,"\\",asap.name,".std"))){
     # Read in std file from admb
-    asap.std <- read.table(paste0(wd,"\\",asap.name, ".std"), header = F, skip=1,sep = "") 
+    asap.std <- read.table(paste0(wd,"\\",asap.name, ".std"), header = F, skip=1) 
     names(asap.std) <- c("index", "name", "value", "stdev" )
     
     years <- seq(asap$parms$styr, asap$parms$endyr)
     
     # Read in cor file from admb
     ncol.cor <- dim(asap.std) [1]
-    asap.cor <- read.table(paste(wd,"\\",asap.name, ".cor",sep=""), header = F, skip=2,sep = "", 
+    asap.cor <- read.table(paste0(wd,"\\",asap.name, ".cor"), header = F, skip=2, 
                            col.names=c("index", "name", "value", "stdev", seq(1,ncol.cor)), fill=T) 
     asap.cor.mat <- as.matrix(asap.cor[,5:length(asap.cor[1,])])
     asap.cor.names <- as.character(as.vector(asap.cor[,2]) )

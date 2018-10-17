@@ -26,7 +26,7 @@ PlotIndexAtAgeConsistency <- function(asap,index.names,save.plots,od,plotf){
   # loop through all the indices
   for (ind in 1:asap$parms$nindices){
     if (asap$control.parms$index.age.comp.flag[ind] == 1){  # used age composition for the index
-      title1 <- paste("Index ",ind," (",index.names[ind],")", sep="")
+      title1 <- paste0("Index ",ind," (",index.names[ind],")")
       
       # replace zeros with NA and take logs
       iob <- rep0log(index.mats$ob[[ind]])
@@ -41,8 +41,8 @@ PlotIndexAtAgeConsistency <- function(asap,index.names,save.plots,od,plotf){
       age.max <- asap$control.parms$index.sel.end.age[ind]
       
       # make the plots
-      iob.cor <- PlotCoh(iob.coh,save.plots,od,plotf,mytitle=paste(title1," Observed", sep=""),mylabels=paste0("age-",seq(age.min,age.max)))
-      ipr.cor <- PlotCoh(ipr.coh,save.plots,od,plotf,mytitle=paste(title1," Predicted", sep=""),mylabels=paste0("age-",seq(age.min,age.max)))
+      iob.cor <- PlotCoh(iob.coh,save.plots,od,plotf,mytitle=paste0(title1," Observed"),mylabels=paste0("age-",seq(age.min,age.max)))
+      ipr.cor <- PlotCoh(ipr.coh,save.plots,od,plotf,mytitle=paste0(title1," Predicted"),mylabels=paste0("age-",seq(age.min,age.max)))
       index.corr[[ind]] <- list(iob.cor,ipr.cor)
     }
   }

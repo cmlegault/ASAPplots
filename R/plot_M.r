@@ -25,6 +25,6 @@ PlotM <- function(asap,save.plots,od,plotf){
            col=c(yr.col[1], yr.col[nyears])  )
   } # end if-test for time varying M
   title(main="M", outer=F)
-  if (save.plots) savePlot(paste(od, "M.", plotf, sep=''), type=plotf)
+  if (save.plots) savePlot(paste0(od, "M.", plotf), type=plotf)
   return()
 }

@@ -24,12 +24,12 @@ PlotIndexSelectivities <- function(asap,index.names,save.plots,od,plotf,liz.pale
       if (cc==1){
         plot(1:asap$parms$nages, ind.sel, type='l', col=liz.palette[cc], ylim=c(0,1.1),
              xlab="Age", ylab="Selectivity at age" , xlim=c(1, (asap$parms$nages+3) ), lwd=2 )
-        #leg.txt <- paste("Index_",i,sep="")
+        #leg.txt <- paste0("Index_",i)
         leg.txt <- index.names
       }    
       if (cc>1){
         lines(1:asap$parms$nages, ind.sel, col=liz.palette[cc], lwd=2  )
-        #leg.txt <- c(leg.txt,paste("Index_",i,sep=""))
+        #leg.txt <- c(leg.txt,paste0("Index_",i))
       }    
     }  #end test for a2>a1
   } #end i loop
@@ -41,6 +41,6 @@ PlotIndexSelectivities <- function(asap,index.names,save.plots,od,plotf,liz.pale
   ## New (to fix cases where a1=a2)
   if (cc>1) legend("topright", col=liz.palette[1:cc], legend=index.names[plot.index], lwd=2)
   title("Indices")
-  if (save.plots) savePlot(paste(od, "Index.Sel.",plotf, sep=""), type=plotf) 
+  if (save.plots) savePlot(paste0(od, "Index.Sel.",plotf), type=plotf) 
   return()
 }

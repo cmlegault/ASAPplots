@@ -9,7 +9,7 @@
 
 GrabDatFileIndexSelOptions <- function(wd,asap.name,asap){
   dat.file.index.sel.options <- NULL
-  gg1<-shell(paste("dir ", wd, "\\", asap.name,".dat", sep=""), intern=T, mustWork=NA )
+  gg1<-shell(paste0("dir ", wd, "\\", asap.name,".dat"), intern=T, mustWork=NA )
   gg2 <- which(gg1=="File Not Found")
   if (length(gg2)==0 ){
     datfile <- readLines(con = paste0(wd, "\\", asap.name, ".dat"))

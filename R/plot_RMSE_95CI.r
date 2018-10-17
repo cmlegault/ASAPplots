@@ -71,7 +71,7 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
     }
     
     title(main="Root Mean Square Error for Indices", outer=T, cex=0.85, line=-1)
-    if (save.plots) savePlot(paste(od, "RMSE.95CI.Indices.",plotf, sep=""), type=plotf)
+    if (save.plots) savePlot(paste0(od, "RMSE.95CI.Indices.",plotf), type=plotf)
   }    # end if-statement for rmse.ind
   
   
@@ -128,7 +128,7 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
     }
     
     title(main="Root Mean Square Error for Catch", outer=T, cex=0.85, line=-1)
-    if (save.plots) savePlot(paste(od, "RMSE.95CI.Catch.",plotf, sep=""), type=plotf)
+    if (save.plots) savePlot(paste0(od, "RMSE.95CI.Catch.",plotf), type=plotf)
   }  # end if-statement for rmse.cat
   
   
@@ -157,7 +157,7 @@ PlotRMSE95CI <- function(asap,index.names,save.plots,od,plotf,liz.palette){
     points(x=rep(0.5, length(rmse.prior)), y=seq(1, length(rmse.prior)), 
            pch=seq(1,length(rmse.prior)), col=liz.palette[seq(1,length(rmse.prior))] )
     title(main="Root Mean Square Error for Priors", outer=T, cex=0.85)
-    if (save.plots) savePlot(paste(od, "RMSE.95CI.Prior.",plotf, sep=""), type=plotf)
+    if (save.plots) savePlot(paste0(od, "RMSE.95CI.Prior.",plotf), type=plotf)
   }
   return()
 } #end function

@@ -98,9 +98,8 @@ PlotAnnualMSY <- function(asap,a1,save.plots,od,plotf){
     lines(MSY.hist$mids, MSY.hist$counts, lwd=2)
     plot(R.hist$mids, R.hist$counts, xlab="R.MSY", ylab="Frequency", type='h', lwd=2, ylim=c(0, max(R.hist$counts))  )
     lines(R.hist$mids, R.hist$counts, lwd=2)
-    title (paste("Annual MSY Reference Points (from S-R curve)", sep=""), 
-           outer=T, line=-1 ) 
-    if (save.plots) savePlot(paste(od, "MSY.4panel.hist1.", plotf, sep=''), type=plotf)  
+    title (paste0("Annual MSY Reference Points (from S-R curve)"), outer=T, line=-1 ) 
+    if (save.plots) savePlot(paste0(od, "MSY.4panel.hist1.", plotf), type=plotf)  
     
     
     plot(h.hist$mids, h.hist$counts, xlab="steepness", ylab="Frequency", type='h', lwd=2, ylim=c(0, max(h.hist$counts))  )
@@ -111,9 +110,8 @@ PlotAnnualMSY <- function(asap,a1,save.plots,od,plotf){
     lines(SPR.hist$mids, SPR.hist$counts, lwd=2)
     plot(R0.hist$mids, R0.hist$counts, xlab="R0", ylab="Frequency", type='h', lwd=2, ylim=c(0, max(R0.hist$counts))  )
     lines(R0.hist$mids, R0.hist$counts, lwd=2)
-    title (paste("Annual MSY Reference Points (from S-R curve)", sep=""), 
-           outer=T, line=-1 ) 
-    if (save.plots) savePlot(paste(od, "MSY.4panel.hist2.", plotf, sep=''), type=plotf)  
+    title (paste0("Annual MSY Reference Points (from S-R curve)"), outer=T, line=-1 ) 
+    if (save.plots) savePlot(paste0(od, "MSY.4panel.hist2.", plotf), type=plotf)  
     
     
     par(mfrow=c(1,1), mar=c(4,4,2,2) )
@@ -126,58 +124,53 @@ PlotAnnualMSY <- function(asap,a1,save.plots,od,plotf){
     points(h.vals[1], MSY.soln[3,1], pch=16, cex=1.5, col="green3")       
     points(h.vals[nyears], MSY.soln[3,nyears], pch=16, cex=1.5, col="orange2")       
     legend('top', legend=c("First Year", "Last Year"), pch=c(16,16), col=c("green3", "orange2") )
-    title (paste("Annual Steepness and SPR.MSY (from S-R curve)", sep=""), 
-           outer=T, line=-1 ) 
+    title (paste0("Annual Steepness and SPR.MSY (from S-R curve)"), outer=T, line=-1 ) 
     
-    if (save.plots) savePlot(paste(od, "MSY.h.vs.SPR.", plotf, sep=''), type=plotf)         
+    if (save.plots) savePlot(paste0(od, "MSY.h.vs.SPR.", plotf), type=plotf)         
     
     plot(years, MSY.soln[1,], xlab="Year", ylab="Full F at MSY", ylim=1.1*c(0, max(MSY.soln[1,])), type='l', lwd=2  ) 
     points(years, MSY.soln[1,], pch=10)
-    title (paste("Annual MSY Reference Points (from S-R curve)", sep=""), 
-           outer=T, line=-1 ) 
+    title (paste0("Annual MSY Reference Points (from S-R curve)"), outer=T, line=-1 ) 
     
-    if (save.plots) savePlot(paste(od, "Annual.Fmsy.", plotf, sep=''), type=plotf)  
+    if (save.plots) savePlot(paste0(od, "Annual.Fmsy.", plotf), type=plotf)  
     
     plot(years, MSY.soln[2,], xlab="Year", ylab="MSY", ylim=1.1*c(0, max(MSY.soln[2,])), type='l', lwd=2  ) 
     points(years, MSY.soln[2,], pch=10)
-    title (paste("Annual MSY Reference Points (from S-R curve)", sep=""), 
-           outer=T, line=-1 ) 
+    title (paste0("Annual MSY Reference Points (from S-R curve)"), outer=T, line=-1 ) 
     
-    if (save.plots) savePlot(paste(od, "Annual.MSY.", plotf, sep=''), type=plotf)  
+    if (save.plots) savePlot(paste0(od, "Annual.MSY.", plotf), type=plotf)  
     
     plot(years, MSY.soln[3,], xlab="Year", ylab="%SPR at MSY", ylim=1.1*c(0, 1), type='l', lwd=2  ) 
     points(years, MSY.soln[3,], pch=10)
-    title (paste("Annual MSY Reference Points (from S-R curve)", sep=""), 
-           outer=T, line=-1 ) 
+    title (paste0("Annual MSY Reference Points (from S-R curve)"), outer=T, line=-1 ) 
     
-    if (save.plots) savePlot(paste(od, "Annual.SPR.MSY.", plotf, sep=''), type=plotf)  
+    if (save.plots) savePlot(paste0(od, "Annual.SPR.MSY.", plotf), type=plotf)  
     
     plot(years, MSY.soln[4,], xlab="Year", ylab="SSB at MSY", ylim=1.1*c(0, max(MSY.soln[4,])), type='l', lwd=2  ) 
     points(years, MSY.soln[4,], pch=10)
-    title (paste("Annual MSY Reference Points (from S-R curve)", sep=""), 
-           outer=T, line=-1 ) 
+    title (paste0("Annual MSY Reference Points (from S-R curve)"), outer=T, line=-1 ) 
     
-    if (save.plots) savePlot(paste(od, "Annual.SSB.MSY.", plotf, sep=''), type=plotf) 
+    if (save.plots) savePlot(paste0(od, "Annual.SSB.MSY.", plotf), type=plotf) 
     
     plot(years, MSY.soln[5,], xlab="Year", ylab="Recruitment at MSY", ylim=1.1*c(0, max(MSY.soln[5,])), type='l', lwd=2  ) 
     points(years, MSY.soln[5,], pch=10)
-    title (paste("Annual MSY Reference Points (from S-R curve)", sep=""), 
+    title (paste0("Annual MSY Reference Points (from S-R curve)"), 
            outer=T, line=-1 ) 
     
-    if (save.plots) savePlot(paste(od, "Annual.Recr.MSY.", plotf, sep=''), type=plotf) 
+    if (save.plots) savePlot(paste0(od, "Annual.Recr.MSY.", plotf), type=plotf) 
     
     frep1 <-asap$options$Freport.agemin
     frep2 <-asap$options$Freport.agemax
     if (frep1==frep2) freport <-MSY.soln[1,frep1:frep2]*sel.mat[,frep1:frep2]
     if (frep2>frep1) freport <-apply(MSY.soln[1,frep1:frep2]*sel.mat[,frep1:frep2],1,mean)
-    freport.label <- paste("Freport_",frep1,"-",frep2,sep="")
+    freport.label <- paste0("Freport_",frep1,"-",frep2)
     MSY.soln<-  rbind(MSY.soln, freport)
     rownames(MSY.soln) <- 
       c("Fmsy", "MSY", "SPRmsy", "SSBmsy", "Rmsy", "YPRmsy",
-        "Rel.SSBmsy", "Rel.Rmsy", "Conv.Code",paste("Freport_",frep1,"-",frep2,sep=""))
+        "Rel.SSBmsy", "Rel.Rmsy", "Conv.Code",paste0("Freport_",frep1,"-",frep2))
     
     asap.name <- a1$asap.name
-    write.csv( t(MSY.soln), file=paste(od, "MSY.soln.values_", asap.name, ".csv", sep=""), row.names=T )
+    write.csv( t(MSY.soln), file=paste0(od, "MSY.soln.values_", asap.name, ".csv"), row.names=T )
 
   } # end test for steepness phase>0
   

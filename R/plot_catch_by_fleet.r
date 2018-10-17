@@ -14,7 +14,7 @@ PlotCatchByFleet <- function(asap,fleet.names,save.plots,od,plotf,liz.palette){
   nfleets <- asap$parms$nfleets
   barplot(asap$catch.obs,xlab="Year",ylab="Catch",ylim=c(0,1.1*max(apply(asap$catch.obs,2,sum))),col=liz.palette[1:nfleets],space=0)
   if (nfleets > 1) legend('top',legend=fleet.names,horiz=T,pch=15,col=liz.palette[1:nfleets])
-  if (save.plots==T) savePlot(paste(od, 'catch.by.fleet.', plotf, sep=''), type=plotf)  
+  if (save.plots==T) savePlot(paste0(od, 'catch.by.fleet.', plotf), type=plotf)  
   
   # do proportions only if nfleets > 1
   if (nfleets > 1){
@@ -25,6 +25,6 @@ PlotCatchByFleet <- function(asap,fleet.names,save.plots,od,plotf,liz.palette){
     barplot(catch.prop,xlab="Year",ylab="Proportion of Catch",ylim=c(0,1.1),col=liz.palette[1:nfleets],space=0)
     legend('top',legend=fleet.names,horiz=T,pch=15,col=liz.palette[1:nfleets])
   }
-  if (save.plots==T) savePlot(paste(od, 'catch.proportions.by.fleet.', plotf, sep=''), type=plotf) 
+  if (save.plots==T) savePlot(paste0(od, 'catch.proportions.by.fleet.', plotf), type=plotf) 
   return()
 }

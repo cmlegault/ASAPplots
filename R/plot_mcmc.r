@@ -55,14 +55,14 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
   # examine Trace in first and last year
   
   par(mfcol=c(2,1),mar=c(4,4,2,2), oma=c(1,1,1,1))
-  plot(seq(1,niter), ssb.chain[,1], type='l', xlab="Iteration", ylab=paste("SSB",years[1], sep="") )
-  plot(seq(1,niter), ssb.chain[,nyears], type='l', xlab="Iteration", ylab=paste("SSB",years[nyears], sep="") )
-  if (save.plots==T)  savePlot(paste(od,'Trace.SSB.first.last.yr.',plotf, sep=""),type=plotf)
+  plot(seq(1,niter), ssb.chain[,1], type='l', xlab="Iteration", ylab=paste0("SSB",years[1]) )
+  plot(seq(1,niter), ssb.chain[,nyears], type='l', xlab="Iteration", ylab=paste0("SSB",years[nyears]))
+  if (save.plots==T)  savePlot(paste0(od,'Trace.SSB.first.last.yr.',plotf),type=plotf)
   
   par(mfcol=c(2,1),mar=c(4,4,2,2), oma=c(1,1,1,1))
-  plot(seq(1,niter), f.chain[,1], type='l', xlab="Iteration", ylab=paste("Freport",years[1], sep="") )
-  plot(seq(1,niter), f.chain[,nyears], type='l', xlab="Iteration", ylab=paste("Freport",years[nyears], sep="") )
-  if (save.plots==T)  savePlot(paste(od,'Trace.Freport.first.last.yr.',plotf, sep=""),type=plotf)
+  plot(seq(1,niter), f.chain[,1], type='l', xlab="Iteration", ylab=paste0("Freport",years[1]) )
+  plot(seq(1,niter), f.chain[,nyears], type='l', xlab="Iteration", ylab=paste0("Freport",years[nyears]))
+  if (save.plots==T)  savePlot(paste0(od,'Trace.Freport.first.last.yr.',plotf),type=plotf)
   
   
   ##NEW
@@ -72,9 +72,8 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
            ylab="Median with 90% PI", lty.median=1, lwd.median=2, col.median="black", lty.outer=2, lwd.outer=1,
            col.outer="black"  )
   
-  if (save.plots==T)  savePlot(paste(od,'Cumu.F_and_SSB.first.last.yr.',plotf, sep=""),type=plotf)
-  
-  
+  if (save.plots==T)  savePlot(paste0(od,'Cumu.F_and_SSB.first.last.yr.',plotf),type=plotf)
+
   
   
   # look at auto-correlation plot
@@ -82,33 +81,33 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
   ac.ssb1<-acf(ssb.chain[,1], lag.max=10, plot=F)
   ac.ssb2<-acf(ssb.chain[,nyears], lag.max=10, plot=F)
   ylims <- c(1.1*min(ac.ssb1$acf,-2/sqrt(niter)), 1 ) 
-  plot(seq(0,10), ac.ssb1$acf, xlab=paste("Lag SSB",years[1],sep=""), ylab="ACF", type="h",ylim=ylims )
+  plot(seq(0,10), ac.ssb1$acf, xlab=paste0("Lag SSB",years[1]), ylab="ACF", type="h",ylim=ylims )
   abline(h=0, lwd=2, col='black')
   abline(h=2/sqrt(niter), col='red', lty=2)
   abline(h=-2/sqrt(niter), col='red', lty=2)
   
-  plot(seq(0,10), ac.ssb2$acf, xlab=paste("Lag SSB",years[nyears],sep=""), ylab="ACF", type="h",ylim=ylims )
+  plot(seq(0,10), ac.ssb2$acf, xlab=paste0("Lag SSB",years[nyears]), ylab="ACF", type="h",ylim=ylims )
   abline(h=0, lwd=2, col='black')
   abline(h=2/sqrt(niter), col='red', lty=2)
   abline(h=-2/sqrt(niter), col='red', lty=2)
   
-  if (save.plots==T)  savePlot(file=paste(od, "lag.autocorrelation.SSB.",plotf,sep=""), type=plotf)
+  if (save.plots==T)  savePlot(file=paste0(od, "lag.autocorrelation.SSB.",plotf), type=plotf)
   
   par(mfcol=c(2,1),mar=c(4,4,2,2))
   ac.f1<-acf(f.chain[,1], lag.max=10, plot=F)
   ac.f2<-acf(f.chain[,nyears], lag.max=10, plot=F)
   ylims <- c(1.1*min(ac.f1$acf,-2/sqrt(niter)), 1 ) 
-  plot(seq(0,10), ac.f1$acf, xlab=paste("Lag F",years[1],sep=""), ylab="ACF", type="h",ylim=ylims )
+  plot(seq(0,10), ac.f1$acf, xlab=paste0("Lag F",years[1]), ylab="ACF", type="h",ylim=ylims )
   abline(h=0, lwd=2, col='black')
   abline(h=2/sqrt(niter), col='red', lty=2)
   abline(h=-2/sqrt(niter), col='red', lty=2)
   
-  plot(seq(0,10), ac.f2$acf, xlab=paste("Lag F",years[nyears],sep=""), ylab="ACF", type="h",ylim=ylims )
+  plot(seq(0,10), ac.f2$acf, xlab=paste0("Lag F",years[nyears]), ylab="ACF", type="h",ylim=ylims )
   abline(h=0, lwd=2, col='black')
   abline(h=2/sqrt(niter), col='red', lty=2)
   abline(h=-2/sqrt(niter), col='red', lty=2)
   
-  if (save.plots==T)  savePlot(file=paste(od, "lag.autocorrelation.Freport.",plotf,sep=""), type=plotf)
+  if (save.plots==T)  savePlot(file=paste0(od, "lag.autocorrelation.Freport.",plotf), type=plotf)
   
   
   # examine Distribution in first and last year
@@ -122,16 +121,16 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
   y2 <- (ssb2.hist$counts) 
   
   par(mfrow=c(2,1) )
-  plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste("SSB", years[1],sep=""), ylab="Freq", 
+  plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste0("SSB", years[1]), ylab="Freq", 
        ylim=c(0, max( 1.02*y1)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=asap$SSB[1], col='red', lty=4)
   legend('topleft', legend=c("MCMC", "Point Est."), col=c("blue", "red"), lwd=c(2,2),
          lty=c(1,4), cex=0.85 )
   
-  plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste("SSB", years[nyears],sep=""), ylab="Freq", 
+  plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste0("SSB", years[nyears]), ylab="Freq", 
        ylim=c(0, max( 1.02*y2)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=asap$SSB[nyears], col='red', lty=4)
-  if (save.plots==T)  savePlot(paste(od, 'Distribution.SSB.first.last.yr.',plotf, sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste0(od, 'Distribution.SSB.first.last.yr.',plotf), type=plotf)
   
   
   
@@ -145,18 +144,18 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
   y2 <- (f2.hist$counts) 
   
   par(mfrow=c(2,1) )
-  plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste("Freport", years[1],sep=""), ylab="Freq", 
+  plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste0("Freport", years[1]), ylab="Freq", 
        ylim=c(0, max( 1.02*y1)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=asap$F.report[1], col='red', lty=4)
   legend('topleft', legend=c("MCMC", "Point Est."), col=c("blue", "red"), lwd=c(2,2),
          lty=c(1,4), cex=0.85 )
   
   
-  plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste("Freport", years[nyears],sep=""), ylab="Freq", 
+  plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste0("Freport", years[nyears]), ylab="Freq", 
        ylim=c(0, max( 1.02*y2)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=asap$F.report[nyears], col='red', lty=4)
   
-  if (save.plots==T)  savePlot(paste(od, 'Distribution.Freport.first.last.yr.',plotf, sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste0(od, 'Distribution.Freport.first.last.yr.',plotf), type=plotf)
   
   
   
@@ -171,18 +170,18 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
   full.f <- apply(asap$F.age,1,max)
   
   par(mfrow=c(2,1) )
-  plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste("Full F", years[1],sep=""), ylab="Freq", 
+  plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste0("Full F", years[1]), ylab="Freq", 
        ylim=c(0, max( 1.02*y1)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=full.f[1], col='red', lty=4)
   legend('topleft', legend=c("MCMC", "Point Est."), col=c("blue", "red"), lwd=c(2,2),
          lty=c(1,4), cex=0.85 )
   
   
-  plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste("Full F", years[nyears],sep=""), ylab="Freq", 
+  plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste0("Full F", years[nyears]), ylab="Freq", 
        ylim=c(0, max( 1.02*y2)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=full.f[nyears], col='red', lty=4)
   
-  if (save.plots==T)  savePlot(paste(od, 'Distribution.Fmult.first.last.yr.',plotf, sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste0(od, 'Distribution.Fmult.first.last.yr.',plotf), type=plotf)
   
   
   b1.hist<-hist(totB.chain[,1],breaks = "Sturges", include.lowest = TRUE, right = TRUE, plot=F)
@@ -196,18 +195,18 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
   tot.B <- asap$tot.jan1.B
   
   par(mfrow=c(2,1) )
-  plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste("Jan-1 B", years[1],sep=""), ylab="Freq", 
+  plot(x1,y1, type="l",lty=2,col="blue",lwd=4,xlab=paste0("Jan-1 B", years[1]), ylab="Freq", 
        ylim=c(0, max( 1.02*y1)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=tot.B[1], col='red', lty=4)
   legend('topleft', legend=c("MCMC", "Point Est."), col=c("blue", "red"), lwd=c(2,2),
          lty=c(1,4), cex=0.85 )
   
   
-  plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste("Jan-1 B", years[nyears],sep=""), ylab="Freq", 
+  plot(x2,y2, type="l",lty=2,col="blue",lwd=4,xlab=paste0("Jan-1 B", years[nyears]), ylab="Freq", 
        ylim=c(0, max( 1.02*y2)), xlim=c(0.98*xlims[1], 1.02*xlims[2]) )
   abline(v=tot.B[nyears], col='red', lty=4)
   
-  if (save.plots==T)  savePlot(paste(od, 'Distribution.Jan1.B.first.last.yr.',plotf, sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste0(od, 'Distribution.Jan1.B.first.last.yr.',plotf), type=plotf)
   
   
   ####   Probability Interval Plots
@@ -243,11 +242,11 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
          col=c("grey35", "red", "green3"), lwd=c(2,2,2), lty=c(1,1,1), cex=0.85,
          pch=c(1,1,17), pt.cex=c(0,0,1) )
   
-  if (save.plots==T)  savePlot(paste(od, "SSB.90PI.", plotf,sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste0(od, "SSB.90PI.", plotf), type=plotf)
   
   
   ssb.pi <- cbind(years, "5th"=ssb.sort[p5,], "Median"=apply(ssb.sort,2,median), "95th"=ssb.sort[p95,])
-  write.csv(ssb.pi, file=paste(od, "ssb.90pi_",asap.name,".csv",sep=""), 
+  write.csv(ssb.pi, file=paste0(od, "ssb.90pi_",asap.name,".csv"), 
             row.names=F )
   
   
@@ -278,11 +277,11 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
          col=c("grey35", "red", "green3"), lwd=c(2,2,2), lty=c(1,1,1), cex=0.85,
          pch=c(1,1,17), pt.cex=c(0,0,1) )
   
-  if (save.plots==T)  savePlot(paste(od, "Freport.90PI.", plotf,sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste0(od, "Freport.90PI.", plotf), type=plotf)
   
   
   Freport.pi <- cbind(years, "5th"=f.sort[p5,], "Median"=apply(f.sort,2,median), "95th"=f.sort[p95,])
-  write.csv(Freport.pi, file=paste(od, "Freport.90pi_",asap.name,".csv",sep=""),   row.names=F)
+  write.csv(Freport.pi, file=paste0(od, "Freport.90pi_",asap.name,".csv"),   row.names=F)
   
   
   
@@ -313,12 +312,11 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
          col=c("grey35", "red", "green3"), lwd=c(2,2,2), lty=c(1,1,1), cex=0.85,
          pch=c(1,1,17), pt.cex=c(0,0,1) )
   
-  if (save.plots==T)  savePlot(paste(od, "Full.F.90PI.", plotf,sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste0(od, "Full.F.90PI.", plotf), type=plotf)
   
   
   Full.F.pi <- cbind(years, "5th"=fm.sort[p5,], "Median"=apply(fm.sort,2,median), "95th"=fm.sort[p95,])
-  write.csv(Full.F.pi, file=paste(od, "Full.F.90pi_",asap.name,".csv",sep=""), 
-            row.names=F)
+  write.csv(Full.F.pi, file=paste0(od, "Full.F.90pi_",asap.name,".csv"), row.names=F)
   
   
   
@@ -349,12 +347,11 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
          col=c("grey35", "red", "green3"), lwd=c(2,2,2), lty=c(1,1,1), cex=0.85,
          pch=c(1,1,17), pt.cex=c(0,0,1) )
   
-  if (save.plots==T)  savePlot(paste(od, "Jan1.B.90PI.", plotf,sep=""), type=plotf)
+  if (save.plots==T)  savePlot(paste0(od, "Jan1.B.90PI.", plotf), type=plotf)
   
   
   Tot.B.pi <- cbind(years, "5th"=tb.sort[p5,], "Median"=apply(tb.sort,2,median), "95th"=tb.sort[p95,])
-  write.csv(Tot.B.pi, file=paste(od, "Jan1.B.90pi_",asap.name,".csv",sep=""), 
-            row.names=F)
+  write.csv(Tot.B.pi, file=paste0(od, "Jan1.B.90pi_",asap.name,".csv"), row.names=F)
   
   return()
 }  # end function

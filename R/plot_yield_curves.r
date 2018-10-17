@@ -48,10 +48,9 @@ PlotYieldCurves <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
   axis(side=4, at=seq(0,1,by=0.1)/scale.spr.vec, lab=seq(0,1,by=0.1), las=2,
        col='black', col.axis="black") 
   mtext(side=4, "% SPR", line=3, col="red")
-  title (paste("YPR-SPR Reference Points (Years Avg = ", nyrs.ave,")", sep=""), 
-         outer=T, line=-1 ) 
+  title (paste0("YPR-SPR Reference Points (Years Avg = ", nyrs.ave,")"), outer=T, line=-1 ) 
   
-  if (save.plots) savePlot(paste(od, "YPR.SPR.Curves.", plotf, sep=''), type=plotf)
+  if (save.plots) savePlot(paste0(od, "YPR.SPR.Curves.", plotf), type=plotf)
   
   ypr.table <- as.data.frame(matrix(NA, nrow=nF, ncol=3) )
   ypr.table[,1] <- F.range
@@ -89,10 +88,9 @@ PlotYieldCurves <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
     text(x=34, y=seq(35,1, by=-1), labels=round(ypr.vec[71:105],4), cex=0.82, pos=4, font=1)
     text(x=39, y=seq(35,1, by=-1), labels=round(spr.vec[71:105],4), cex=0.82, pos=4, font=1)   
   }
-  title (paste("YPR-SPR Reference Points (Years Avg = ", nyrs.ave,")", sep=""), 
-         outer=T, line=-1 ) 
+  title (paste0("YPR-SPR Reference Points (Years Avg = ", nyrs.ave,")"), outer=T, line=-1 ) 
   
-  if (save.plots) savePlot(paste(od, "YPR.SPR.Table.", plotf, sep=''), type=plotf)   
+  if (save.plots) savePlot(paste0(od, "YPR.SPR.Table.", plotf), type=plotf)   
   
   frep1 <-asap$options$Freport.agemin
   frep2 <-asap$options$Freport.agemax
@@ -102,8 +100,8 @@ PlotYieldCurves <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
   asap.name <- a1$asap.name
   
   ypr.table<- as.data.frame(cbind(F.range, ypr.vec, spr.vec, spr.vec*spr0,freport))
-  colnames(ypr.table) <- c("Full.F", "YPR", "SPR", "SSBPR",paste("Freport_",frep1,"-",frep2,sep=""))
-  write.csv( ypr.table, file=paste(od,"YPR.Table_",asap.name,".csv", sep=""), row.names=F )
+  colnames(ypr.table) <- c("Full.F", "YPR", "SPR", "SSBPR",paste0("Freport_",frep1,"-",frep2))
+  write.csv( ypr.table, file=paste0(od,"YPR.Table_",asap.name,".csv"), row.names=F )
   
   return()
 } # end function                                   

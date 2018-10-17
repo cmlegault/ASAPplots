@@ -10,9 +10,9 @@
 GrabNames <- function(wd,asap.name,asap){
   my.names <- list()
   # in case the file was created outside the GUI
-  my.names$fleet.names <- paste("FLEET-",1:asap$parms$nfleets, sep="")
-  my.names$index.names <- paste("INDEX-",1:asap$parms$nindices, sep="")
-  gg1<-shell(paste("dir ", wd, "\\", asap.name,".dat", sep=""), intern=T, mustWork=NA )
+  my.names$fleet.names <- paste0("FLEET-",1:asap$parms$nfleets)
+  my.names$index.names <- paste0("INDEX-",1:asap$parms$nindices)
+  gg1<-shell(paste0("dir ", wd, "\\", asap.name,".dat"), intern=T, mustWork=NA )
   gg2 <- which(gg1=="File Not Found")
   if (length(gg2)==0 )  {
     datfile <- readLines(con = paste0(wd,"\\",asap.name,".dat"))

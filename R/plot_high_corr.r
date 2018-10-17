@@ -57,10 +57,10 @@ PlotHighCorr <- function(a1,correlation.limit,save.plots,od,plotf){
       
       asap.name <- a1$asap.name
       
-      write.csv(named.cor.pairs, file=paste(od, "High.Corr.Pars_",asap.name,".csv",sep=""), row.names=F)
+      write.csv(named.cor.pairs, file=paste0(od, "High.Corr.Pars_",asap.name,".csv"), row.names=F)
     }  # end check for length(cor.vals)
     
-    if (save.plots) savePlot(paste(od, "Corr.Limit.Count.by.par.",plotf, sep=""), type=plotf)
+    if (save.plots) savePlot(paste0(od, "Corr.Limit.Count.by.par.",plotf), type=plotf)
     
   } # end if npar check
   

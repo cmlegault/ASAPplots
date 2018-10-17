@@ -74,8 +74,8 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
       Hmisc::errbar(years[catch.yrs],t.res[,1],t.res[,3],t.res[,2],ylim=c(0,10),add=T)
       
       
-      if(len.uniques==1)    title(main=paste(my.title,"Fleet ",i, " (", fleet.names[i], ")"," ESS = ",ESS[1], sep=""), outer=F)
-      if(len.uniques>1)    title(main=paste(my.title,"Fleet ",i, " (", fleet.names[i], ")", sep=""), outer=F)
+      if(len.uniques==1) title(main=paste0(my.title,"Fleet ",i, " (", fleet.names[i], ")"," ESS = ",ESS[1]), outer=F)
+      if(len.uniques>1) title(main=paste0(my.title,"Fleet ",i, " (", fleet.names[i], ")"), outer=F)
       
       sdres <- (t.res[,4]-t.res[,1])/((t.res[,1]-t.res[,2])/1.96)
       sdres[sdres==Inf]  <- NA
@@ -84,8 +84,8 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
       sdnr <- sd(sdres, na.rm=T)
       rmse <- sqrt(mean(sdres^2, na.rm=T))
       plotrix::barp(sdres,names.arg=years[catch.yrs],col="grey50",ylab="Std Resids",xlab="Year")
-      legend('topleft',legend=c(paste("SDNR=",round(sdnr,2), sep=""),paste("RMSE=",round(rmse,2), sep="")),cex=0.7,h=T)
-      if (save.plots) savePlot(paste(od,my.save,"ESS_Mean_Age_Fleet_",i,".",plotf, sep=""), type=plotf)
+      legend('topleft',legend=c(paste0("SDNR=",round(sdnr,2)),paste0("RMSE=",round(rmse,2))),cex=0.7,h=T)
+      if (save.plots) savePlot(paste0(od,my.save,"ESS_Mean_Age_Fleet_",i,".",plotf), type=plotf)
       
       
       #-- Second plot
@@ -97,10 +97,10 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
       abline(a=0,b=1,col="blue",lty=2)
       legend('topleft',legend=c("y=x","1st-3rd quartiles"),lty=c(2,1),col=c("blue","red"))
       
-      if(len.uniques==1)  title(main=paste(my.title,"Fleet ",i, " (", fleet.names[i], ")"," ESS = ",ESS[1], sep=""), outer=F)
-      if(len.uniques>1)    title(main=paste(my.title,"Fleet ",i, " (", fleet.names[i], ")", sep=""), outer=F)
+      if(len.uniques==1) title(main=paste0(my.title,"Fleet ",i, " (", fleet.names[i], ")"," ESS = ",ESS[1]), outer=F)
+      if(len.uniques>1) title(main=paste0(my.title,"Fleet ",i, " (", fleet.names[i], ")"), outer=F)
       
-      if (save.plots) savePlot(paste(od,my.save,"ESS_QQplot_Fleet_",i,".",plotf, sep=""), type=plotf)
+      if (save.plots) savePlot(paste0(od,my.save,"ESS_QQplot_Fleet_",i,".",plotf), type=plotf)
       
     } #end test for catch.yrs
   }   # end loop on number of fleets
@@ -109,7 +109,7 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
   asap.name <- a1$asap.name
   
   francis.mult <- unlist(asap$Neff.stage2.mult)
-  write.csv(francis.mult, file=paste(od, "NEFF.Mult.Stage2_",asap.name,".csv", sep=""),   row.names=T)
+  write.csv(francis.mult, file=paste0(od, "NEFF.Mult.Stage2_",asap.name,".csv"), row.names=T)
   
   return()
 } #end function   

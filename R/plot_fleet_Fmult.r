@@ -30,7 +30,7 @@ PlotFleetFmult <- function(asap,fleet.names,save.plots,od,plotf,liz.palette){
   legend('topleft', legend=leg.names, col=liz.palette[1:nfleets],lwd=rep(2, nfleets),
          lty=seq(1, nfleets), horiz=T, bty='n' ) 
   
-  if (save.plots==T) savePlot(paste(od, 'Fmult.by.fleet.', plotf, sep=''), type=plotf)
+  if (save.plots==T) savePlot(paste0(od, 'Fmult.by.fleet.', plotf), type=plotf)
   
 }   # end function
 

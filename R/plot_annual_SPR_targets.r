@@ -55,7 +55,7 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   
   title (main="Annual F(%SPR) Reference Points", outer=T, line=-1 ) 
   
-  if (save.plots) savePlot(paste(od, "Annual.FSPR.", plotf, sep=''), type=plotf)
+  if (save.plots) savePlot(paste0(od, "Annual.FSPR.", plotf), type=plotf)
   
   
   plot(years, ypr.spr.vals[,1], type='n', xlab="Year", ylab="YPR (%SPR)", lwd=2,
@@ -68,7 +68,7 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   
   title (main="Annual YPR(%SPR) Reference Points", outer=T, line=-1 ) 
   
-  if (save.plots) savePlot(paste(od, "Annual.YPR.", plotf, sep=''), type=plotf)
+  if (save.plots) savePlot(paste0(od, "Annual.YPR.", plotf), type=plotf)
   
   f.hist.20 <- hist(f.spr.vals[,1], plot=F)
   f.hist.30 <- hist(f.spr.vals[,2], plot=F)
@@ -92,7 +92,7 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   
   title (main="Annual F (%SPR) Reference Points", outer=T, line=-1 ) 
   
-  if (save.plots) savePlot(paste(od, "Annual.F_SPR.4panel.hist.", plotf, sep=''), type=plotf)  
+  if (save.plots) savePlot(paste0(od, "Annual.F_SPR.4panel.hist.", plotf), type=plotf)  
   
   
   ypr.hist.20 <- hist(ypr.spr.vals[,1], plot=F)
@@ -117,7 +117,7 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   
   title (main="Annual YPR (%SPR) Reference Points", outer=T, line=-1 ) 
   
-  if (save.plots) savePlot(paste(od, "Annual.YPR_SPR.4panel.hist.", plotf, sep=''), type=plotf)  
+  if (save.plots) savePlot(paste0(od, "Annual.YPR_SPR.4panel.hist.", plotf), type=plotf)  
   par(mfrow=c(1,1), mar=c(5.1,4.1,4.1,2.1), oma=c(0,0,0,0))
   
   return()

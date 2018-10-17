@@ -42,17 +42,17 @@ PlotCatchAgeComp <- function(asap,fleet.names,save.plots,od,plotf,liz.palette,is
              pch=1, xlab="Age", ylab="Proportion at Age", ylim=c(0, 1.1 ) )
         lines(seq(asap$fleet.sel.start.age[i],asap$fleet.sel.end.age[i]), acomp.pred[catch.yrs[j],] , 
               col=liz.palette[i],  lwd=2)
-        title( paste("Year = ", as.numeric(names(catch.yrs[j])), sep=""), outer=F )
+        title(paste0("Year = ", as.numeric(names(catch.yrs[j]))), outer=F )
         if (cc%%15==0)  {
           title (my.title, outer=T, line=0 )
-          if (save.plots) savePlot( paste(od, my.save, i, ".p", (cc/15),"." , plotf, sep=""), type=plotf)
+          if (save.plots) savePlot(paste0(od, my.save, i, ".p", (cc/15),"." , plotf), type=plotf)
         } #end cc test
       }  #end loop on nyears
     } # end catch.yrs test
   }  #end loop on nfleets
   if (cc>1) {
     title (my.title, outer=T, line=0 )
-    if (save.plots) savePlot( paste(od, my.save, i, ".p", ceiling(cc/15),"." , plotf, sep=""), type=plotf)
+    if (save.plots) savePlot(paste0(od, my.save, i, ".p", ceiling(cc/15),"." , plotf), type=plotf)
   } 
   par(mfcol=c(1,1)) 
   return()

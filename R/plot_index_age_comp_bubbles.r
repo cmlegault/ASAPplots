@@ -45,9 +45,8 @@ PlotIndexAgeCompBubbles <- function(asap,index.names,save.plots,od,plotf,scale.i
       legend("topright", xpd=T, legend=bubble.legend1, pch=rep(21, 3), 
              pt.cex=bubble.legend2, horiz=T , col='black', pt.bg = bubble.color  )
       # NEW 9/23/2016 changed fleet.names[i] to index.names[i] in title
-      title (paste(my.title,i, " (", index.names[i], ")", sep=""), 
-             outer=T, line=-1 ) 
-      if (save.plots) savePlot(paste(od, my.save, i, ".", plotf, sep=''), type=plotf)
+      title (paste0(my.title,i, " (", index.names[i], ")"), outer=T, line=-1 ) 
+      if (save.plots) savePlot(paste0(od, my.save, i, ".", plotf), type=plotf)
     } # end index.yrs test  
   }   #end loop nfleets
   par(mar=c(5.1,4.1,4.1,2.1), oma=c(0,0,0,0))

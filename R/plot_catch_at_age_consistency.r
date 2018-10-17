@@ -13,7 +13,7 @@ PlotCatchAtAgeConsistency <- function(asap,fleet.names,save.plots,od,plotf){
   cat.corr <- list()
   for (ifleet in 1:asap$parms$nfleets){
     if (asap$parms$nfleets == 1) title1 = "Catch"
-    if (asap$parms$nfleets >= 2) title1 = paste("Catch for Fleet ",ifleet," (",fleet.names[ifleet],")",sep="")
+    if (asap$parms$nfleets >= 2) title1 = paste0("Catch for Fleet ",ifleet," (",fleet.names[ifleet],")")
     
     # get catch at age
     catchob <- wtprop2caa(asap$catch.obs[ifleet,],  asap$WAA.mats[[(ifleet*2-1)]], asap$catch.comp.mats[[(ifleet*4-3)]])
@@ -28,8 +28,8 @@ PlotCatchAtAgeConsistency <- function(asap,fleet.names,save.plots,od,plotf){
     cpr.coh <- makecohorts(cpr)
     
     # make the plots
-    cob.cor <- PlotCoh(cob.coh,save.plots,od,plotf,mytitle=paste(title1," Observed", sep=""))
-    cpr.cor <- PlotCoh(cpr.coh,save.plots,od,plotf,mytitle=paste(title1," Predicted", sep=""))
+    cob.cor <- PlotCoh(cob.coh,save.plots,od,plotf,mytitle=paste0(title1," Observed"))
+    cpr.cor <- PlotCoh(cpr.coh,save.plots,od,plotf,mytitle=paste0(title1," Predicted"))
     cat.corr[[ifleet]] <- list(cob.cor,cpr.cor)
   }
   return(cat.corr)

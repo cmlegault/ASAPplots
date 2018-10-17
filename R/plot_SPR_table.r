@@ -83,10 +83,9 @@ PlotSPRtable <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
        col='black', col.axis="black") 
   mtext(side=4, "F (%SPR)", line=3, col="red")
   
-  title (paste("SPR Target Reference Points (Years Avg = ", nyrs.ave,")", sep=""), 
-         outer=T, line=-1 ) 
+  title (paste0("SPR Target Reference Points (Years Avg = ", nyrs.ave,")"), outer=T, line=-1 ) 
   
-  if (save.plots) savePlot(paste(od, "SPR.Target.Curves.", plotf, sep=''), type=plotf)
+  if (save.plots) savePlot(paste0(od, "SPR.Target.Curves.", plotf), type=plotf)
   
   par(mfrow=c(1,1), mar=c(2,2,2,2))
   plot(seq(1,15), seq(1,15), type='n', axes=F, bty='n',xlab="",ylab="")
@@ -99,10 +98,9 @@ PlotSPRtable <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
     text(x=5, y=seq(n.spr,1, by=-1), labels=round(f.spr.vals,4), cex=1.0, pos=4, font=1)
     text(x=9, y=seq(n.spr,1, by=-1), labels=round(ypr.spr.vals,4), cex=1.0, pos=4, font=1)   
   }
-  title (paste("SPR Target Reference Points (Years Avg = ", nyrs.ave,")", sep=""), 
-         outer=T, line=-1 ) 
+  title (paste0("SPR Target Reference Points (Years Avg = ", nyrs.ave,")"), outer=T, line=-1 ) 
   
-  if (save.plots) savePlot(paste(od, "SPR.Target.Table.", plotf, sep=''), type=plotf)
+  if (save.plots) savePlot(paste0(od, "SPR.Target.Table.", plotf), type=plotf)
   
   frep1 <-asap$options$Freport.agemin
   frep2 <-asap$options$Freport.agemax
@@ -110,8 +108,8 @@ PlotSPRtable <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
   if (frep2>frep1) freport <-f.spr.vals*mean(sel.age[frep1:frep2])
   
   spr.target.table<- as.data.frame(cbind(spr.targ.values, f.spr.vals, ypr.spr.vals, ssb.spr.vals, freport))
-  colnames(spr.target.table) <- c("%SPR", "F(%SPR)", "YPR", "SSB.PR", paste("Freport_",frep1,"-",frep2,sep=""))
+  colnames(spr.target.table) <- c("%SPR", "F(%SPR)", "YPR", "SSB.PR", paste0("Freport_",frep1,"-",frep2))
   
-  write.csv( spr.target.table, file=paste(od,"SPR.Target.Table_",asap.name,".csv", sep=""),  row.names=F )
+  write.csv( spr.target.table, file=paste0(od,"SPR.Target.Table_",asap.name,".csv"),  row.names=F )
   return()
 } # end function
