@@ -68,7 +68,7 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
                  y1=Neff.bars[catch.yrs], lwd=5, col='#66BB77aa')
         axis(side=4, at=seq(0,10,2), lab=scale.Neff*seq(0,10,2), las=2 )
         mtext(side = 4, "Eff. Sample Size", line = 3, col='#66BB77')    
-        lines(years,t.res[,4],lty=1,lwd=2,col="blue")
+        lines(years[catch.yrs],t.res[,4],lty=1,lwd=2,col="blue")
       } #end test for >1 unique ESS
       
       Hmisc::errbar(years[catch.yrs],t.res[,1],t.res[,3],t.res[,2],ylim=c(0,10),add=T)
