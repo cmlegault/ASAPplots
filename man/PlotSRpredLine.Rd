@@ -16,5 +16,5 @@ PlotSRpredLine(asap, save.plots, od, plotf)
 \item{plotf}{type of plot to save}
 }
 \description{
-Scatterplot of SSB, R with underlying stock recruitment relationship (x-axis extends to S0).
+Scatterplot of SSB, R with underlying stock recruitment relationship (SR fit line ends at (S0, R0)).
 }
