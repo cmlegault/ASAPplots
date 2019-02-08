@@ -22,7 +22,7 @@ PlotSRpredLine <- function(asap,save.plots,od,plotf){
   SR[,2] <- ssb[1:(nyears-1)]
   SR[,3] <- recr[2:nyears]
   
-  seq.ssb= seq(0, S0.yr, length.out=300)
+  seq.ssb= seq(0, S0.yr[nyears], length.out=300)
   pred.r = a*seq.ssb/(b+seq.ssb)
   
   plot( SR[,2], SR[,3], type='p', col='black', pch=19,
