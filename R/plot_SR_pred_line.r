@@ -27,7 +27,8 @@ PlotSRpredLine <- function(asap,save.plots,od,plotf){
   
   plot( SR[,2], SR[,3], type='p', col='black', pch=19,
         xlab="SSB (mt)", ylab="Recruits (000s)", 
-        ylim=c(0, 1.1*max(c(SR[,3], pred.r))), xlim=c(0,1.2*max(SR[,2], S0.yr[nyears]))  )    
+        ylim=c(0, 1.1*max(c(SR[,3], pred.r), na.rm=TRUE)), 
+        xlim=c(0, 1.2*max(SR[,2], S0.yr[nyears], na.rm=TRUE))  )    
   
   lines(seq.ssb , pred.r,  col='red', lwd=2) 
 
