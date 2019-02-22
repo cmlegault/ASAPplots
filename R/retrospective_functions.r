@@ -67,7 +67,7 @@ plot.retro <- function(retro.mat,years,nages,y.lab,y.range1=NA,y.range2=NA){
   }
   mohn.rho <- mm/npeels
   rho.vals[(npeels+1)] <- mohn.rho
-  text(x=years[1], y=0.9*y.range2[2], label=expression(paste0(rho,"= ")), pos=4)
+  text(x=years[1], y=0.9*y.range2[2], label=paste0(expression(rho),"= "), pos=4)
   text(x=(years[1]+3), y=0.9*y.range2[2], label=round(mohn.rho,3), pos=4)
   return(rho.vals)
 }
