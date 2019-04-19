@@ -26,6 +26,9 @@ PlotFrontPage <- function(wd,asap.name,asap,a1,save.plots,od,plotf){
     text(5,1,"Warning, run did not converge, .std file not present", col="red")
   } else {
     text(5,1,paste0("npar = ",a1$npar,", maximum gradient = ",a1$max.grad))
+    if (a1$max.grad > 0.001){
+      text(5,2,"Warning, maximum gradient > 0.001", col="red")
+    } 
   }
   
   if (save.plots) savePlot(paste0(od, "Front.Page.",plotf), type=plotf)
