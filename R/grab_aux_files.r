@@ -17,7 +17,7 @@ GrabAuxFiles <- function(wd,asap.name,asap,fleet.names,index.names) {
   
   if (file.exists(paste0(wd,"\\",asap.name,".std"))){
     # Read in std file from admb
-    asap.std <- read.table(paste0(wd,"\\",asap.name, ".std"), header = F, skip=1) 
+    asap.std <- read.table(paste0(wd,"\\",asap.name, ".std"), header = F, skip=1, stringsAsFactors = FALSE) 
     names(asap.std) <- c("index", "name", "value", "stdev" )
     
     years <- seq(asap$parms$styr, asap$parms$endyr)
