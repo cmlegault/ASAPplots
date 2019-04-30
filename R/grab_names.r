@@ -12,10 +12,9 @@ GrabNames <- function(wd,asap.name,asap){
   # in case the file was created outside the GUI
   my.names$fleet.names <- paste0("FLEET-",1:asap$parms$nfleets)
   my.names$index.names <- paste0("INDEX-",1:asap$parms$nindices)
-  gg1<-shell(paste0("dir ", wd, "\\", asap.name,".dat"), intern=T, mustWork=NA )
-  gg2 <- which(gg1=="File Not Found")
-  if (length(gg2)==0 )  {
-    datfile <- readLines(con = paste0(wd,"\\",asap.name,".dat"))
+  my.file.name <- paste0(wd, "\\", asap.name,".dat")
+  if (file.exists(my.file.name)){
+    datfile <- readLines(con = my.file.name)
     nlines <- length(datfile)
     nfinis <- nlines-asap$parms$nfleets-asap$parms$navailindices-3
     if (datfile[nfinis] == "###### FINIS ######"){
@@ -23,7 +22,7 @@ GrabNames <- function(wd,asap.name,asap){
       avail.index.names <- substr(datfile[(nfinis+3+asap$parms$nfleets):(nlines-1)],3,100)
       my.names$index.names <- avail.index.names[asap$initial.guesses$index.use.flag==1]
     }  # end if-test for nfinis
-  } # end if-test for length(gg2)
+  } # end if-test for dat file
   
   return(my.names)
 }

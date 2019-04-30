@@ -9,21 +9,20 @@
 
 GrabDatFileIndexSelOptions <- function(wd,asap.name,asap){
   dat.file.index.sel.options <- NULL
-  gg1<-shell(paste0("dir ", wd, "\\", asap.name,".dat"), intern=T, mustWork=NA )
-  gg2 <- which(gg1=="File Not Found")
-  if (length(gg2)==0 ){
-    datfile <- readLines(con = paste0(wd, "\\", asap.name, ".dat"))
+  my.file.name <- paste0(wd, "\\", asap.name, ".dat")
+  if (file.exists(my.file.name)){
+    datfile <- readLines(con = my.file.name)
     nlines <- seq(1, length(datfile))
     myval <- c("# Index Selectivity Options 1=by age, 2=logisitic, 3=double logistic",
                "# Survey Selectivity Type")  # this one written in retro file
     index.sel.options.line <- nlines[datfile %in% myval]
     if (length(index.sel.options.line) > 0){
-      dat.file.all.index.sel.options <- scan(file = paste0(wd, "\\", asap.name, ".dat"),
+      dat.file.all.index.sel.options <- scan(file = my.file.name,
                                              n = asap$parms$navailindices, 
                                              skip = index.sel.options.line)
       dat.file.index.sel.options <- dat.file.all.index.sel.options[asap$initial.guesses$index.use.flag==1]
     }
-  } # end if-test for length(gg2)
+  } # end if-test for dat file
   
   return(dat.file.index.sel.options)
   

@@ -24,7 +24,10 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
                      mcmc.burn=0, mcmc.thin=1,
                      first.age=-999, save.plots=TRUE, plotf='png', make.one.pdf=TRUE){
 
+  wd <- gsub("/", "\\\\", wd)  # change from unix to Windows directory approach if needed
   od <- paste0(wd,"\\plots\\")
+  if (dir.exists(od) == FALSE)  dir.create(od)
+  
   pdf.name <- asap.name
   
   retro.flag <- FALSE  
@@ -33,12 +36,6 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
     asap.name <- paste0(asap.name,"_000")  # change asap.name to use null retro peel
   }
 
-  ss5<-shell(paste0("dir ",wd,"\\plots"), intern=T )
-  ss6 <- which(ss5=="File Not Found")
-  if (length(ss6)>0 )  shell(paste0("mkdir ",wd,"\\plots"), intern=T )
-  # the line below is more elegant, but not supported by older versions of R
-  #if (dir.exists(od)==F )  shell(paste0("mkdir ",  od), intern=T )
-  
   rdat <- paste0(asap.name,".rdat")
   asap <- dget(paste0(wd,"\\",rdat))
   
