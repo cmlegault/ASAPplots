@@ -4,8 +4,9 @@
 \alias{RunJitter}
 \title{RunJitter}
 \usage{
-RunJitter(wd, asap.name, njitter, ploption = "jitter", save.plots = TRUE,
-  od = paste0(wd, "\\\\jitter\\\\"), plotf = "png", showtitle = FALSE)
+RunJitter(wd, asap.name, njitter, ploption = "jitter",
+  save.plots = TRUE, od = paste0(wd, "\\\\jitter\\\\"),
+  plotf = "png", showtitle = FALSE, copy_std_cor_flag = FALSE)
 }
 \arguments{
 \item{wd}{directory where ASAP run is located}
@@ -23,6 +24,8 @@ RunJitter(wd, asap.name, njitter, ploption = "jitter", save.plots = TRUE,
 \item{plotf}{format for individual plots (defaults to 'png')}
 
 \item{showtitle}{option to include title of numeric results on objective function plot (defaults to FALSE)}
+
+\item{copy_std_cor_flag}{option to save .std and .cor files for each jitter run (defaults to FALSE)}
 }
 \description{
 Run ASAP a number of times from different initial guesses.

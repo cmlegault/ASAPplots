@@ -1,13 +1,13 @@
 Package: ASAPplots
 Type: Package
 Title: Creates Standard Plots and PDFs for ASAP3
-Version: 0.2.11
+Version: 0.2.12
 Author: Liz Brooks and Chris Legault
 Maintainer: Chris Legault <chris.legault@noaa.gov>
 Description: Assumes NOAA Fisheries Toolbox ASAP3 has been run and creates large number of plots, csv files, and PDFs.
 License: MIT
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr

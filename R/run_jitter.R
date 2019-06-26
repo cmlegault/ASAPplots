@@ -9,9 +9,10 @@
 #' @param od location where plot is saved (defaults to jitter subdirectory of wd)
 #' @param plotf format for individual plots (defaults to 'png')
 #' @param showtitle option to include title of numeric results on objective function plot (defaults to FALSE)
+#' @param copy_std_cor_flag option to save .std and .cor files for each jitter run (defaults to FALSE)
 #' @export
 
-RunJitter <- function(wd, asap.name, njitter, ploption="jitter", save.plots=TRUE, od=paste0(wd,"\\jitter\\"), plotf='png', showtitle=FALSE){
+RunJitter <- function(wd, asap.name, njitter, ploption="jitter", save.plots=TRUE, od=paste0(wd,"\\jitter\\"), plotf='png', showtitle=FALSE, copy_std_cor_flag=FALSE){
   
   # error checks for missing files 
   if (!file.exists(paste0(wd, "\\", asap.name, ".dat"))){
@@ -55,6 +56,8 @@ RunJitter <- function(wd, asap.name, njitter, ploption="jitter", save.plots=TRUE
   shell("del jitter*.par", mustWork = NA, intern = TRUE)
   shell("del jitter*.pin", mustWork = NA, intern = TRUE)
   shell("del jitter*.rdat", mustWork = NA, intern = TRUE)
+  shell("del jitter*.std", mustWork = NA, intern = TRUE)
+  shell("del jitter*.cor", mustWork = NA, intern = TRUE)
   shell("del jitter_objfxn.png", mustWork = NA, intern = TRUE)
 
   # write orig file with ignore_guesses flag=1 to file [base]_no_init_guesses.dat
@@ -94,6 +97,10 @@ RunJitter <- function(wd, asap.name, njitter, ploption="jitter", save.plots=TRUE
     if (file.exists("asap3.std")){
       shell(paste("copy asap3.rdat", paste0("jitter", ijit, ".rdat")), intern=TRUE)
       shell(paste("copy asap3.par", paste0("jitter", ijit, ".par")), intern=TRUE)
+      if (copy_std_cor_flag == TRUE){
+        shell(paste("copy asap3.std", paste0("jitter", ijit, ".std")), intern=TRUE)
+        shell(paste("copy asap3.cor", paste0("jitter", ijit, ".cor")), intern=TRUE)
+      }
       asap <- dget("asap3.rdat")
       objfxn[ijit] <- asap$like$lk.total
       print(paste("jitter", ijit, "complete, objective function =", objfxn[ijit]))

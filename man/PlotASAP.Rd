@@ -6,9 +6,9 @@
 \usage{
 PlotASAP(wd, asap.name, nyrs.ave = 5, correlation.limit = 0.9,
   scale.catch.bubble.resid = 2, scale.index.bubble.resid = 2,
-  scale.catch.bubble.data = 6, scale.index.bubble.data = 6, mcmc.burn = 0,
-  mcmc.thin = 1, first.age = -999, save.plots = TRUE, plotf = "png",
-  make.one.pdf = TRUE)
+  scale.catch.bubble.data = 6, scale.index.bubble.data = 6,
+  mcmc.burn = 0, mcmc.thin = 1, first.age = -999,
+  save.plots = TRUE, plotf = "png", make.one.pdf = TRUE)
 }
 \arguments{
 \item{wd}{directory where ASAP run is located}
