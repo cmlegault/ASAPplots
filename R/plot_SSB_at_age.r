@@ -14,8 +14,11 @@ PlotSSBatAge <- function(asap,save.plots,od,plotf,liz.palette){
   
   years<-  seq(asap$parms$styr, asap$parms$endyr)
   ssb.aa.1 <- asap$N.age*exp(asap$options$frac.yr.spawn*(-asap$F.age-asap$M.age))
-  ssb.aa <- ssb.aa.1*asap$maturity*asap$WAA.mats$WAA.ssb #ssb at age
-  
+  if (asap$options$isfecund == 1){
+    ssb.aa <- ssb.aa.1*asap$maturity
+  }else{
+    ssb.aa <- ssb.aa.1*asap$maturity*asap$WAA.mats$WAA.ssb #ssb at age
+  }
   ssb.max=max(apply(ssb.aa,1,sum))
   
   barplot( t(ssb.aa), beside=F  ,  cex.names=0.75 ,  

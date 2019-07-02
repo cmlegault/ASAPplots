@@ -13,8 +13,12 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   n.spr <- length(spr.targ.values)
   nages<- asap$parms$nages
   nyears <- asap$parms$nyears
-  years <- seq(asap$parms$styr,asap$parms$endyr)  
-  fec.age <- asap$WAA.mats$WAA.ssb
+  years <- seq(asap$parms$styr,asap$parms$endyr)
+  if (asap$options$isfecund == 1){
+    fec.age <- asap$WAA.mats$WAA.ssb / asap$WAA.mats$WAA.ssb  # matrix of 1s
+  }else{
+    fec.age <- asap$WAA.mats$WAA.ssb    
+  }
   mat.age <- asap$maturity
   wgt.age <- asap$WAA.mats$WAA.catch.all
   M.age <- asap$M.age

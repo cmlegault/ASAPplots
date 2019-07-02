@@ -19,7 +19,11 @@ PlotAnnualMSY <- function(asap,a1,save.plots,od,plotf){
     nages<- asap$parms$nages
     nyears <- asap$parms$nyears
     years <- seq(asap$parms$styr,asap$parms$endyr)  
-    fec.age <- asap$WAA.mats$WAA.ssb
+    if (asap$options$isfecund == 1){
+      fec.age <- asap$WAA.mats$WAA.ssb / asap$WAA.mats$WAA.ssb # matrix of 1s 
+    }else{
+      fec.age <- asap$WAA.mats$WAA.ssb  
+    }
     mat.age <- asap$maturity
     wgt.age <- asap$WAA.mats$WAA.catch.all
     M.age <- asap$M.age

@@ -17,7 +17,11 @@ PlotSPRtable <- function(asap,a1,nyrs.ave,save.plots,od,plotf){
   nages<- asap$parms$nages
   years <- seq(asap$parms$styr,asap$parms$endyr)  
   nyears <- asap$parms$nyears
-  fec.age <- apply(asap$WAA.mats$WAA.ssb[(nyears-nyrs.ave+1):nyears,],2,mean)
+  if (asap$options$isfecund == 1){
+    fec.age <- rep(1, nages)
+  }else{
+    fec.age <- apply(asap$WAA.mats$WAA.ssb[(nyears-nyrs.ave+1):nyears,],2,mean)    
+  }
   mat.age <- apply(asap$maturity[(nyears-nyrs.ave+1):nyears,],2,mean)
   wgt.age <- apply(asap$WAA.mats$WAA.catch.all[(nyears-nyrs.ave+1):nyears,],2,mean)
   M.age <- apply(asap$M.age[(nyears-nyrs.ave+1):nyears,],2,mean)
