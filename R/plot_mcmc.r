@@ -19,6 +19,11 @@ PlotMCMC  <- function(wd,asap.name,asap,mcmc.burn=0,mcmc.thin=1,save.plots,od,pl
   
   f.chain <- paste0(asap.name, ".MCM" )
   #f.chain <- "asap3MCMC.dat"
+  # don't run this function if chains are not present
+  # just in case Enable MCMC Calculations box checked in General Tab of GUI but MCMC not actually run
+  if (file.exists(paste0(wd,"\\",f.chain)) == FALSE){
+    return()
+  }
   chain1c <- read.table(paste0(wd,"\\",f.chain), header=T)
   ## new stuff
   niter <-  dim(chain1c)[1]
