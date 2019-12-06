@@ -34,6 +34,7 @@ makecohorts <- function(mat){
   for (i in 1:nc){
     matcoh[1:(nr-i),i] <- matcoh1[i:(nr-1),i]
   }
+  colnames(matcoh) <- colnames(mat)
   return(matcoh)
 }
 

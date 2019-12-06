@@ -11,6 +11,7 @@
 #' @export
 
 PlotCoh <- function(matcoh,save.plots,od,plotf,mytitle="",mylabels=NA){
+  age <- colnames(matcoh)
   nc <- length(matcoh[1,])
   my.cor <- cor(matcoh,use="pairwise.complete.obs")
   my.cor.round <- round(my.cor,2)
@@ -21,7 +22,7 @@ PlotCoh <- function(matcoh,save.plots,od,plotf,mytitle="",mylabels=NA){
     for (j in nc:1){
       if (i == j){
         plot(1:10,1:10,type='n',axes=F)
-        if (is.na(mylabels[1])) text(5,5,paste0("age-",i),cex=1.4)
+        if (is.na(mylabels[1])) text(5,5,paste0("age-",age[i]),cex=1.4)
         if (is.na(mylabels[1])==F) text(5,5,mylabels[i],cex=1.4)
       }
       if (i < j){

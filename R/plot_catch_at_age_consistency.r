@@ -16,8 +16,14 @@ PlotCatchAtAgeConsistency <- function(asap,fleet.names,save.plots,od,plotf){
     if (asap$parms$nfleets >= 2) title1 = paste0("Catch for Fleet ",ifleet," (",fleet.names[ifleet],")")
     
     # get catch at age
-    catchob <- wtprop2caa(asap$catch.obs[ifleet,],  asap$WAA.mats[[(ifleet*2-1)]], asap$catch.comp.mats[[(ifleet*4-3)]])
-    catchpr <- wtprop2caa(asap$catch.pred[ifleet,], asap$WAA.mats[[(ifleet*2-1)]], asap$catch.comp.mats[[(ifleet*4-2)]])
+    s.age <- asap$fleet.sel.start.age
+    e.age <- asap$fleet.sel.end.age
+    catchob <- wtprop2caa(asap$catch.obs[ifleet,],  
+                          asap$WAA.mats[[(ifleet*2-1)]][, s.age:e.age], 
+                          asap$catch.comp.mats[[(ifleet*4-3)]])
+    catchpr <- wtprop2caa(asap$catch.pred[ifleet,], 
+                          asap$WAA.mats[[(ifleet*2-1)]][, s.age:e.age], 
+                          asap$catch.comp.mats[[(ifleet*4-2)]])
     
     # replace zeros with NA and take logs
     cob <- rep0log(catchob)
