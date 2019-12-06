@@ -14,14 +14,17 @@ PlotCatchAgeCompBubbles <- function(asap,fleet.names,save.plots,od,plotf,scale.c
                                     is.catch.flag=T){
   
   par(mar=c(4,4,2,2), oma=c(1,1,1,1), mfrow=c(1,1))
-  
-  ages=seq(1, asap$parms$nages)
-  nages=length(ages)
+
   years=seq(asap$parms$styr, asap$parms$endyr)
   nyrs=asap$parms$nyears
   bubble.color <- "#11aaffaa"
   
   for (i in 1:asap$parms$nfleets) {
+    # fix for fleet selectivity start age > 1 or end age < nages (thanks Kiersten!)
+    # ages = seq(1, asap$parms$nages)
+    ages=seq(asap$fleet.sel.start.age[i], asap$fleet.sel.end.age[i])
+    nages=length(ages)
+    
     acomp.obs <- as.data.frame(asap$catch.comp.mats[4*(i-1)+1])
     catch.yrs <- which(asap$fleet.catch.Neff.init[i,]>0)
     missing.catch.yrs <- which(asap$fleet.catch.Neff.init[i,] <= 0)
@@ -41,14 +44,14 @@ PlotCatchAgeCompBubbles <- function(asap,fleet.names,save.plots,od,plotf,scale.c
       
       z3 <- as.matrix(acomp.obs) * scale.catch.bubble.data
       
-      plot(ages, rev(ages),  xlim = c(1, nages), ylim = c(years[nyrs],(years[1]-2)), 
+      plot(ages, rev(ages),  xlim = range(ages), ylim = c(years[nyrs],(years[1]-2)), 
            xlab = "Age", ylab = "", type = "n", axes=F)
       axis(1, at= ages, lab=ages)
       axis(2, at = rev(years), lab = rev(years), cex.axis=0.75, las=1)
       box()
       abline(h=years, col="lightgray")
-      segments(x0=seq(ages[1], nages), y0=rep(years[1],nages),
-               x1=seq(ages[1], nages), y1=rep(years[nyrs],nages), col = "lightgray", lty = 1)
+      segments(x0=ages, y0=rep(years[1],nages),
+               x1=ages, y1=rep(years[nyrs],nages), col = "lightgray", lty = 1)
       
       for (j in 1:nyrs){
         points(ages, rep((years[1]+j-1), nages), cex=z3[j,], col="black",

@@ -17,17 +17,16 @@ PlotCatchAgeCompResids <- function(asap,fleet.names,save.plots,od,plotf,
   pos.resid.col <- "#ffffffaa"
   neg.resid.col <- "#ff1111aa"
   
-  ages=seq(1, asap$parms$nages)
-  nages=length(ages)
   years=seq(asap$parms$styr, asap$parms$endyr)
   nyrs=asap$parms$nyears
   
   for (i in 1:asap$parms$nfleets) {
-    acomp.obs1 <- as.data.frame(asap$catch.comp.mats[4*(i-1)+1])
-    ##New - replace observed zeros with NA
-    #acomp.obs <- apply(acomp.obs1, 2, function(x)  replace(x, which(x==0 ), NA) )
-    acomp.obs <- acomp.obs1
+    # fix for fleet selectivity start age > 1 or end age < nages (thanks Kiersten!)
+    # ages = seq(1, asap$parms$nages)
+    ages=seq(asap$fleet.sel.start.age[i], asap$fleet.sel.end.age[i])
+    nages=length(ages)
     
+    acomp.obs <- as.data.frame(asap$catch.comp.mats[4*(i-1)+1])
     acomp.pred <- as.data.frame(asap$catch.comp.mats[4*(i-1)+2]) 
     catch.yrs <- which(asap$fleet.catch.Neff.init[i,]>0)
     my.title <- "Age Comp Residuals for Catch by Fleet "
@@ -43,14 +42,12 @@ PlotCatchAgeCompResids <- function(asap,fleet.names,save.plots,od,plotf,
     ###NEW  
     acomp.sd <- matrix(NA, nrow=nyrs, ncol=nages)
     if (length(catch.yrs)>0){
-      s.age <- asap$fleet.sel.start.age[i]
-      e.age <- asap$fleet.sel.end.age[i]
       for (j in 1:length(catch.yrs)){
-        resids <- as.numeric(acomp.obs[catch.yrs[j],] - acomp.pred[catch.yrs[j],])  # NOTE obs-pred
-        acomp.catch.resids[as.numeric(catch.yrs[j]),s.age:e.age] <- resids[s.age:e.age]
+        resids <- as.numeric(acomp.obs[catch.yrs[j], ] - acomp.pred[catch.yrs[j],])  # NOTE obs-pred
+        acomp.catch.resids[as.numeric(catch.yrs[j]), ] <- resids
         ###NEW  
         tmp.sd <- as.numeric(sqrt(acomp.pred[catch.yrs[j],]*(1-acomp.pred[catch.yrs[j],])/asap$fleet.catch.Neff.init[i, catch.yrs[j]] ) )
-        acomp.sd[as.numeric(catch.yrs[j]),s.age:e.age] <- tmp.sd[s.age:e.age]
+        acomp.sd[as.numeric(catch.yrs[j]), ] <- tmp.sd
       }
       z1 <- acomp.catch.resids
       range.resids<-range(abs((as.vector(z1))), na.rm=T)
@@ -69,14 +66,14 @@ PlotCatchAgeCompResids <- function(asap,fleet.names,save.plots,od,plotf,
       ###NEW  
       par(mar=c(5,4,2,2), oma=c(1,1,1,1), mfrow=c(1,1))     
       ##   plot age comp bubble resids as pearson standardized resids
-      plot(ages, rev(ages),  xlim = c(1, nages), ylim = c(years[nyrs],(years[1]-2)), 
+      plot(ages, rev(ages),  xlim = range(ages), ylim = c(years[nyrs],(years[1]-2)), 
            xlab = "Age", ylab = "Pearson Residuals (Obs-Pred)/SQRT(Pred*(1-Pred)/NESS)", type = "n", axes=F)
       axis(1, at= ages, lab=ages)
       axis(2, at = rev(years), lab = rev(years), cex.axis=0.75, las=1)
       box()
       abline(h=years, col="lightgray")
-      segments(x0=seq(ages[1], nages), y0=rep(years[1],nages),
-               x1=seq(ages[1], nages), y1=rep(years[nyrs],nages), col = "lightgray", lty = 1)
+      segments(x0=ages, y0=rep(years[1],nages),
+               x1=ages, y1=rep(years[nyrs],nages), col = "lightgray", lty = 1)
       
       for (j in 1:nyrs){
         ## New  - use triangle instead of circle for resids where Obs=0
