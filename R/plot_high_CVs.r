@@ -32,9 +32,9 @@ PlotHighCVs <- function(a1,save.plots,od,plotf) {
     }  #end p loop
     CVmat <- cbind(asap.std, "CV"= CV.vec)
     trouble.pars1 <- CVmat[CVmat$CV<0.05 | CVmat$CV>0.55,]
+    trouble.pars <- trouble.pars1[trouble.pars1$index<(nCV.par+1),]
     
-    if (length(trouble.pars1[,1]>0) ) {
-      trouble.pars <- trouble.pars1[trouble.pars1$index<(nCV.par+1),]
+    if (length(trouble.pars[,1]>0) ) {
       cex.par <- rep(1, length(trouble.pars[,1])  )
       pch.par <- rep(4, length(trouble.pars[,1])  )
       pch.par[which(trouble.pars$CV<0.05)]<- 8
