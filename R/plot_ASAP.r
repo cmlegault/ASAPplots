@@ -9,19 +9,20 @@
 #' @param scale.index.bubble.resid larger values increase size of catch age comp bubbles (defaults to 2)
 #' @param scale.catch.bubble.data larger values increase size of catch age comp bubbles (defaults to 6)
 #' @param scale.index.bubble.data larger values increase size of catch age comp bubbles (defaults to 6)
+#' @param orig.bubble.colors logical TRUE = red, white, FALSE = red, blue (defaults to FALSE)
 #' @param first.age youngest age to use in catch curves, -999 finds peak age (defaults to -999)
 #' @param mcmc.burn number of realizations to remove from start of MCMC (defaults to 0)
 #' @param mcmc.thin thinning parameter for MCMC (defaults to 1)
 #' @param save.plots saves indivdual plots (defaults to TRUE)
-#' @param make.one.pdf diagnostics/results/ref pts/MCMC/data are all saved as one pdf (defaults to TRUE)
 #' @param plotf format for individual plots (defaults to 'png')
+#' @param make.one.pdf diagnostics/results/ref pts/MCMC/data are all saved as one pdf (defaults to TRUE)
 #' @export
 #' @examples PlotASAP("C:\\main.dir\\my.asap.results.dir","simple") 
 
 PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9, 
                      scale.catch.bubble.resid=2, scale.index.bubble.resid=2, 
                      scale.catch.bubble.data=6, scale.index.bubble.data=6,
-                     mcmc.burn=0, mcmc.thin=1,
+                     orig.bubble.colors=FALSE, mcmc.burn=0, mcmc.thin=1,
                      first.age=-999, save.plots=TRUE, plotf='png', make.one.pdf=TRUE){
 
   wd <- gsub("/", "\\\\", wd)  # change from unix to Windows directory approach if needed
@@ -76,16 +77,15 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotCatch4Panel(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotDiscard4Panel(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotCatchAgeComp(asap,fleet.names,save.plots,od,plotf,liz.palette)  # catch
-  PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid)  # bubble plots
+  PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,orig.bubble.colors)  # bubble plots
   PlotCatchAgeComp(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
-  PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,
-                         is.catch.flag=FALSE)  # discard bubble plots
+  PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,orig.bubble.colors,is.catch.flag=FALSE)  # discard bubble plots
   PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf)
   PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
   PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
   PlotIndices4Panel(asap,index.names,save.plots,od,plotf,liz.palette)
-  PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid)
+  PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid,orig.bubble.colors)
   PlotIndexNeff(asap,index.names,save.plots,od,plotf,liz.palette)
   PlotFrancisIndex(asap,index.names,save.plots,od,plotf)  
   
@@ -153,16 +153,15 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
     PlotCatch4Panel(asap,fleet.names,save.plots,od,plotf,liz.palette)
     PlotDiscard4Panel(asap,fleet.names,save.plots,od,plotf,liz.palette)
     PlotCatchAgeComp(asap,fleet.names,save.plots,od,plotf,liz.palette)  # catch
-    PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid)  # bubble plots
+    PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,orig.bubble.colors)  # bubble plots
     PlotCatchAgeComp(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
-    PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,
-                           is.catch.flag=FALSE)  # discard bubble plots
+    PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,orig.bubble.colors,is.catch.flag=FALSE)  # discard bubble plots
     PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette)
     PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf)
     PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
     PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
     PlotIndices4Panel(asap,index.names,save.plots,od,plotf,liz.palette)
-    PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid)
+    PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid,orig.bubble.colors)
     PlotIndexNeff(asap,index.names,save.plots,od,plotf,liz.palette)
     PlotFrancisIndex(asap,index.names,save.plots,od,plotf)  
     PlotFleetSelBlocks(asap,fleet.names,save.plots,od,plotf,liz.palette)
@@ -218,16 +217,15 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotCatch4Panel(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotDiscard4Panel(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotCatchAgeComp(asap,fleet.names,save.plots,od,plotf,liz.palette)  # catch
-  PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid)  # bubble plots
+  PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,orig.bubble.colors)  # bubble plots
   PlotCatchAgeComp(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
-  PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,
-                         is.catch.flag=FALSE)  # discard bubble plots
+  PlotCatchAgeCompResids(asap,fleet.names,save.plots,od,plotf,scale.catch.bubble.resid,orig.bubble.colors,is.catch.flag=FALSE)  # discard bubble plots
   PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette)
   PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf)
   PlotFleetNeff(asap,fleet.names,save.plots,od,plotf,liz.palette,is.catch.flag=FALSE)  # discards
   PlotFrancisFleet(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag=FALSE)  # discards
   PlotIndices4Panel(asap,index.names,save.plots,od,plotf,liz.palette)
-  PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid)
+  PlotIndexAgeCompResids(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid,orig.bubble.colors)
   PlotIndexNeff(asap,index.names,save.plots,od,plotf,liz.palette)
   PlotFrancisIndex(asap,index.names,save.plots,od,plotf)  
   dev.off()

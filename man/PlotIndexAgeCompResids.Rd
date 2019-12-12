@@ -5,7 +5,7 @@
 \title{Bubble plots of index age comp resids}
 \usage{
 PlotIndexAgeCompResids(asap, index.names, save.plots, od, plotf,
-  scale.index.bubble.resid = 2)
+  scale.index.bubble.resid = 2, orig.bubble.colors = FALSE)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
@@ -19,6 +19,8 @@ PlotIndexAgeCompResids(asap, index.names, save.plots, od, plotf,
 \item{plotf}{type of plot to save}
 
 \item{scale.index.bubble.resid}{larger values increase size of catch age comp bubbles (defaults to 2)}
+
+\item{orig.bubble.colors}{logical TRUE = red, white, FALSE = red, blue (defaults to FALSE)}
 }
 \description{
 Pearson residuals for age composition for all years in bubble plot.

@@ -7,14 +7,20 @@
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @param scale.index.bubble.resid larger values increase size of catch age comp bubbles (defaults to 2)
+#' @param orig.bubble.colors logical TRUE = red, white, FALSE = red, blue (defaults to FALSE)
 #' @export
 
 # Bubble plots of index age comp resids 
-PlotIndexAgeCompResids <- function(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid=2){
+PlotIndexAgeCompResids <- function(asap,index.names,save.plots,od,plotf,scale.index.bubble.resid=2,orig.bubble.colors=FALSE){
   par(mar=c(4,4,2,2), oma=c(1,1,1,1), mfrow=c(1,1))
 
-  pos.resid.col <- "#ffffffaa"
-  neg.resid.col <- "#ff1111aa"
+  if (orig.bubble.colors == TRUE) {
+    pos.resid.col <- "#ffffffaa"
+    neg.resid.col <- "#ff1111aa"
+  } else {
+    pos.resid.col <- rgb(0, 0, 1, alpha = 0.5)
+    neg.resid.col <- rgb(1, 0, 0, alpha = 0.5)
+  }
   
   ages=seq(1, asap$parms$nages)
   nages=length(ages)

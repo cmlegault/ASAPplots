@@ -5,7 +5,8 @@
 \title{Bubble plots of catch age comp resids}
 \usage{
 PlotCatchAgeCompResids(asap, fleet.names, save.plots, od, plotf,
-  scale.catch.bubble.resid = 2, is.catch.flag = TRUE)
+  scale.catch.bubble.resid = 2, orig.bubble.colors = FALSE,
+  is.catch.flag = TRUE)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
@@ -19,6 +20,8 @@ PlotCatchAgeCompResids(asap, fleet.names, save.plots, od, plotf,
 \item{plotf}{type of plot to save}
 
 \item{scale.catch.bubble.resid}{larger values increase size of catch age comp bubbles (defaults to 2)}
+
+\item{orig.bubble.colors}{logical TRUE = red, white, FALSE = red, blue (defaults to FALSE)}
 
 \item{is.catch.flag}{true means only catch plotted, false also plots discards (defaults to TRUE)}
 }
