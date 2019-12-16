@@ -28,7 +28,7 @@ PlotFrancisFleet<-function(asap,a1,fleet.names,save.plots,od,plotf,is.catch.flag
   }
   
   for (i in 1:asap$parms$nfleets) {
-    ages <- seq(asap$fleet.sel.start.age, asap$fleet.sel.end.age)
+    ages <- seq(asap$fleet.sel.start.age[i], asap$fleet.sel.end.age[i])
     
     t.obs<-   as.data.frame(asap$catch.comp.mats [4*(i-1)+1] )
     t.pred<-   as.data.frame(asap$catch.comp.mats [4*(i-1)+2] ) 
