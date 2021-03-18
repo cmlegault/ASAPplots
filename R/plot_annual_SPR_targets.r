@@ -2,23 +2,21 @@
 #' 
 #' Computes and plots SPR targets using selectivity, M, WAA, and maturity by year.
 #' @param asap name of the variable that read in the asap.rdat file
+#' @param pspr user defined value(s) of spr, e.g. 0.4 or c(0.4, 0.43, 0.46); if empty (default), calculated at seq(0.2, 0.5, by=0.1) 
 #' @param save.plots save individual plots
 #' @param od output directory for plots and csv files 
 #' @param plotf type of plot to save
 #' @export
 
-PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
+PlotAnnualSPRtargets <- function(asap, pspr=c(), save.plots,od,plotf){
   
-  spr.targ.values <- seq(0.2, 0.5, by=0.1)
+  if(length(pspr)>0) spr.targ.values <- pspr
+  if(length(pspr)==0) spr.targ.values <- seq(0.2, 0.5, by=0.1)
   n.spr <- length(spr.targ.values)
   nages<- asap$parms$nages
   nyears <- asap$parms$nyears
-  years <- seq(asap$parms$styr,asap$parms$endyr)
-  if (asap$options$isfecund == 1){
-    fec.age <- asap$WAA.mats$WAA.ssb / asap$WAA.mats$WAA.ssb  # matrix of 1s
-  }else{
-    fec.age <- asap$WAA.mats$WAA.ssb    
-  }
+  years <- seq(asap$parms$styr,asap$parms$endyr)  
+  fec.age <- asap$WAA.mats$WAA.ssb
   mat.age <- asap$maturity
   wgt.age <- asap$WAA.mats$WAA.catch.all
   M.age <- asap$M.age
@@ -43,10 +41,11 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
       yyy <- nlminb(start=F.start, objective=spr.f, lower=0, upper=3)
       f.spr.vals[j,i] <- yyy$par
       ypr.spr.vals[j,i] <- ypr(nages, wgt.age=wgt.age[j,], M.age=M.age[j,],  F.mult=f.spr.vals[j,i], sel.age=sel.age[j,] )
-      
+      conv.vals[j,i] <- ifelse(yyy$convergence==0, TRUE, FALSE)
     }  # end j-loop over nyears
   }  #end i-loop over SPR values
   
+ # if(length(pspr)==0) {
   par(mfrow=c(1,1), mar=c(4,4,2,4) )
   lty.seq=c(1,2,4,6)
   plot(years, f.spr.vals[,1], type='n', xlab="Year", ylab="Full F (%SPR)", lwd=2,
@@ -54,8 +53,10 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   for (i in 1:n.spr) {
     lines(years, f.spr.vals[,i], lwd=2, col=i, lty=lty.seq[i] )     
   }
-  legend('top', legend=c("F20%", "F30%", "F40%", "F50%"), col=seq(1,4), lty=lty.seq, 
+  if(length(pspr)==0) legend('top', legend=c("F20%", "F30%", "F40%", "F50%"), col=seq(1,4), lty=lty.seq, 
          horiz=T,lwd=rep(2,4), cex=0.9)
+  if(length(pspr)>0) legend('top', legend=c(paste0("F", round(100*pspr,0), "%")), col=seq(1,4), lty=lty.seq, 
+                             horiz=T,lwd=rep(2,4), cex=0.9)
   
   title (main="Annual F(%SPR) Reference Points", outer=T, line=-1 ) 
   
@@ -67,13 +68,16 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   for (i in 1:n.spr) {
     lines(years, ypr.spr.vals[,i], lwd=2, col=i, lty=lty.seq[i] )     
   }
-  legend('top', legend=c("YPR20%", "YPR30%", "YPR40%", "YPR50%"), col=seq(1,4), lty=lty.seq, 
+  if(length(pspr)==0) legend('top', legend=c("YPR20%", "YPR30%", "YPR40%", "YPR50%"), col=seq(1,4), lty=lty.seq, 
          horiz=T,lwd=rep(2,4), cex=0.9)
+  if(length(pspr)>0) legend('top', legend=c(paste0("YPR", round(100*pspr,0), "%")), col=seq(1,4), lty=lty.seq, 
+                             horiz=T,lwd=rep(2,4), cex=0.9)
   
   title (main="Annual YPR(%SPR) Reference Points", outer=T, line=-1 ) 
   
   if (save.plots) savePlot(paste0(od, "Annual.YPR.", plotf), type=plotf)
   
+  if(length(pspr)==0) {
   f.hist.20 <- hist(f.spr.vals[,1], plot=F)
   f.hist.30 <- hist(f.spr.vals[,2], plot=F)
   f.hist.40 <- hist(f.spr.vals[,3], plot=F)
@@ -123,6 +127,8 @@ PlotAnnualSPRtargets <- function(asap,save.plots,od,plotf){
   
   if (save.plots) savePlot(paste0(od, "Annual.YPR_SPR.4panel.hist.", plotf), type=plotf)  
   par(mfrow=c(1,1), mar=c(5.1,4.1,4.1,2.1), oma=c(0,0,0,0))
+  } # end test if pspr has length 0
   
-  return()
+  spr.list <- list(f.spr.vals=f.spr.vals, ypr.spr.vals=ypr.spr.vals, conv.vals=conv.vals)
+  return(spr.list)
 } # end function
