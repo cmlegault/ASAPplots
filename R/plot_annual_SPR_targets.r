@@ -72,58 +72,43 @@ PlotAnnualSPRtargets <- function(asap, pspr=c(), save.plots,od,plotf){
   
   if (save.plots) savePlot(paste0(od, "Annual.YPR.", plotf), type=plotf)
   
-  if(length(pspr)==0) {
-  f.hist.20 <- hist(f.spr.vals[,1], plot=F)
-  f.hist.30 <- hist(f.spr.vals[,2], plot=F)
-  f.hist.40 <- hist(f.spr.vals[,3], plot=F)
-  f.hist.50 <- hist(f.spr.vals[,4], plot=F)
+  f.hist.list <- list()
+  for (i in 1:n.spr){
+    f.hist.list[[i]] <- hist(f.spr.vals[,i], plot=FALSE)
+  }
+
+  mynrows <- ceiling(n.spr/2)  
+  par(mfrow=c(mynrows,2), mar=c(4,4,2,2), oma=c(0,0,2,0) )
   
-  par(mfrow=c(2,2), mar=c(4,4,2,2), oma=c(0,0,2,0) )
-  
-  plot(f.hist.20$mids, f.hist.20$counts, xlab="Full F20%", ylab="Frequency", type='h', lwd=2, 
-       ylim=c(0, max(f.hist.20$counts)), col='blue4'  )
-  lines(f.hist.20$mids, f.hist.20$counts, lwd=2, col='blue4')
-  plot(f.hist.30$mids, f.hist.30$counts, xlab="Full F30%", ylab="Frequency", type='h', lwd=2, 
-       ylim=c(0, max(f.hist.30$counts)), col='blue4'  )
-  lines(f.hist.30$mids, f.hist.30$counts, lwd=2, col='blue4')
-  plot(f.hist.40$mids, f.hist.40$counts, xlab="Full F40%", ylab="Frequency", type='h', lwd=2, 
-       ylim=c(0, max(f.hist.40$counts)), col='blue4'  )
-  lines(f.hist.40$mids, f.hist.40$counts, lwd=2, col='blue4')
-  plot(f.hist.50$mids, f.hist.50$counts, xlab="Full F50%", ylab="Frequency", type='h', lwd=2, 
-       ylim=c(0, max(f.hist.50$counts)), col='blue4'  )
-  lines(f.hist.50$mids, f.hist.50$counts, lwd=2, col='blue4')
-  
+  for (i in 1:n.spr){
+    myxlab <- paste0("Full F", round(spr.targ.values[i]*100, 0), "%")
+    plot(f.hist.list[[i]]$mids, f.hist.list[[i]]$counts, xlab=myxlab, ylab="Frequency", type='h', lwd=2, ylim=c(0, max(f.hist.list[[i]]$counts)), col='blue4')
+    lines(f.hist.list[[i]]$mids, f.hist.list[[i]]$counts, lwd=2, col='blue4')
+  }
+
   title (main="Annual F (%SPR) Reference Points", outer=T, line=-1 ) 
   
   if (save.plots) savePlot(paste0(od, "Annual.F_SPR.4panel.hist.", plotf), type=plotf)  
   
-  
-  ypr.hist.20 <- hist(ypr.spr.vals[,1], plot=F)
-  ypr.hist.30 <- hist(ypr.spr.vals[,2], plot=F)
-  ypr.hist.40 <- hist(ypr.spr.vals[,3], plot=F)
-  ypr.hist.50 <- hist(ypr.spr.vals[,4], plot=F)
-  
-  par(mfrow=c(2,2), mar=c(4,4,2,2), oma=c(0,0,2,0) )
-  
-  plot(ypr.hist.20$mids, ypr.hist.20$counts, xlab="YPR (F20%)", ylab="Frequency", type='h', lwd=2, 
-       ylim=c(0, max(ypr.hist.20$counts)), col='blue4'  )
-  lines(ypr.hist.20$mids, ypr.hist.20$counts, lwd=2, col='blue4')
-  plot(ypr.hist.30$mids, ypr.hist.30$counts, xlab="YPR (F30%)", ylab="Frequency", type='h', lwd=2, 
-       ylim=c(0, max(ypr.hist.30$counts)), col='blue4'  )
-  lines(ypr.hist.30$mids, ypr.hist.30$counts, lwd=2, col='blue4')
-  plot(ypr.hist.40$mids, ypr.hist.40$counts, xlab="YPR (F40%)", ylab="Frequency", type='h', lwd=2, 
-       ylim=c(0, max(ypr.hist.40$counts)), col='blue4'  )
-  lines(ypr.hist.40$mids, ypr.hist.40$counts, lwd=2, col='blue4')
-  plot(ypr.hist.50$mids, ypr.hist.50$counts, xlab="YPR (F50%)", ylab="Frequency", type='h', lwd=2, 
-       ylim=c(0, max(ypr.hist.50$counts)), col='blue4'  )
-  lines(ypr.hist.50$mids, ypr.hist.50$counts, lwd=2, col='blue4')
+  ypr.hist.list <- list()
+  for (i in 1:n.spr){
+    ypr.hist.list[[i]] <- hist(ypr.spr.vals[,i], plot = FALSE)
+  }
+
+  par(mfrow=c(mynrows,2), mar=c(4,4,2,2), oma=c(0,0,2,0) )
+
+  for (i in 1:n.spr){
+    myxlab <- paste0("YPR(", round(spr.targ.values[i]*100, 0), "%)")
+    plot(ypr.hist.list[[i]]$mids, ypr.hist.list[[i]]$counts, xlab=myxlab, ylab="Frequency", type='h', lwd=2, ylim=c(0, max(ypr.hist.list[[i]]$counts)), col='blue4'  )
+    lines(ypr.hist.list[[i]]$mids, ypr.hist.list[[i]]$counts, lwd=2, col='blue4')
+  }
   
   title (main="Annual YPR (%SPR) Reference Points", outer=T, line=-1 ) 
   
   if (save.plots) savePlot(paste0(od, "Annual.YPR_SPR.4panel.hist.", plotf), type=plotf)  
-  par(mfrow=c(1,1), mar=c(5.1,4.1,4.1,2.1), oma=c(0,0,0,0))
-  } # end test if pspr has length 0
   
+  par(mfrow=c(1,1), mar=c(5.1,4.1,4.1,2.1), oma=c(0,0,0,0))
+
   spr.list <- list(f.spr.vals=f.spr.vals, ypr.spr.vals=ypr.spr.vals, conv.vals=conv.vals)
   return(spr.list)
 } # end function
