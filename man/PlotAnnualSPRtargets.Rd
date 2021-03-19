@@ -4,10 +4,12 @@
 \alias{PlotAnnualSPRtargets}
 \title{Plot annual SPR targets}
 \usage{
-PlotAnnualSPRtargets(asap, save.plots, od, plotf)
+PlotAnnualSPRtargets(asap, pspr = c(), save.plots, od, plotf)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}
+
+\item{pspr}{user defined value(s) of spr, e.g. 0.4 or c(0.4, 0.43, 0.46); if empty (default), calculated at seq(0.2, 0.5, by=0.1)}
 
 \item{save.plots}{save individual plots}
 

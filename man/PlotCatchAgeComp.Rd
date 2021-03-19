@@ -4,8 +4,15 @@
 \alias{PlotCatchAgeComp}
 \title{Plot age composition by fleet}
 \usage{
-PlotCatchAgeComp(asap, fleet.names, save.plots, od, plotf, liz.palette,
-  is.catch.flag = TRUE)
+PlotCatchAgeComp(
+  asap,
+  fleet.names,
+  save.plots,
+  od,
+  plotf,
+  liz.palette,
+  is.catch.flag = TRUE
+)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}

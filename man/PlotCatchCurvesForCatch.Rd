@@ -4,8 +4,7 @@
 \alias{PlotCatchCurvesForCatch}
 \title{Plot catch curves for catch}
 \usage{
-PlotCatchCurvesForCatch(asap, a1, save.plots, od, plotf,
-  first.age = -999)
+PlotCatchCurvesForCatch(asap, a1, save.plots, od, plotf, first.age = -999)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}

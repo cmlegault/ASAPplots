@@ -4,8 +4,7 @@
 \alias{PlotMainLikelihoods}
 \title{Plot main likelihoods by component}
 \usage{
-PlotMainLikelihoods(asap.name, asap, a1, save.plots, od, plotf,
-  liz.palette)
+PlotMainLikelihoods(asap.name, asap, a1, save.plots, od, plotf, liz.palette)
 }
 \arguments{
 \item{asap.name}{Base name of original dat file (without the .dat extension)}

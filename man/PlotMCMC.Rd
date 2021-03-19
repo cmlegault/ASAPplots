@@ -4,8 +4,16 @@
 \alias{PlotMCMC}
 \title{Plot MCMC}
 \usage{
-PlotMCMC(wd, asap.name, asap, mcmc.burn = 0, mcmc.thin = 1, save.plots,
-  od, plotf)
+PlotMCMC(
+  wd,
+  asap.name,
+  asap,
+  mcmc.burn = 0,
+  mcmc.thin = 1,
+  save.plots,
+  od,
+  plotf
+)
 }
 \arguments{
 \item{wd}{directory where ASAP run is located}

@@ -10,9 +10,10 @@
 #' @param scale.catch.bubble.data larger values increase size of catch age comp bubbles (defaults to 6)
 #' @param scale.index.bubble.data larger values increase size of catch age comp bubbles (defaults to 6)
 #' @param orig.bubble.colors logical TRUE = red, white, FALSE = red, blue (defaults to FALSE)
-#' @param first.age youngest age to use in catch curves, -999 finds peak age (defaults to -999)
+#' @param pspr user defined value(s) of spr, e.g. 0.4 or c(0.4, 0.43, 0.46); if empty (default), calculated at seq(0.2, 0.5, by=0.1) 
 #' @param mcmc.burn number of realizations to remove from start of MCMC (defaults to 0)
 #' @param mcmc.thin thinning parameter for MCMC (defaults to 1)
+#' @param first.age youngest age to use in catch curves, -999 finds peak age (defaults to -999)
 #' @param save.plots saves indivdual plots (defaults to TRUE)
 #' @param plotf format for individual plots (defaults to 'png')
 #' @param make.one.pdf diagnostics/results/ref pts/MCMC/data are all saved as one pdf (defaults to TRUE)
@@ -22,7 +23,8 @@
 PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9, 
                      scale.catch.bubble.resid=2, scale.index.bubble.resid=2, 
                      scale.catch.bubble.data=6, scale.index.bubble.data=6,
-                     orig.bubble.colors=FALSE, mcmc.burn=0, mcmc.thin=1,
+                     orig.bubble.colors=FALSE, pspr=c(), 
+                     mcmc.burn=0, mcmc.thin=1,
                      first.age=-999, save.plots=TRUE, plotf='png', make.one.pdf=TRUE){
 
   wd <- gsub("/", "\\\\", wd)  # change from unix to Windows directory approach if needed
@@ -116,7 +118,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotYieldCurves(asap,a1,nyrs.ave,save.plots,od,plotf)
   PlotSPRtable(asap,a1,nyrs.ave,save.plots,od,plotf)
   PlotExpSpawn(asap,a1,nyrs.ave,save.plots,od,plotf)
-  PlotAnnualSPRtargets(asap,save.plots,od,plotf)
+  annualSPRlist <- PlotAnnualSPRtargets(asap,pspr,save.plots,od,plotf)
   PlotAnnualMSY(asap,a1,save.plots,od,plotf)
   
   #--- MCMC results (assume user only does 1 chain)
@@ -186,7 +188,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
     PlotYieldCurves(asap,a1,nyrs.ave,save.plots,od,plotf)
     PlotSPRtable(asap,a1,nyrs.ave,save.plots,od,plotf)
     PlotExpSpawn(asap,a1,nyrs.ave,save.plots,od,plotf)
-    PlotAnnualSPRtargets(asap,save.plots,od,plotf)
+    annualSPRlist <- PlotAnnualSPRtargets(asap,pspr,save.plots,od,plotf)
     PlotAnnualMSY(asap,a1,save.plots,od,plotf)
     if (asap$options$do.mcmc>0) PlotMCMC(wd,asap.name,asap,mcmc.burn,mcmc.thin,save.plots,od,plotf)
     PlotCatchByFleet(asap,fleet.names,save.plots,od,plotf,liz.palette)
@@ -283,7 +285,7 @@ PlotASAP <- function(wd, asap.name, nyrs.ave=5, correlation.limit=0.9,
   PlotYieldCurves(asap,a1,nyrs.ave,save.plots,od,plotf)
   PlotSPRtable(asap,a1,nyrs.ave,save.plots,od,plotf)
   PlotExpSpawn(asap,a1,nyrs.ave,save.plots,od,plotf)
-  PlotAnnualSPRtargets(asap,save.plots,od,plotf)
+  annualSPRlist <- PlotAnnualSPRtargets(asap,pspr,save.plots,od,plotf)
   PlotAnnualMSY(asap,a1,save.plots,od,plotf)
   dev.off()      
   graphics.off()

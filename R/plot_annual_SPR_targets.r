@@ -47,16 +47,14 @@ PlotAnnualSPRtargets <- function(asap, pspr=c(), save.plots,od,plotf){
   
  # if(length(pspr)==0) {
   par(mfrow=c(1,1), mar=c(4,4,2,4) )
-  lty.seq=c(1,2,4,6)
+  nrepltyseq <- ceiling(n.spr/4) # allows more than 4 line types by repeats
+  lty.seq=rep(c(1,2,4,6), nrepltyseq)
   plot(years, f.spr.vals[,1], type='n', xlab="Year", ylab="Full F (%SPR)", lwd=2,
        col="blue3", ylim=c(0,1.2*max(f.spr.vals)) )
   for (i in 1:n.spr) {
     lines(years, f.spr.vals[,i], lwd=2, col=i, lty=lty.seq[i] )     
   }
-  if(length(pspr)==0) legend('top', legend=c("F20%", "F30%", "F40%", "F50%"), col=seq(1,4), lty=lty.seq, 
-         horiz=T,lwd=rep(2,4), cex=0.9)
-  if(length(pspr)>0) legend('top', legend=c(paste0("F", round(100*pspr,0), "%")), col=seq(1,4), lty=lty.seq, 
-                             horiz=T,lwd=rep(2,4), cex=0.9)
+  legend('top', legend=c(paste0("F", round(100*spr.targ.values,0), "%")), col=seq(1,n.spr), lty=lty.seq, horiz=T,lwd=2, cex=0.9)
   
   title (main="Annual F(%SPR) Reference Points", outer=T, line=-1 ) 
   
@@ -68,10 +66,7 @@ PlotAnnualSPRtargets <- function(asap, pspr=c(), save.plots,od,plotf){
   for (i in 1:n.spr) {
     lines(years, ypr.spr.vals[,i], lwd=2, col=i, lty=lty.seq[i] )     
   }
-  if(length(pspr)==0) legend('top', legend=c("YPR20%", "YPR30%", "YPR40%", "YPR50%"), col=seq(1,4), lty=lty.seq, 
-         horiz=T,lwd=rep(2,4), cex=0.9)
-  if(length(pspr)>0) legend('top', legend=c(paste0("YPR", round(100*pspr,0), "%")), col=seq(1,4), lty=lty.seq, 
-                             horiz=T,lwd=rep(2,4), cex=0.9)
+  legend('top', legend=c(paste0("YPR", round(100*spr.targ.values,0), "%")), col=seq(1,n.spr), lty=lty.seq, horiz=T,lwd=2, cex=0.9)
   
   title (main="Annual YPR(%SPR) Reference Points", outer=T, line=-1 ) 
   

@@ -4,12 +4,24 @@
 \alias{PlotASAP}
 \title{Plot ASAP}
 \usage{
-PlotASAP(wd, asap.name, nyrs.ave = 5, correlation.limit = 0.9,
-  scale.catch.bubble.resid = 2, scale.index.bubble.resid = 2,
-  scale.catch.bubble.data = 6, scale.index.bubble.data = 6,
-  orig.bubble.colors = FALSE, mcmc.burn = 0, mcmc.thin = 1,
-  first.age = -999, save.plots = TRUE, plotf = "png",
-  make.one.pdf = TRUE)
+PlotASAP(
+  wd,
+  asap.name,
+  nyrs.ave = 5,
+  correlation.limit = 0.9,
+  scale.catch.bubble.resid = 2,
+  scale.index.bubble.resid = 2,
+  scale.catch.bubble.data = 6,
+  scale.index.bubble.data = 6,
+  orig.bubble.colors = FALSE,
+  pspr = c(),
+  mcmc.burn = 0,
+  mcmc.thin = 1,
+  first.age = -999,
+  save.plots = TRUE,
+  plotf = "png",
+  make.one.pdf = TRUE
+)
 }
 \arguments{
 \item{wd}{directory where ASAP run is located}
@@ -29,6 +41,8 @@ PlotASAP(wd, asap.name, nyrs.ave = 5, correlation.limit = 0.9,
 \item{scale.index.bubble.data}{larger values increase size of catch age comp bubbles (defaults to 6)}
 
 \item{orig.bubble.colors}{logical TRUE = red, white, FALSE = red, blue (defaults to FALSE)}
+
+\item{pspr}{user defined value(s) of spr, e.g. 0.4 or c(0.4, 0.43, 0.46); if empty (default), calculated at seq(0.2, 0.5, by=0.1)}
 
 \item{mcmc.burn}{number of realizations to remove from start of MCMC (defaults to 0)}
 

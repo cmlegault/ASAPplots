@@ -4,9 +4,16 @@
 \alias{PlotCatchAgeCompResids}
 \title{Bubble plots of catch age comp resids}
 \usage{
-PlotCatchAgeCompResids(asap, fleet.names, save.plots, od, plotf,
-  scale.catch.bubble.resid = 2, orig.bubble.colors = FALSE,
-  is.catch.flag = TRUE)
+PlotCatchAgeCompResids(
+  asap,
+  fleet.names,
+  save.plots,
+  od,
+  plotf,
+  scale.catch.bubble.resid = 2,
+  orig.bubble.colors = FALSE,
+  is.catch.flag = TRUE
+)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}

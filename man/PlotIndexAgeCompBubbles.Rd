@@ -4,8 +4,14 @@
 \alias{PlotIndexAgeCompBubbles}
 \title{Bubble plots of index age comps}
 \usage{
-PlotIndexAgeCompBubbles(asap, index.names, save.plots, od, plotf,
-  scale.index.bubble.data = 6)
+PlotIndexAgeCompBubbles(
+  asap,
+  index.names,
+  save.plots,
+  od,
+  plotf,
+  scale.index.bubble.data = 6
+)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}

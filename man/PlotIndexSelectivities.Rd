@@ -4,8 +4,7 @@
 \alias{PlotIndexSelectivities}
 \title{Plot index selectivities}
 \usage{
-PlotIndexSelectivities(asap, index.names, save.plots, od, plotf,
-  liz.palette)
+PlotIndexSelectivities(asap, index.names, save.plots, od, plotf, liz.palette)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}

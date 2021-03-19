@@ -4,10 +4,18 @@
 \alias{docxASAP}
 \title{docxASAP}
 \usage{
-docxASAP(wd, asap.name, od = NULL, docx.name = "docxASAP.docx",
-  control.file = "docxASAP.csv", first.figure.number = 1,
-  figure.prefix = "", plotf = "png", use.group = NULL,
-  append.asap.name.caption = TRUE)
+docxASAP(
+  wd,
+  asap.name,
+  od = NULL,
+  docx.name = "docxASAP.docx",
+  control.file = "docxASAP.csv",
+  first.figure.number = 1,
+  figure.prefix = "",
+  plotf = "png",
+  use.group = NULL,
+  append.asap.name.caption = TRUE
+)
 }
 \arguments{
 \item{wd}{directory where ASAP run is located}

@@ -4,8 +4,15 @@
 \alias{PlotFleetNeff}
 \title{Plot effective sample size (Neff)}
 \usage{
-PlotFleetNeff(asap, fleet.names, save.plots, od, plotf, liz.palette,
-  is.catch.flag = TRUE)
+PlotFleetNeff(
+  asap,
+  fleet.names,
+  save.plots,
+  od,
+  plotf,
+  liz.palette,
+  is.catch.flag = TRUE
+)
 }
 \arguments{
 \item{asap}{name of the variable that read in the asap.rdat file}

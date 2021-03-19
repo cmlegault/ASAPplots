@@ -4,9 +4,17 @@
 \alias{RunJitter}
 \title{RunJitter}
 \usage{
-RunJitter(wd, asap.name, njitter, ploption = "jitter",
-  save.plots = TRUE, od = paste0(wd, "\\\\jitter\\\\"),
-  plotf = "png", showtitle = FALSE, copy_std_cor_flag = FALSE)
+RunJitter(
+  wd,
+  asap.name,
+  njitter,
+  ploption = "jitter",
+  save.plots = TRUE,
+  od = paste0(wd, "\\\\jitter\\\\"),
+  plotf = "png",
+  showtitle = FALSE,
+  copy_std_cor_flag = FALSE
+)
 }
 \arguments{
 \item{wd}{directory where ASAP run is located}
