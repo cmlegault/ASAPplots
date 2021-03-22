@@ -1,0 +1,92 @@
+---
+title: "Jittering"
+author: "Chris Legault"
+date: "22 March 2021"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Jittering}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+You've run ASAP and ASAPplots but are wondering if the solution found is just a local minimum. One way to check is to jitter the initial guesses around the solution to see if the solver goes back to that solution. In this function, jittering can start from random values either near the original solution (the default) or be selected at random from the full range of possible values. The former is similar to the way jitter is implemented in Stock Synthesis, while the latter is a stronger jitter test that may take longer to run. 
+
+## How do I jitter?
+
+The RunJitter function works similarly to PlotASAP in that it requires the working directory where you ran ASAP along with the name of the file you ran. The added required input is the number of jitters, meaning how many sets of randomly selected initial guesses will be used. For example, the following code snippet would run the jitter analysis with default settings 100 times. 
+
+```{r, eval=FALSE}
+asap.name <- "simple"
+wd <- "C:\\Users\\chris.legault\\Desktop\\testingASAPplots"
+njits <- 200
+jitter_res <- RunJitter(wd, asap.name, njits)
+```
+
+The RunJitter function will automatically create a subfolder called jitter in the wd directory that has 200 pin files names jitter1.pin, jitter2.pin, ..., jitter200.pin and for each successful model run there will be files jitterX.par and jitterX.rdat where X is an integer between 1 and 200 (some models may not converge and those results are not saved). The console will show the progress of the analysis, reporting the objective function value for each realization or noting that the realization did not converge. This analysis may take a while to run depending on how long the original model took to converge and how many realizations are requested. The function also defaults to saving a copy of the resulting plot of objective function value versus realization with a solid, horizontal line marking the original solution. If the solution is robust, all the jittered solutions will have the exact same objective function as the original solution. The jitter_res object is a list with both the original objective function value and the 200 solutions from jittered initial guesses.
+
+Sometimes there are initial guesses which do not converge. These are noted as NA for the objective function value. The not converged runs in this example can be found with 
+
+```{r, eval=FALSE}
+which(is.na(jitter_res$objfxn))
+```
+
+Sometimes there are initial guesses which result in different objective function values. To check to see if any of the jittered starting guesses resulted in a lower objective function than the original solution (meaning the original solution was only a local minimum and should be replaced by the improved solution),
+
+```{r, eval=FALSE}
+which(jitter_res$objfxn < jitter_res$orig_objfxn)
+```
+
+## Plotting Jitters
+
+The PlotJitter function allows the user to set the upper bound of the y-axis to see if there are multiple starting guesses that result in different solutions but are hidden by the default plot due to one or more large values. Using ?PlotJitter will show the options available for this function, in this case ymaxlimit is the one of particular interest. Setting ymaxlimit to a value just a little greater than the original objective function will have points on the original plot greater tahn ymaxlimit replaced by a triangle at the ymaxlimit. This allows zooming in on the solution to quickly see how variable the jitter results are.
+
+## How does the default jittering work?
+
+```{r}
+Pval <- 0.3  # estimated parameter value
+Pmin <- 0    # lower bound for parameter
+Pmax <- 1    # upper bound for parameter
+
+jitterfac <- 0.1
+zmin <- qnorm(0.001)
+zmax <- qnorm(0.999)
+Pmean <- (Pmin + Pmax) / 2
+Psigma <- (Pmax - Pmean) / zmax
+zval <- (Pval - Pmean) / Psigma
+
+nr <- 101
+randval <- seq(0, 1, length.out = nr)
+res <- rep(NA, nr)
+for (i in 1:nr){
+  kval <- pnorm(zval)
+  temp <- randval[i] # runif(1)
+  kjitter <- kval + (jitterfac * ((2 * temp) - 1))
+  if (kjitter < 0.0001){
+    newval <- Pmin + 0.1 * (Pval - Pmin)
+  } else if (kjitter > 0.9999){
+    newval <- Pmax - 0.1 * (Pmax - Pval)
+  } else {
+    zjitter <- qnorm(kjitter)
+    newval <- Pmean + (Psigma * zjitter)
+  }
+  # check for jittered value outside bounds
+  if (newval < Pmin) newval <- Pmin
+  if (newval > Pmax) newval <- Pmax
+  res[i] <- newval
+}
+plot(randval, res, ylim = c(Pmin, Pmax))
+abline(h=Pval, col="red")
+abline(v=0.5, col="blue")
+```
+
+## Have fun!
+
+If you have questions, you can contact me at chris.legault@noaa.gov. A more detailed explanation of jittering, with examples from actual ASAP runs, is available at https://github.com/cmlegault/jitter.
+
